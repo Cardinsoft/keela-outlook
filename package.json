@@ -1,0 +1,17 @@
+{
+    "name": "keela-outlook",
+    "version": "0.1.0",
+    "description": "",
+    "main": "index.js",
+    "keywords": [
+        "keela"
+    ],
+    "bugs": {
+        "url": "https://github.com/cardinsoft/keela-outlook/issues"
+    },
+    "homepage": "https://github.com/cardinsoft/keela-outlook#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cardinsoft/keela-outlook.git"
+    }
+}
