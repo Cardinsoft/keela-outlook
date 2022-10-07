@@ -98,6 +98,10 @@ class EventObject {
         return this.commonEventObject.parameters;
     }
 
+    set parameters(value) {
+        this.commonEventObject.parameters = value;
+    }
+
     /**
      * @summary The two-letter ISO 639 code indicating the user's language
      * @deprecated
