@@ -24,10 +24,19 @@ class CommonEventObject {
 
     parameters: Record<string, string> = {};
 
-    constructor(
-        public platform: Office.PlatformType,
-        public userLocale: Office.Context["displayLanguage"],
-    ) { }
+    /**
+     * @summary Indicates where the event originates
+     */
+    get platform() {
+        return Office.context.platform;
+    }
+
+    /**
+     * @summary The user's language and country/region identifier
+     */
+    get userLocale() {
+        return Office.context.displayLanguage;
+    }
 }
 
 class MessageMetadata {
@@ -60,20 +69,10 @@ class MessageMetadata {
 }
 
 class EventObject {
-    commonEventObject: CommonEventObject;
+    commonEventObject = new CommonEventObject();
 
     formInput: Record<string, string> = {};
     formInputs: Record<string, string[]> = {};
-
-    constructor(
-        platform: Office.PlatformType,
-        locale: Office.Context["displayLanguage"],
-    ) {
-        this.commonEventObject = new CommonEventObject(
-            platform,
-            locale,
-        );
-    }
 
     /**
      * @summary Indicates where the event originates
