@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noErrorTruncation": true,
+        "downlevelIteration": true,
+        "outDir": "dist",
+        "target": "ES5",
+        "lib": [
+            "ESNext",
+            "DOM",
+            "DOM.Iterable"
+        ]
+    },
+    "include": [
+        "src"
+    ]
+}
