@@ -1,8 +1,13 @@
+type Services = {
+  CardService: CardService;
+};
+
 /**
  * @summary initializes the Add-In
+ * @param services Add-In services
  * @param homepageTriggerName main Add-In function name
  */
-const initialize = async (homepageTriggerName: string) => {
+const initialize = async (services: Services, homepageTriggerName: string) => {
   const event = new EventObject();
 
   const overlay = new Overlay("app-overlay", "app-body");
@@ -25,7 +30,7 @@ const initialize = async (homepageTriggerName: string) => {
     throw new Error("Add-In must initialize with at least 1 card");
   }
 
-  const nav = CardService.newNavigation();
+  const nav = services.CardService.newNavigation();
   nav.popToRoot().popCard(); // clears the navigation stack
   cards.forEach((card) => nav.pushCard(card));
 
