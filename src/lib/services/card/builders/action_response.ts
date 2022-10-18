@@ -3,19 +3,6 @@
  */
 class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse> {
   /**
-   * @see https://developers.google.com/apps-script/reference/card-service/action-response-builder#build
-   *
-   * @summary Builds the current action response and validates it.
-   */
-  build(): Components.ActionResponse {
-    if (!this.validate()) {
-      throw new Error("Invalid card");
-    }
-
-    return this.item;
-  }
-
-  /**
    * @see https://developers.google.com/apps-script/reference/card-service/action-response-builder#setNavigation(Navigation)
    *
    * @summary Sets the response to a {@link Components.Navigation} action.
@@ -62,7 +49,7 @@ class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse
   /**
    * @summary validates the {@link ActionResponse}
    */
-  private validate() {
+  protected validate() {
     const { navigation, notification, openLink } = this.item;
     return [navigation, notification, openLink].some(Boolean);
   }
