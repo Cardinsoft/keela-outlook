@@ -3,7 +3,9 @@ namespace Components {
    * @see https://developers.google.com/apps-script/reference/card-service/navigation
    */
   export class Navigation extends CardServiceComponent {
-    private static stack: Card[] = [];
+    constructor(private stack: Card[] = []) {
+      super();
+    }
 
     /**
      * @see https://developers.google.com/apps-script/reference/card-service/navigation#popcard
@@ -11,7 +13,7 @@ namespace Components {
      * @summary Pops a card from the navigation stack.
      */
     popCard() {
-      Navigation.stack.pop();
+      this.stack.pop();
       return this;
     }
 
@@ -22,7 +24,7 @@ namespace Components {
      * @param cardName The name of the card to navigate to.
      */
     popToNamedCard(cardName: string) {
-      const { stack } = Navigation;
+      const { stack } = this;
 
       for (let i = stack.length - 1; i >= 0; i--) {
         const card = stack[i];
@@ -41,7 +43,7 @@ namespace Components {
      * @summary Pops the card stack to the root card.
      */
     popToRoot() {
-      const { stack } = Navigation;
+      const { stack } = this;
 
       const { length } = stack;
       for (let i = 1; i < length; i++) {
@@ -58,7 +60,7 @@ namespace Components {
      * @param card A card to add to the stack.
      */
     pushCard(card: Card) {
-      Navigation.stack.push(card);
+      this.stack.push(card);
       return this;
     }
 
@@ -67,7 +69,7 @@ namespace Components {
      * @param card A card to replace the current card with.
      */
     updateCard(card: Card) {
-      Navigation.stack.splice(-1, 1, card);
+      this.stack.splice(-1, 1, card);
       return this;
     }
   }
