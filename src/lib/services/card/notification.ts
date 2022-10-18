@@ -3,7 +3,7 @@ namespace Components {
    * @see https://developers.google.com/apps-script/reference/card-service/notification
    */
   export class Notification extends CardServiceRenderableComponent {
-    text?: string;
+    private text: string = "";
 
     /**
      * @summary gets the underlying text element
@@ -27,10 +27,7 @@ namespace Components {
       return this;
     }
 
-    create(
-      this: Notification & { text: string },
-      parentId: string
-    ): HTMLElement {
+    create(parentId: string): HTMLElement {
       const { text } = this;
 
       const parent = document.getElementById(parentId);
@@ -62,7 +59,7 @@ namespace Components {
       return wrapper;
     }
 
-    render(this: Notification & { text: string }): Promise<void> {
+    render(): Promise<void> {
       const { element, textElement, text } = this;
 
       textElement.textContent = text;
