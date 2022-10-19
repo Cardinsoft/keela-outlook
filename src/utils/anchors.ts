@@ -12,7 +12,7 @@ const openURL = (
   onClose?: (...args: any[]) => void
 ) => {
   const url = new URL(`${location.origin}/redirect`);
-  url.searchParams.append("endpoint", href);
+  url.searchParams.append("endpoint", forceHttps(href));
 
   const handlers: Record<OpenType, (url: URL) => void> = {
     browser: (url) => Office.context.ui.openBrowserWindow(url.toString()),
