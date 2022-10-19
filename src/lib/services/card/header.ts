@@ -38,7 +38,7 @@ namespace Components {
       return this;
     }
 
-    create(parentId: string): HTMLElement {
+    create(): HTMLElement {
       const { imageUrl, title, imageAltText, imageStyle } = this;
 
       if (!title) {
@@ -47,7 +47,6 @@ namespace Components {
 
       const wrapper = document.createElement("div");
       wrapper.classList.add("CardHeader", "separated-both");
-      wrapper.hidden = true;
 
       if (imageUrl) {
         const imageElement = document.createElement("img");
@@ -63,18 +62,11 @@ namespace Components {
       titleElement.textContent = title;
       wrapper.append(titleElement);
 
-      const parent = document.getElementById(parentId);
-      if (!parent) {
-        throw new Error(`missing card header parent: #${parentId}`);
-      }
-
-      parent.prepend(wrapper);
       return wrapper;
     }
 
-    async render(): Promise<void> {
+    async render(parentId: string): Promise<HTMLElement> {
       const {
-        element,
         imageElement,
         imageAltText = "",
         imageStyle,
@@ -100,7 +92,7 @@ namespace Components {
         });
       }
 
-      element.hidden = false;
+      return super.render(parentId);
     }
   }
 }
