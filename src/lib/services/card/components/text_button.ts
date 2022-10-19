@@ -37,6 +37,7 @@ namespace Components {
     create(): HTMLElement {
       const {
         action,
+        altText,
         backgroundColor,
         disabled,
         textButtonStyle,
@@ -48,6 +49,7 @@ namespace Components {
       const button = document.createElement("div");
       button.classList.add("TextButton");
       button.classList.toggle("btn-disabled", disabled);
+      button.ariaLabel = altText || text;
 
       const filled = textButtonStyle === TextButtonStyle.FILLED;
       if (filled) {
