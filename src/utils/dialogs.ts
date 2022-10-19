@@ -23,8 +23,12 @@ enum DialogErrorCode {
 /**
  * @summary Office dialog events handler
  * @param event dialog event
+ * @param onClose callback to call when the dialog is closed
  */
-const dialogCallback = (event: DialogEvent) => {
+const dialogCallback = (
+  event: DialogEvent,
+  onClose?: (...args: any[]) => void
+) => {
   const eventLog: Omit<DialogEventLog, "event"> = { type: "dialog" };
   const logMessage = "dialog event";
 
