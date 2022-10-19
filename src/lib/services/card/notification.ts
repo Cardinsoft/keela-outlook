@@ -27,13 +27,8 @@ namespace Components {
       return this;
     }
 
-    create(parentId: string): HTMLElement {
+    create(): HTMLElement {
       const { text } = this;
-
-      const parent = document.getElementById(parentId);
-      if (!parent) {
-        throw new Error(`missing notification parent: #${parentId}`);
-      }
 
       const wrapper = document.createElement("div");
       wrapper.classList.add("ms-MessageBar");
@@ -55,22 +50,21 @@ namespace Components {
       txt.textContent = text;
       content.append(txt);
 
-      parent.append(wrapper);
       return wrapper;
     }
 
-    render(): Promise<void> {
-      const { element, textElement, text } = this;
+    render(parentId: string): Promise<HTMLElement> {
+      const { textElement, text } = this;
 
       textElement.textContent = text;
-      element.hidden = false;
 
-      return new Promise<void>((resolve) => {
+      new Promise<void>((resolve) => {
         setTimeout(() => {
-          element.hidden = true;
           resolve();
         }, 3000);
       });
+
+      return super.render(parentId);
     }
   }
 }
