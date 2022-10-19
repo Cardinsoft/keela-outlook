@@ -14,6 +14,12 @@ type DialogEventLog = {
   type: "dialog";
 };
 
+enum DialogErrorCode {
+  CLOSED = 12006,
+  HTTPS_ERROR = 12003,
+  LOAD_ERROR = 12002,
+}
+
 /**
  * @summary Office dialog events handler
  * @param event dialog event
@@ -25,12 +31,17 @@ const dialogCallback = (event: DialogEvent) => {
   if ("error" in event) {
     const { error } = event;
 
-    const messages: Record<number, string> = {
-      12002:
+    // dialog is closed normally
+    if (error === DialogErrorCode.CLOSED) {
+      onClose?.();
+    }
+
+    const messages: Record<DialogErrorCode | number, string> = {
+      [DialogErrorCode.LOAD_ERROR]:
         "The dialog box has been directed to a page that it cannot find or load, or the URL syntax is invalid.",
-      12003:
+      [DialogErrorCode.HTTPS_ERROR]:
         "The dialog box has been directed to a URL with the HTTP protocol. HTTPS is required.",
-      12006: "Dialog closed.",
+      [DialogErrorCode.CLOSED]: "Dialog closed.",
     };
 
     const defaultMessage = "Unknown error in dialog box.";
