@@ -31,7 +31,7 @@ namespace Components {
 
         if (card.name === cardName) break;
 
-        stack.pop();
+        this.popCard();
       }
 
       return this;
@@ -47,7 +47,7 @@ namespace Components {
 
       const { length } = stack;
       for (let i = 1; i < length; i++) {
-        stack.pop();
+        this.popCard();
       }
 
       return this;
@@ -69,7 +69,8 @@ namespace Components {
      * @param card A card to replace the current card with.
      */
     updateCard(card: Card) {
-      this.stack.splice(-1, 1, card);
+      this.popCard();
+      this.pushCard(card);
       return this;
     }
   }
