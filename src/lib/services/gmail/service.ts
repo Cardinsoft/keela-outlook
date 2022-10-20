@@ -38,45 +38,28 @@ class GmailApp {
     const {
       bcc = "",
       cc = "",
-      from,
+      from = Office.context.mailbox.userProfile.emailAddress,
       htmlBody = "",
       name = Office.context.mailbox.userProfile.displayName,
       replyTo = Office.context.mailbox.userProfile.emailAddress,
     } = options;
 
     const data: microsoftgraph.Message = {
-      bccRecipients: bcc.split(",").map((address) => {
-        return { emailAddress: { address } };
-      }),
+      bccRecipients: MailboxAPI.mapAddressesToRecipients(bcc),
       body: {
         content: htmlBody || body,
         contentType: htmlBody ? "html" : "text",
       },
-      ccRecipients: cc.split(",").map((address) => {
-        return { emailAddress: { address } };
-      }),
+      ccRecipients: MailboxAPI.mapAddressesToRecipients(cc),
       from: { emailAddress: { address: from, name } },
       isDraft: true,
-      replyTo: [{ emailAddress: { address: replyTo } }],
+      replyTo: MailboxAPI.mapAddressesToRecipients(replyTo),
       subject,
-      toRecipients: [{ emailAddress: { address: recipient } }],
+      toRecipients: MailboxAPI.mapAddressesToRecipients(recipient),
     };
 
-    const res = await MailboxAPI.request({
-      authorize: true,
-      headers: { "Content-Length": "0" },
-      method: "POST",
-      path: "/me/messages",
-      type: "application/json",
-      data,
-    });
-
-    if (!res.ok) {
-      const { message }: microsoftgraph.GenericError = await res.json();
-      throw new Error("failed to create GmailDraft", { cause: message });
-    }
-
-    return new Components.GmailDraft(await res.json());
+    const item = await MailboxAPI.createMessage(data);
+    return new Components.GmailDraft(item);
   }
 
   /**
