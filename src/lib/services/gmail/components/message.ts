@@ -337,30 +337,8 @@ namespace Components {
      * @param options A JavaScript object that specifies advanced parameters, as listed below.
      */
     async reply(body: string, options: AdvancedReplyOptions = {}) {
-      const {
-        bcc = "",
-        cc = "",
-        from = Office.context.mailbox.userProfile.emailAddress,
-        htmlBody = "",
-        name = Office.context.mailbox.userProfile.displayName,
-        replyTo = Office.context.mailbox.userProfile.emailAddress,
-        subject,
-      } = options;
-
-      const message: microsoftgraph.Message = {
-        bccRecipients: MailboxAPI.mapAddressesToRecipients(bcc),
-        body: {
-          content: htmlBody || body,
-          contentType: htmlBody ? "html" : "text",
-        },
-        ccRecipients: MailboxAPI.mapAddressesToRecipients(cc),
-        replyTo: MailboxAPI.mapAddressesToRecipients(replyTo),
-        sender: { emailAddress: { address: from, name } },
-      };
-
-      if (subject) message.subject = subject;
-
-      await MailboxAPI.sendReply(message);
+      const reply = await this.createDraftReply(body, options);
+      await MailboxAPI.sendReply(reply.getId());
       return this;
     }
 
@@ -372,30 +350,8 @@ namespace Components {
      * @param options A JavaScript object that specifies advanced parameters
      */
     async replyAll(body: string, options: AdvancedReplyOptions = {}) {
-      const {
-        bcc = "",
-        cc = "",
-        from = Office.context.mailbox.userProfile.emailAddress,
-        htmlBody = "",
-        name = Office.context.mailbox.userProfile.displayName,
-        replyTo = Office.context.mailbox.userProfile.emailAddress,
-        subject,
-      } = options;
-
-      const message: microsoftgraph.Message = {
-        bccRecipients: MailboxAPI.mapAddressesToRecipients(bcc),
-        body: {
-          content: htmlBody || body,
-          contentType: "html",
-        },
-        ccRecipients: MailboxAPI.mapAddressesToRecipients(cc),
-        replyTo: MailboxAPI.mapAddressesToRecipients(replyTo),
-        sender: { emailAddress: { address: from, name } },
-      };
-
-      if (subject) message.subject = subject;
-
-      await MailboxAPI.sendReply(message, true);
+      const replyAll = await this.createDraftReplyAll(body, options);
+      await MailboxAPI.sendReply(replyAll.getId(), true);
       return this;
     }
 
