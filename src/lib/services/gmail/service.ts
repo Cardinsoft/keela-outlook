@@ -74,20 +74,8 @@ class GmailApp {
       displayName: name,
     };
 
-    const res = await MailboxAPI.request({
-      authorize: true,
-      method: "POST",
-      path: "/me/outlook/masterCategories",
-      type: "application/json",
-      data,
-    });
-
-    if (!res.ok) {
-      const { message }: microsoftgraph.GenericError = await res.json();
-      throw new Error("failed to create GmailLabel", { cause: message });
-    }
-
-    return new Components.GmailLabel(await res.json());
+    const item = await MailboxAPI.createCategory(data);
+    return new Components.GmailLabel(item);
   }
 
   /**
@@ -583,8 +571,8 @@ class GmailApp {
       body: { content: htmlBody || body, contentType: "html" },
       ccRecipients: MailboxAPI.mapAddressesToRecipients(cc),
       from: { emailAddress: { address: from, name } },
-      replyTo: [{ emailAddress: { address: replyTo } }],
-      toRecipients: [{ emailAddress: { address: recipient } }],
+      replyTo: MailboxAPI.mapAddressesToRecipients(replyTo),
+      toRecipients: MailboxAPI.mapAddressesToRecipients(recipient),
       subject,
     });
 
