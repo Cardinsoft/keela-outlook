@@ -1,6 +1,6 @@
 /// <reference types="@microsoft/microsoft-graph-types" />
 
-type CreateDraftOptions = {
+type BaseMailOptions = {
   attachments?: {}[];
   bcc?: string;
   cc?: string;
@@ -11,7 +11,7 @@ type CreateDraftOptions = {
   replyTo?: string;
 };
 
-type AdvancedSendOptions = CreateDraftOptions & { noReply?: boolean };
+type AdvancedSendOptions = BaseMailOptions & { noReply?: boolean };
 
 type AdvancedReplyOptions = AdvancedSendOptions & { subject?: string };
 
@@ -33,7 +33,7 @@ class GmailApp {
     recipient: string,
     subject: string,
     body: string,
-    options: CreateDraftOptions = {}
+    options: BaseMailOptions = {}
   ) {
     const {
       bcc = "",
@@ -650,14 +650,14 @@ class GmailApp {
 
   /**
    * @see https://developers.google.com/apps-script/reference/gmail/gmail-app#unstarmessagesmessages
-   * 
+   *
    * @summary Removes stars from these messages and forces the messages to refresh.
    * @param messages an array of messages to unstar
    */
   static async unstarMessages(messages: Components.GmailMessage[]) {
-    for(const message of messages) {
-        await this.unstarMessage(message);
+    for (const message of messages) {
+      await this.unstarMessage(message);
     }
     return this;
-  } 
+  }
 }
