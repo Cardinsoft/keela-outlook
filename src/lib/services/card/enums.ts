@@ -55,6 +55,20 @@ enum DisplayStyle {
 }
 
 /**
+ * @see https://developers.google.com/apps-script/reference/card-service/grid-item-layout
+ */
+enum GridItemLayout {
+  /**
+   * The title and subtitle are shown below the grid item's image.
+   */
+  TEXT_BELOW = "TEXT_BELOW",
+  /**
+   * The title and subtitle are shown above the grid item's image.
+   */
+  TEXT_ABOVE = "TEXT_ABOVE",
+}
+
+/**
  * @see https://developers.google.com/apps-script/reference/card-service/icon
  */
 enum Icon {
