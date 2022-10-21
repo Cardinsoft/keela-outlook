@@ -6,7 +6,7 @@ namespace Components {
     private altText?: string;
     private disabled: boolean = false;
     private text?: string;
-    private textButtonStyle: TextButtonStyle = TextButtonStyle.TEXT;
+    textButtonStyle: TextButtonStyle = TextButtonStyle.TEXT;
 
     /**
      * @param backgroundColor default background color
