@@ -1,13 +1,14 @@
 type MenuItemType = "card" | "universal";
 
 class AddInMenu extends CardServiceRenderableComponent {
-  private actions: Record<string, CardAction | UniversalAction> = {};
+  private cardActions: Record<string, CardAction> = {};
+  private universalActions: Record<string, UniversalAction> = {};
 
   /**
    * @summary gets a pool of existing identifiers
    */
-  private get identifiers() {
-    return Object.keys(this.actions);
+  private getIdentifiers(type: MenuItemType) {
+    return Object.keys(this[`${type}Actions`]);
   }
 
   /**
@@ -15,9 +16,8 @@ class AddInMenu extends CardServiceRenderableComponent {
    * @param cardAction {@link CardAction} to add
    */
   async addCardAction(cardAction: CardAction) {
-    const { identifiers } = this;
-    const guid = getGuid(identifiers);
-    this.actions[guid] = cardAction;
+    const guid = getGuid(this.getIdentifiers("card"));
+    this.cardActions[guid] = cardAction;
     return this;
   }
 
@@ -26,33 +26,33 @@ class AddInMenu extends CardServiceRenderableComponent {
    * @param universalAction {@link UniversalAction} to add
    */
   async addUniversalAction(universalAction: UniversalAction) {
-    const { identifiers } = this;
-    const guid = getGuid(identifiers);
-    this.actions[guid] = universalAction;
+    const guid = getGuid(this.getIdentifiers("universal"));
+    this.universalActions[guid] = universalAction;
     return this;
   }
 
   /**
    * @summary clears the menu
    */
-  clear() {
-    const { actions } = this;
-    Object.entries(actions).forEach(([guid, action]) => {
+  clear(type: MenuItemType) {
+    const store = this[`${type}Actions`];
+    Object.entries(store).forEach(([guid, action]) => {
       action.teardown();
-      delete actions[guid];
+      delete store[guid];
     });
     return this;
   }
 
   /**
    * @summary removes an action from the menu
+   * @param type item type to remove
    * @param guid action GUID
    */
-  remove(guid: string) {
-    const { actions } = this;
-    const action = actions[guid];
+  remove(type: MenuItemType, guid: string) {
+    const store = this[`${type}Actions`];
+    const action = store[guid];
     action?.teardown();
-    delete actions[guid];
+    delete store[guid];
     return this;
   }
 
@@ -91,5 +91,21 @@ class AddInMenu extends CardServiceRenderableComponent {
     });
 
     return element;
+  }
+
+  async render(maybeParent: HTMLElement | null): Promise<HTMLElement> {
+    const { cardActions, universalActions } = this;
+
+    const element = this.element || this.create();
+
+    for (const action of Object.values(cardActions)) {
+      await action.render(element);
+    }
+
+    for (const action of Object.values(universalActions)) {
+      await action.render(element);
+    }
+
+    return super.render(maybeParent);
   }
 }
