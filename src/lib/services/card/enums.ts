@@ -92,6 +92,28 @@ enum Icon {
 }
 
 /**
+ * @see https://developers.google.com/apps-script/reference/card-service/image-crop-type
+ */
+enum ImageCropType {
+  /**
+   * Square shape crop style.
+   */
+  SQUARE = "SQUARE",
+  /**
+   * Circle shape crop style.
+   */
+  CIRCLE = "CIRCLE",
+  /**
+   * Rectangle shape crop style with custom ratio.
+   */
+  RECTANGLE_CUSTOM = "RECTANGLE_CUSTOM",
+  /**
+   * Rectangle shape crop style with 4:3 ratio.
+   */
+  RECTANGLE_4_3 = "RECTANGLE_4_3",
+}
+
+/**
  * @see https://developers.google.com/apps-script/reference/card-service/image-style
  */
 enum ImageStyle {
