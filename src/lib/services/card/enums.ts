@@ -27,6 +27,20 @@ enum ComposedEmailType {
 }
 
 /**
+ * @see https://developers.google.com/apps-script/reference/card-service/switch-control-type
+ */
+enum SwitchControlType {
+  /**
+   * Toggle-styled control for a switch widget. Default.
+   */
+  SWITCH,
+  /**
+   * Checkbox-styled control for a switch widget.
+   */
+  CHECK_BOX,
+}
+
+/**
  * @see https://developers.google.com/apps-script/reference/card-service/display-style
  */
 enum DisplayStyle {
