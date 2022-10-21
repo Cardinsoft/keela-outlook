@@ -1,0 +1,6 @@
+{
+    "prettier.tabWidth": 2,
+    "[typescript]": {
+        "typescript.preferences.useAliasesForRenames": false
+    },
+}
