@@ -3,8 +3,8 @@ namespace Components {
    * @see https://developers.google.com/apps-script/reference/card-service/fixed-footer
    */
   export class FixedFooter extends CardServiceRenderableComponent {
-    primary?: Components.TextButton;
-    secondary?: Components.TextButton;
+    private primary?: Components.TextButton;
+    private secondary?: Components.TextButton;
 
     /**
      * @see https://developers.google.com/apps-script/reference/card-service/fixed-footer#setprimarybuttonbutton
@@ -43,9 +43,26 @@ namespace Components {
       return this;
     }
 
-    create(): HTMLElement {
+    async create(): Promise<HTMLElement> {
+      const { primary, secondary } = this;
+
       const wrapper = document.createElement("div");
-      // TODO: future releases
+      wrapper.classList.add("ms-Grid", "card-fixed-footer");
+
+      const row = document.createElement("div");
+      row.classList.add("ms-Grid-row");
+      wrapper.append(row);
+
+      if (primary) {
+        const element = await primary.render(row);
+        element.classList.add("ms-Grid-col", "ms-sm6", "ms-md6", "ms-lg6");
+      }
+
+      if (secondary) {
+        const element = await secondary.render(row);
+        element.classList.add("ms-Grid-col", "ms-sm6", "ms-md6", "ms-lg6");
+      }
+
       return wrapper;
     }
   }
