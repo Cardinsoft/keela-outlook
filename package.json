@@ -15,9 +15,13 @@
         "url": "git+https://github.com/cardinsoft/keela-outlook.git"
     },
     "devDependencies": {
+        "@microsoft/microsoft-graph-types": "^2.25.0",
         "@types/jquery": "^3.5.14",
         "@types/luxon": "^3.0.1",
         "@types/office-js": "^1.0.289",
         "typescript": "^4.8.4"
+    },
+    "dependencies": {
+        "office-ui-fabric-js": "^1.5.0"
     }
 }
