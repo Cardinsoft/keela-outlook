@@ -69,6 +69,24 @@ enum GridItemLayout {
 }
 
 /**
+ * @see https://developers.google.com/apps-script/reference/card-service/horizontal-alignment
+ */
+enum HorizontalAlignment {
+  /**
+   * Align the widget to the start of the sentence side.
+   */
+  START = "START",
+  /**
+   * Align the widget to the center.
+   */
+  CENTER = "CENTER",
+  /**
+   * Align the widget to the end of the sentence side.
+   */
+  END = "END",
+}
+
+/**
  * @see https://developers.google.com/apps-script/reference/card-service/icon
  */
 enum Icon {
