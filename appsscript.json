@@ -1,0 +1,79 @@
+{
+  "timeZone": "GMT",
+  "dependencies": {
+    "libraries": [
+      {
+        "userSymbol": "Cardin",
+        "libraryId": "1ubgr8LYvICQHI1BE8Fpy7h-JM6SR79P_4C6Da9PUIYiZvAqOiFcaTEQ3",
+        "version": "123"
+      },
+      {
+        "libraryId": "1I3BAstRBmAXOylKmAYfAap564_22u8sVgxP6kcRoc522qesT73LACYHf",
+        "userSymbol": "FetchApp",
+        "version": "31"
+      }
+    ]
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "addOns": {
+    "common": {
+      "homepageTrigger": {
+        "enabled": true,
+        "runFunction": "buildHomepage"
+      },
+      "universalActions": [
+        {
+          "label": "Home",
+          "runFunction": "buildHome"
+        },
+        {
+          "label": "Settings",
+          "runFunction": "buildSettings"
+        },
+        {
+          "label": "Help",
+          "runFunction": "buildHelp"
+        }
+      ],
+      "openLinkUrlPrefixes": [
+        "https://cardinsoft.com/",
+        "https://*.cardinsoft.com/",
+        "https://keela.co/",
+        "https://*.keela.co/",
+        "https://*.zendesk.com/"
+      ],
+      "logoUrl": "https://usa.keela.co/media/logos/keela-logo.png",
+      "name": "Keela for Outlook",
+      "layoutProperties": {
+        "secondaryColor": "#F5E2FF",
+        "primaryColor": "#7745D6"
+      }
+    },
+    "gmail": {
+      "homepageTrigger": {
+        "enabled": true,
+        "runFunction": "buildHomepage"
+      },
+      "contextualTriggers": [
+        {
+          "unconditional": {},
+          "onTriggerFunction": "onMessageOpen"
+        }
+      ]
+    }
+  },
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/gmail.addons.execute",
+    "https://www.googleapis.com/auth/gmail.addons.current.message.readonly",
+    "https://www.googleapis.com/auth/script.external_request",
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile"
+  ],
+  "urlFetchWhitelist": [
+    "https://cardinsoft.com/",
+    "https://*.cardinsoft.com/",
+    "https://keela.co/",
+    "https://*.keela.co/"
+  ]
+}
