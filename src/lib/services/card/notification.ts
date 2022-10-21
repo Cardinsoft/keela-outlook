@@ -6,17 +6,6 @@ namespace Components {
     private text: string = "";
 
     /**
-     * @summary gets the underlying text element
-     */
-    private get textElement() {
-      const text = this.element.querySelector(".ms-MessageBar-text");
-      if (!text) {
-        throw new Error("notification is missing text element");
-      }
-      return text;
-    }
-
-    /**
      * @see https://developers.google.com/apps-script/reference/card-service/notification#settexttext
      *
      * @summary Sets the text to show in the notification. Required.
@@ -53,18 +42,17 @@ namespace Components {
       return wrapper;
     }
 
-    render(parentId: string): Promise<HTMLElement> {
-      const { textElement, text } = this;
-
-      textElement.textContent = text;
+    render(parent: HTMLElement): Promise<HTMLElement> {
+      const element = super.render(parent);
 
       new Promise<void>((resolve) => {
         setTimeout(() => {
+          this.teardown();
           resolve();
         }, 3000);
       });
 
-      return super.render(parentId);
+      return element;
     }
   }
 }
