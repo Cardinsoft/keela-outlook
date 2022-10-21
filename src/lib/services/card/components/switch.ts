@@ -76,7 +76,7 @@ namespace Components {
       } = this;
 
       if (!fieldName) {
-        throw new Error("Switch must have a field name");
+        throw new Error("Switch must have a field name set");
       }
 
       if (controlType !== SwitchControlType.SWITCH) {
@@ -88,16 +88,18 @@ namespace Components {
       wrapper.classList.add("ms-Toggle", "ms-font-m-plus", "Switch");
 
       const input = document.createElement("input");
-      input.id = input.name = fieldName;
       input.classList.add("ms-Toggle-input");
       input.classList.toggle("is-selected", selected);
+      input.id = input.name = fieldName;
       input.type = "checkbox";
       input.value = value;
       wrapper.append(input);
 
       if (action) {
-        ActionStore.set(wrapper, action);
-        wrapper.addEventListener("click", () => handleEvent(wrapper));
+        wrapper.addEventListener("click", () => {
+          ActionStore.set(wrapper, action);
+          handleEvent(wrapper);
+        });
       }
 
       const label = document.createElement("label");
