@@ -99,9 +99,10 @@ namespace Components {
         throw new Error(`TextButton must have at least one action set`);
       }
 
-      ActionStore.set(button, action);
-
-      button.addEventListener("click", () => handleEvent(button));
+      button.addEventListener("click", () => {
+        ActionStore.set(button, action);
+        handleEvent(button);
+      });
 
       wrapper.append(button);
       return wrapper;
