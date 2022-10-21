@@ -2,19 +2,8 @@
  * @summary custom implementation to use in Add-In menus
  */
 class UniversalAction extends CardServiceRenderableComponent {
-  action?: Components.OpenLink | DisplayCardsAction;
-  text?: string;
-
-  /**
-   * @summary gets action of this universal action
-   */
-  private getAction() {
-    const { action } = this;
-    if (!action) {
-      throw new Error("universal actions must have at least one action set");
-    }
-    return action;
-  }
+  private functionName?: string;
+  private text?: string;
 
   /**
    * @summary gets text of this universal action
@@ -28,11 +17,25 @@ class UniversalAction extends CardServiceRenderableComponent {
   }
 
   /**
-   * @summary sets an open link action
-   * @param openLink {@link Components.OpenLink} action
+   * @summary runs the function of this universal action
    */
-  setOpenLink(openLink: Components.OpenLink) {
-    this.action = openLink;
+  run() {
+    const { functionName } = this;
+    if (!functionName) {
+      throw new Error("universal actions must have a function name set");
+    }
+
+    return callFunctionFromGlobalScope<
+      Components.OpenLink | DisplayCardsAction
+    >(functionName, new EventObject());
+  }
+
+  /**
+   * @summary sets a function to run
+   * @param name name of the function
+   */
+  setRunFunction(name: string) {
+    this.functionName = name;
     return this;
   }
 
@@ -47,7 +50,7 @@ class UniversalAction extends CardServiceRenderableComponent {
 
   create(): HTMLElement {
     const text = this.getText();
-    const action = this.getAction();
+    const action = this.run();
 
     const wrapper = document.createElement("div");
     wrapper.classList.add("menuItem");
