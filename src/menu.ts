@@ -3,8 +3,11 @@ type MenuItemType = "card" | "universal";
 class AddInMenu extends CardServiceRenderableComponent {
   private actions: Record<string, CardAction | UniversalAction> = {};
 
-  constructor(private identifierPool: string[]) {
-    super();
+  /**
+   * @summary gets a pool of existing identifiers
+   */
+  private get identifiers() {
+    return Object.keys(this.actions);
   }
 
   /**
@@ -12,8 +15,8 @@ class AddInMenu extends CardServiceRenderableComponent {
    * @param cardAction {@link CardAction} to add
    */
   async addCardAction(cardAction: CardAction) {
-    const { identifierPool } = this;
-    const guid = getGuid(identifierPool);
+    const { identifiers } = this;
+    const guid = getGuid(identifiers);
     this.actions[guid] = cardAction;
     return this;
   }
@@ -23,8 +26,8 @@ class AddInMenu extends CardServiceRenderableComponent {
    * @param universalAction {@link UniversalAction} to add
    */
   async addUniversalAction(universalAction: UniversalAction) {
-    const { identifierPool } = this;
-    const guid = getGuid(identifierPool);
+    const { identifiers } = this;
+    const guid = getGuid(identifiers);
     this.actions[guid] = universalAction;
     return this;
   }
