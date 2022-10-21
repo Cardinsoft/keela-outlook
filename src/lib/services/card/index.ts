@@ -16,7 +16,7 @@ abstract class CardServiceRenderableComponent extends CardServiceComponent {
   /**
    * @summary creates the component element
    */
-  abstract create(): HTMLElement;
+  abstract create(): Promise<HTMLElement> | HTMLElement;
 
   /**
    * @summary renders the component
@@ -26,7 +26,7 @@ abstract class CardServiceRenderableComponent extends CardServiceComponent {
     maybeParent: HTMLElement | null,
     prepend = false
   ): Promise<HTMLElement> {
-    const element = (this.element ||= this.create());
+    const element = (this.element ||= await this.create());
     const parent = maybeParent || document.body;
     prepend ? parent.prepend(element) : parent.append(element);
     return element;
@@ -35,8 +35,8 @@ abstract class CardServiceRenderableComponent extends CardServiceComponent {
   /**
    * @summary removes the component from DOM
    */
-  teardown(): HTMLElement {
-    const element = (this.element ||= this.create());
+  async teardown(): Promise<HTMLElement> {
+    const element = (this.element ||= await this.create());
     element.remove();
     return element;
   }
