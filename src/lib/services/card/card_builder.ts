@@ -17,9 +17,9 @@ class CardBuilder extends CardServiceBuilder<Card> {
    * @see https://developers.google.com/apps-script/reference/card-service/card-builder#addsectionsection
    *
    * @summary Adds a section to this {@link Card}.
-   * @param section The {@link CardSection} to use.
+   * @param section The {@link Components.CardSection} to use.
    */
-  addSection(section: CardSection) {
+  addSection(section: Components.CardSection) {
     const { sections } = this.item;
 
     if (sections.length === 100) {
@@ -58,9 +58,9 @@ class CardBuilder extends CardServiceBuilder<Card> {
    * @see https://developers.google.com/apps-script/reference/card-service/card-builder#setfixedfooterfixedfooter
    *
    * @summary Sets a fixed footer for this {@link Card}.
-   * @param fixedFooter The {@link FixedFooter} to use.
+   * @param fixedFooter The {@link Components.FixedFooter} to use.
    */
-  setFixedFooter(fixedFooter: FixedFooter) {
+  setFixedFooter(fixedFooter: Components.FixedFooter) {
     this.item.footer = fixedFooter;
     return this;
   }
@@ -69,9 +69,9 @@ class CardBuilder extends CardServiceBuilder<Card> {
    * @see https://developers.google.com/apps-script/reference/card-service/card-builder#setheadercardheader
    *
    * @summary Sets the header for this {@link Card}.
-   * @param cardHeader The {@link CardHeader} to use.
+   * @param cardHeader The {@link Components.CardHeader} to use.
    */
-  setHeader(cardHeader: CardHeader) {
+  setHeader(cardHeader: Components.CardHeader) {
     this.item.header = cardHeader;
     return this;
   }
@@ -91,9 +91,9 @@ class CardBuilder extends CardServiceBuilder<Card> {
    * @see https://developers.google.com/apps-script/reference/card-service/card-builder#setpeekcardheaderpeekcardheader
    *
    * @summary Sets the peek card header.
-   * @param peekCardHeader The {@link CardHeader} to set.
+   * @param peekCardHeader The {@link Components.CardHeader} to set.
    */
-  setPeekCardHeader(peekCardHeader: CardHeader) {
+  setPeekCardHeader(peekCardHeader: Components.CardHeader) {
     this.item.peekHeader = peekCardHeader;
     return this;
   }
@@ -101,7 +101,7 @@ class CardBuilder extends CardServiceBuilder<Card> {
   /**
    * @summary validates the {@link Card}
    */
-  private validate() {
+  protected validate() {
     // TODO: handle
     return true;
   }
