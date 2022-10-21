@@ -5,7 +5,8 @@ type ServiceType =
   | typeof Session
   | typeof Logger
   | typeof PropertiesService
-  | typeof CacheService;
+  | typeof CacheService
+  | typeof LockService;
 
 class ServicesStore {
   /**
