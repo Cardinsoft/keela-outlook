@@ -1,7 +1,7 @@
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/card-action
  */
-class CardAction {
+class CardAction extends CardServiceRenderableComponent {
   action?: AuthorizationAction | Action | Components.OpenLink;
   composedEmailType: ComposedEmailType = ComposedEmailType.REPLY_AS_DRAFT;
   text?: string;
@@ -72,5 +72,32 @@ class CardAction {
   setText(text: string) {
     this.text = text;
     return this;
+  }
+
+  create(): HTMLElement {
+    const { text, action } = this;
+
+    if (!text) {
+      throw new Error("card actions must have text set");
+    }
+
+    if (!action) {
+      throw new Error("card actions must have an action set");
+    }
+
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("menuItem");
+
+    const textElement = document.createElement("p");
+    textElement.classList.add("menuText");
+    textElement.textContent = text;
+
+    // TODO: handle actions with icons
+
+    ActionStore.set(wrapper, action);
+    wrapper.addEventListener("click", () => handleEvent(wrapper));
+
+    wrapper.append(textElement);
+    return wrapper;
   }
 }
