@@ -3,8 +3,15 @@ namespace Components {
    * @see https://developers.google.com/apps-script/reference/card-service/image
    */
   export class Image extends Button {
-    altText?: string;
-    url?: string;
+    private altText?: string;
+    private url?: string;
+
+    /**
+     * @param width default image width
+     */
+    constructor(private width: number) {
+      super();
+    }
 
     /**
      * @see https://developers.google.com/apps-script/reference/card-service/image#setalttextalttext
@@ -29,7 +36,7 @@ namespace Components {
     }
 
     create(): HTMLElement {
-      const { action, altText, url } = this;
+      const { action, altText, url, width } = this;
 
       if (!altText) {
         throw new Error("Image must have an alt text set");
@@ -45,19 +52,17 @@ namespace Components {
       const image = document.createElement("img");
       image.alt = altText;
       image.src = url;
-      image.width = 268;
+      image.width = width;
 
       if (action) {
-        ActionStore.set(wrapper, action);
-        wrapper.addEventListener("click", () => handleEvent(wrapper));
+        wrapper.addEventListener("click", () => {
+          ActionStore.set(wrapper, action);
+          handleEvent(wrapper);
+        });
       }
 
       wrapper.append(image);
       return wrapper;
-    }
-
-    render(parentId: string): Promise<HTMLElement> {
-      return super.render(parentId);
     }
   }
 }
