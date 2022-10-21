@@ -148,6 +148,24 @@ enum OpenAs {
 }
 
 /**
+ * @see https://developers.google.com/apps-script/reference/card-service/selection-input-type
+ */
+enum SelectionInputType {
+  /**
+   * Checkbox input style. Default.
+   */
+  CHECK_BOX,
+  /**
+   * Radio buton input style. At most one item in the group can be selected.
+   */
+  RADIO_BUTTON,
+  /**
+   * Dropdown menu selection input style.
+   */
+  DROPDOWN,
+}
+
+/**
  * @see https://developers.google.com/apps-script/reference/card-service/text-button-style
  */
 enum TextButtonStyle {
