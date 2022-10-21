@@ -69,6 +69,12 @@ class AddInMenu extends CardServiceRenderableComponent {
     const element = document.createElement("div");
     element.classList.add("Menu", "singulared");
 
+    document.querySelector(".navelem")?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      event.preventDefault();
+      this.toggle();
+    });
+
     element.addEventListener("pointerover", () => {
       const out = () => {
         element.removeEventListener("pointerout", out);
