@@ -8,14 +8,6 @@ namespace Components {
     private imageUrl?: string;
     private title?: string;
 
-    private get imageElement() {
-      return this.element.querySelector("img");
-    }
-
-    private get titleElement() {
-      return document.getElementById("card-header-title");
-    }
-
     /**
      * @see https://developers.google.com/apps-script/reference/card-service/card-header#setimagealttextimagealttext
      *
@@ -53,7 +45,7 @@ namespace Components {
         imageElement.src = imageUrl;
         imageElement.alt = imageAltText || "";
         imageElement.classList.add("headerIcon", `style-${imageStyle}`);
-        wrapper.prepend(imageElement);
+        wrapper.append(imageElement);
       }
 
       const titleElement = document.createElement("p");
@@ -61,38 +53,7 @@ namespace Components {
       titleElement.id = "card-header-title";
       titleElement.textContent = title;
       wrapper.append(titleElement);
-
       return wrapper;
-    }
-
-    async render(parentId: string): Promise<HTMLElement> {
-      const {
-        imageElement,
-        imageAltText = "",
-        imageStyle,
-        imageUrl = "",
-        titleElement,
-        title = "",
-      } = this;
-
-      if (!titleElement) {
-        throw new Error("card header is missing the title element");
-      }
-
-      titleElement.textContent = title;
-
-      if (imageElement) {
-        imageElement.alt = imageAltText;
-        imageElement.src = imageUrl;
-
-        const newToken = `style-${imageStyle}`;
-
-        imageElement.classList.forEach((token, _i, list) => {
-          list.toggle(token, !token.startsWith("style-") || token === newToken);
-        });
-      }
-
-      return super.render(parentId);
     }
   }
 }
