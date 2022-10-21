@@ -3,9 +3,9 @@ namespace Components {
    * @see https://developers.google.com/apps-script/reference/card-service/image-button
    */
   export class ImageButton extends Button {
-    altText?: string;
-    icon?: Icon;
-    url?: string;
+    private altText?: string;
+    private icon?: Icon;
+    private url?: string;
 
     /**
      * @see https://developers.google.com/apps-script/reference/card-service/image-button#setalttextalttext
@@ -43,36 +43,33 @@ namespace Components {
     create(): HTMLElement {
       const { action, altText, icon, url } = this;
 
-      if (!altText) {
-        throw new Error("Image button must have an alt text set");
-      }
-
-      if (!icon && !url) {
-        throw new Error("Image button must have either icon or icon URL set");
-      }
-
-      const widget = document.createElement("div");
-
-      const button = document.createElement("img");
-      button.classList.add("ImageButton");
-      button.alt = altText;
-      button.src = url || `${location.origin}/public/${icon}.png`;
-      button.title = altText;
-
       if (!action) {
         throw new Error(`ImageButton must have at least one action set`);
       }
 
-      ActionStore.set(button, action);
+      if (!altText) {
+        throw new Error("ImageButton must have an alt text set");
+      }
 
-      button.addEventListener("click", () => handleEvent(button));
+      if (!icon && !url) {
+        throw new Error("ImageButton must have either icon or icon URL set");
+      }
 
-      widget.append(button);
+      const widget = document.createElement("div");
+
+      const image = document.createElement("img");
+      image.classList.add("ImageButton");
+      image.alt = altText;
+      image.src = url || `${location.origin}/public/${icon}.png`;
+      image.title = altText;
+
+      image.addEventListener("click", () => {
+        ActionStore.set(image, action);
+        handleEvent(image);
+      });
+
+      widget.append(image);
       return widget;
-    }
-
-    render(parentId: string): Promise<HTMLElement> {
-      return super.render(parentId);
     }
   }
 }
