@@ -1,8 +1,14 @@
+type ActionType =
+  | AuthorizationAction
+  | Action
+  | Components.OpenLink
+  | DisplayCardsAction;
+
 class ActionStore {
   /**
    * @summary map of guids to actions
    */
-  private static actions: Record<string, ValidActions> = {};
+  private static actions: Record<string, ActionType> = {};
 
   /**
    * @summary gets a list of existing action guids
@@ -12,7 +18,7 @@ class ActionStore {
   }
 
   /**
-   * @summary gets an {@link ValidActions} by its guid
+   * @summary gets an {@link ActionType} by its guid
    * @param guid action guid to lookup
    */
   static get(guid: string) {
@@ -20,11 +26,11 @@ class ActionStore {
   }
 
   /**
-   * @summary sets an {@link ValidActions}
+   * @summary sets an {@link ActionType}
    * @param caller calling element
-   * @param action {@link ValidActions} instance
+   * @param action {@link ActionType} instance
    */
-  static set(caller: HTMLElement, action: ValidActions) {
+  static set(caller: HTMLElement, action: ActionType) {
     const { actions, identifiers } = this;
     const guid = getGuid(identifiers);
     actions[guid] = action;
@@ -34,8 +40,8 @@ class ActionStore {
   }
 
   /**
-   * @summary removes an {@link ValidActions} by its guid
-   * @param guid {@link ValidActions} guid
+   * @summary removes an {@link ActionType} by its guid
+   * @param guid {@link ActionType} guid
    */
   static remove(guid: string) {
     const { actions } = this;
