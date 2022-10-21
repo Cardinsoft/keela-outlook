@@ -3,6 +3,14 @@ type AnchorHandler = (anchor: HTMLAnchorElement) => void;
 type AnchorHandlerRule = [string, AnchorHandler];
 
 /**
+ * @summary parses length (i.e. "1 px") into a number
+ * @param length stringified length
+ */
+const parsePixelLength = (length: string) => {
+  return Math.ceil(+length.replace("px", ""));
+};
+
+/**
  * @summary binds an event listener to a given {@link anchor}
  * @param anchor an {@link HTMLAnchorElement}
  * @param rules anchor handler rules
