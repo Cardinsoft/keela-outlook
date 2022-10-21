@@ -3,11 +3,17 @@ namespace Components {
    * @see https://developers.google.com/apps-script/reference/card-service/text-button
    */
   export class TextButton extends Button {
-    altText?: string;
-    backgroundColor: string = "#0078d7";
-    disabled: boolean = false;
-    text?: string;
-    textButtonStyle: TextButtonStyle = TextButtonStyle.TEXT;
+    private altText?: string;
+    private disabled: boolean = false;
+    private text?: string;
+    private textButtonStyle: TextButtonStyle = TextButtonStyle.TEXT;
+
+    /**
+     * @param backgroundColor default background color
+     */
+    constructor(private backgroundColor: string) {
+      super();
+    }
 
     /**
      * @see https://developers.google.com/apps-script/reference/card-service/text-button#setalttextalttext
@@ -75,6 +81,7 @@ namespace Components {
       } = this;
 
       const wrapper = document.createElement("div");
+      wrapper.classList.add("row");
 
       const button = document.createElement("div");
       button.classList.add("TextButton");
@@ -82,10 +89,8 @@ namespace Components {
       button.ariaLabel = altText || text;
 
       const filled = textButtonStyle === TextButtonStyle.FILLED;
-      if (filled) {
-        button.style.backgroundColor = backgroundColor;
-      }
 
+      button.style[filled ? "backgroundColor" : "color"] = backgroundColor;
       button.classList.add(filled ? "btn-filled" : "btn-text");
 
       parseHTMLWidgetContent(button, text);
@@ -100,10 +105,6 @@ namespace Components {
 
       wrapper.append(button);
       return wrapper;
-    }
-
-    render(parentId: string): Promise<HTMLElement> {
-      return super.render(parentId);
     }
   }
 }
