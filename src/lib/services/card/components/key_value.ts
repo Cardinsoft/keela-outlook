@@ -140,8 +140,10 @@ namespace Components {
       wrapper.classList.add("KeyValue", "row");
 
       if (action) {
-        ActionStore.set(wrapper, action);
-        wrapper.addEventListener("click", () => handleEvent(wrapper));
+        wrapper.addEventListener("click", () => {
+          ActionStore.set(wrapper, action);
+          handleEvent(wrapper);
+        });
       }
 
       const iconSource = iconUrl || icon;
