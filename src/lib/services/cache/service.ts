@@ -13,7 +13,7 @@ class CacheService {
    *
    * @summary Gets the cache instance scoped to the current document and script.
    */
-  static getDocumentCache() {
+  getDocumentCache() {
     const { localStorage } = window;
     return new Components.Cache(localStorage, CacheType.DOCUMENT);
   }
@@ -23,7 +23,7 @@ class CacheService {
    *
    * @summary Gets the cache instance scoped to the script.
    */
-  static getScriptCache() {
+  getScriptCache() {
     const { localStorage } = window;
     return new Components.Cache(localStorage, CacheType.SCRIPT);
   }
@@ -33,7 +33,7 @@ class CacheService {
    *
    * @summary Gets the cache instance scoped to the current user and script.
    */
-  static getUserCache() {
+  getUserCache() {
     const { localStorage } = window;
     return new Components.Cache(localStorage, CacheType.USER);
   }

@@ -1,12 +1,12 @@
 type ServiceType =
-  | typeof CardService
-  | typeof GmailApp
-  | typeof Utilities
-  | typeof Session
-  | typeof Logger
-  | typeof PropertiesService
-  | typeof CacheService
-  | typeof LockService;
+  | CardService
+  | GmailApp
+  | Utilities
+  | Session
+  | Logger
+  | PropertiesService
+  | CacheService
+  | LockService;
 
 class ServicesStore {
   /**
@@ -21,7 +21,7 @@ class ServicesStore {
   static expose(name: string) {
     const service = this.get(name);
     if (service) {
-      window[service.name] = service;
+      window[service.constructor.name] = service;
     }
     return service;
   }
@@ -59,7 +59,7 @@ class ServicesStore {
    */
   static set(service: ServiceType) {
     const { items } = this;
-    const { name } = service;
+    const { name } = service.constructor;
     items[name] = service;
     this.expose(name);
     return this;
@@ -72,7 +72,7 @@ class ServicesStore {
   static setAll(services: ServiceType[]) {
     const { items } = this;
     for (const service of services) {
-      const { name } = service;
+      const { name } = service.constructor;
       items[name] = service;
       this.expose(name);
     }

@@ -4,14 +4,14 @@ type LoggerLog = { message: string; timestamp: string };
  * @see https://developers.google.com/apps-script/reference/base/logger
  */
 class Logger {
-  private static stack: LoggerLog[] = [];
+  private stack: LoggerLog[] = [];
 
   /**
    * @see https://developers.google.com/apps-script/reference/base/logger#clear
    *
    * @summary Clears the log.
    */
-  static clear() {
+  clear() {
     this.stack.length = 0;
     return this;
   }
@@ -21,7 +21,7 @@ class Logger {
    *
    * @summary Returns a complete list of messages in the current log.
    */
-  static getLog() {
+  getLog() {
     return this.stack
       .map(({ message, timestamp }) => {
         return `${timestamp}: ${message}`;
@@ -35,7 +35,7 @@ class Logger {
    * @summary Writes the string to the logging console.
    * @param data the message to log
    */
-  static log(data: any) {
+  log(data: any) {
     this.stack.push({
       message: Object.prototype.toString.call(data),
       timestamp: new Date().toISOString(),

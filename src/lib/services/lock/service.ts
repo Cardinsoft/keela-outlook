@@ -7,7 +7,7 @@ class LockService {
    *
    * @summary Gets a lock that prevents any user of the current document from concurrently running a section of code.
    */
-  static getDocumentLock() {
+  getDocumentLock() {
     return new Components.Lock(LockType.DOCUMENT);
   }
 
@@ -16,7 +16,7 @@ class LockService {
    *
    * @summary Gets a lock that prevents any user from concurrently running a section of code.
    */
-  static getScriptLock() {
+  getScriptLock() {
     return new Components.Lock(LockType.SCRIPT);
   }
 
@@ -25,7 +25,7 @@ class LockService {
    *
    * @summary Gets a lock that prevents the current user from concurrently running a section of code.
    */
-  static getUserLock() {
+  getUserLock() {
     return new Components.Lock(LockType.USER);
   }
 }

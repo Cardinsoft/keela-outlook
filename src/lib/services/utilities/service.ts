@@ -10,7 +10,7 @@ class Utilities {
    * @param contentType the content type of the blob - can be null
    * @param name the name of the blob - can be null
    */
-  static newBlob(data: string | number[], contentType?: string, name?: string) {
+  newBlob(data: string | number[], contentType?: string, name?: string) {
     const blob = new _Blob();
     if (contentType) blob.setContentType(contentType);
     if (name) blob.setName(name);
@@ -28,7 +28,7 @@ class Utilities {
    * @summary Sleeps for specified number of milliseconds.
    * @param milliseconds The number of milliseconds to sleep.
    */
-  static async sleep(milliseconds: number) {
+  async sleep(milliseconds: number) {
     if (milliseconds < 0) {
       throw new RangeError(
         `milliseconds to sleep must be a positive integer, got ${milliseconds}`
@@ -48,7 +48,7 @@ class Utilities {
    * @param encoded the string of data to decode
    */
   base64Decode(encoded: string) {
-    const blob = Utilities.newBlob(atob(encoded));
+    const blob = this.newBlob(atob(encoded));
     return blob.getBytes();
   }
 
@@ -59,7 +59,7 @@ class Utilities {
    * @param input a string or byte[] of data to encode
    */
   base64Encode(input: string | number[]) {
-    const blob = Utilities.newBlob(input);
+    const blob = this.newBlob(input);
     return btoa(blob.getDataAsString());
   }
 }

@@ -13,7 +13,7 @@ class PropertiesService {
    *
    * @summary Gets a property store (for this script only) that all users can access within the open document, spreadsheet, or form.
    */
-  static getDocumentProperties() {
+  getDocumentProperties() {
     return new Components.Properties(
       Office.context.roamingSettings,
       PropertiesStoreType.DOCUMENT
@@ -25,7 +25,7 @@ class PropertiesService {
    *
    * @summary Gets a property store that all users can access, but only within this script.
    */
-  static getScriptProperties() {
+  getScriptProperties() {
     return new Components.Properties(
       Office.context.roamingSettings,
       PropertiesStoreType.SCRIPT
@@ -37,7 +37,7 @@ class PropertiesService {
    *
    * @summary Gets a property store that only the current user can access, and only within this script.
    */
-  static getUserProperties() {
+  getUserProperties() {
     return new Components.Properties(
       Office.context.roamingSettings,
       PropertiesStoreType.USER
