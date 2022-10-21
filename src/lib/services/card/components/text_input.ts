@@ -148,15 +148,14 @@ namespace Components {
       inputWrapper.append(label);
 
       const input = document.createElement(multiline ? "textarea" : "input");
-
-      if (!isHTMLTextAreaElement(input)) {
-        input.type = "text";
-      }
-
       input.classList.add("ms-TextField-field", "TextInputInput");
       input.name = fieldName;
       input.value = value;
       inputWrapper.append(input);
+
+      if (!isHTMLTextAreaElement(input)) {
+        input.type = "text";
+      }
 
       input.addEventListener("keydown", (event) => {
         if (event instanceof KeyboardEvent && event.key === "Enter") {
@@ -166,8 +165,10 @@ namespace Components {
       });
 
       if (action) {
-        ActionStore.set(wrapper, action);
-        wrapper.addEventListener("focusout", () => handleEvent(wrapper));
+        wrapper.addEventListener("focusout", () => {
+          ActionStore.set(wrapper, action);
+          handleEvent(wrapper);
+        });
       }
 
       new fabric.TextField(inputWrapper);
