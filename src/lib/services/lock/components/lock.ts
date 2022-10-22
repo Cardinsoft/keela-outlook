@@ -56,7 +56,8 @@ namespace Components {
           }
         });
 
-        await Utilities.sleep(timeoutInMillis);
+        await new Promise((r) => setTimeout(r, timeoutInMillis));
+
         resolve(false);
       });
     }
@@ -84,7 +85,8 @@ namespace Components {
           }
         });
 
-        await Utilities.sleep(timeoutInMillis);
+        await new Promise((r) => setTimeout(r, timeoutInMillis));
+
         reject(new Error("failed to acquire the lock"));
       });
     }
