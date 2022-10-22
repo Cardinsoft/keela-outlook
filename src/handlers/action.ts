@@ -53,6 +53,6 @@ const handleAction = async (event: EventObject, element: Element) => {
     log("error", "action handler error", safeToString(error));
   } finally {
     ActionStore.remove(guid);
-    await Utilities.sleep(500);
+    await new Promise((r) => setTimeout(r, 500));
   }
 };
