@@ -3,7 +3,9 @@
  * @param action {@link DisplayCardsAction} to get the response for
  */
 const getDisplayCardsResponse = (action: DisplayCardsAction) => {
-  const builder = CardService.newUniversalActionResponseBuilder();
+  const builder = new UniversalActionResponseBuilder(
+    new Components.UniversalActionResponse()
+  );
   builder.displayAddOnCards(action.getCards());
   return builder.build();
 };
