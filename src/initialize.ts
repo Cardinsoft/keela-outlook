@@ -36,7 +36,7 @@ const initialize = async (
   cardStack.length = 0;
   cardStack.push(...cards);
 
-  await lastCard.render();
+  await lastCard.render(document.getElementById("app-body"));
 
   spinner.hide();
   overlay.hide();
