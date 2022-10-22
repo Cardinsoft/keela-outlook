@@ -1,15 +1,12 @@
 @import "./menu.scss";
 
-$overlay-types: "dark", "light";
-
 .overlay {
     position: absolute;
-    top: $menu-height;
-	width: 100vw;
+    top: $menu-icon-height + $menu-padding-v * 2;
+    width: 100vw;
 }
 
-@each $type in $overlay-types {
-    .overlay-#{$type} {
-        opacity: 0.5;
-    }
+.overlay-dark,
+.overlay-light {
+    opacity: 0.5;
 }

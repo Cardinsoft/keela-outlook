@@ -1,30 +1,61 @@
-$menu-height: 35px;
+$menu-icon-height: 35px;
+$menu-icon-width: 28px;
+$menu-padding-v: 8px;
+$menu-padding-h: 14px;
+$menu-margin-h: 5vw;
+$menu-hover-color: #eaeaea;
+
+.navbar {
+    padding: $menu-padding-v $menu-padding-h;
+    background-color: #f4f4f4;
+    color: #0078d7;
+}
 
 .navelem {
+    font-size: x-large;
+
     margin: {
         left: auto;
         right: 0;
-    };
-	height       : $menu-height;
-    width        : 28px;
-	text-align   : center;
-    font-size    : x-large;
+    }
+
+    height: $menu-icon-height;
+    text-align: center;
+    width: $menu-icon-width;
 
     &:hover {
-        outline          : 8px solid #eaeaea;
-        background-color : #eaeaea;
+        outline: $menu-padding-v solid $menu-hover-color;
+        background-color: $menu-hover-color;
     }
 }
 
-span.menu:before {
-	content: '\205D';
+.menu {
+    left: 0;
+    margin: auto $menu-margin-h;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;
+    top: 16px;
+    z-index: 9999;
 }
 
-.Menu {
-	z-index    : 999;
-	overflow-x : hidden;
-	overflow-y : hidden;
-	position   : absolute;
-    top        : 16px;
-    left       : auto;
+.menu-icon {
+    &::before {
+        content: "\205D";
+    }
+}
+
+.menu-item {
+    padding: $menu-padding-v 0;
+}
+
+.menu-item-text {
+    margin-left: 12px;
+
+    &::before {
+        position: relative;
+        top: 2px;
+        padding: 0 16px;
+        font-family: FabricMDL2Icons;
+    }
 }

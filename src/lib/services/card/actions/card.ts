@@ -94,10 +94,10 @@ export class CardAction extends RenderableComponent {
     }
 
     const wrapper = document.createElement("div");
-    wrapper.classList.add("menuItem");
+    wrapper.classList.add("menu-item");
 
     const textElement = document.createElement("p");
-    textElement.classList.add("menuText");
+    textElement.classList.add("menu-item-text");
     textElement.textContent = text;
 
     // TODO: handle actions with icons

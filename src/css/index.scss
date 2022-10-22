@@ -14,230 +14,224 @@
 
 html,
 body {
-    margin  : 0;
-    padding : 0;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	height: 100vh;
+	width: 100vw;
 }
 
 .disabled {
-    pointer-events: none;
+	pointer-events: none;
 }
 
 .pointer {
-	cursor : pointer;
+	cursor: pointer;
 }
 
 .CardHeader {
-	display     : flex;
-    align-items : center;
-	padding     : 8px 16px;
-	min-height  : 32px;
+	display: flex;
+	align-items: center;
+	padding: 8px 16px;
+	min-height: 32px;
 }
 
 .CardSection {
-	padding : 12px 18px;
+	padding: 12px 18px;
 }
 
 .sectionHeader {
-	margin : 0px 0 8px 0;
-	color  : #848484;
+	margin: 0px 0 8px 0;
+	color: #848484;
 }
 
 .headerIcon {
-	width        : 32px;
-	height       : 32px;
-	margin-right : 16px;
+	width: 32px;
+	height: 32px;
+	margin-right: 16px;
 }
 
 .row {
-	display     : flex;
-	align-items : center;
-	margin      : 12px 0;
-	width       : 100%;
-	min-height  : 20px;
+	display: flex;
+	align-items: center;
+	margin: 12px 0;
+	width: 100%;
+	min-height: 20px;
 }
 
 .column {
-	flex-grow : 1;
+	flex-grow: 1;
 }
 
 .column-icon {
 	margin-right: 16px;
 }
 
-.column-label > .ImageButton {
-	margin-right : 0;
+.column-label>.ImageButton {
+	margin-right: 0;
 }
 
 .column-text {
-	margin-right : 8px;
-	flex-grow    : 100;
-	word-break   : break-word;
+	margin-right: 8px;
+	flex-grow: 100;
+	word-break: break-word;
 }
 
 .ButtonSet {
-	margin : 0;
+	margin: 0;
 }
 
-.collapsible > .ButtonSet {
+.collapsible>.ButtonSet {
 	margin: 12px 0;
 }
 
 .SetElement {
-	display : inline;
+	display: inline;
 }
 
-.ButtonSet .TextButton, .ButtonSet .ImageButton {
-	margin : 4px 16px 0 0;
+.ButtonSet .TextButton,
+.ButtonSet .ImageButton {
+	margin: 4px 16px 0 0;
 }
 
-.row + .TextButton {
-    margin : 12px 0;
+.row+.TextButton {
+	margin: 12px 0;
 }
 
-.ImageButton, .TextButton {
-	padding    : 0;
-	cursor     : pointer;
+.ImageButton,
+.TextButton {
+	padding: 0;
+	cursor: pointer;
 }
 
 .btn-filled {
-	padding : 8px;
+	padding: 8px;
 }
 
 .btn-text {
-	text-align : right;
-	background : none;
-	color      : #0078d7;
+	text-align: right;
+	background: none;
+	color: #0078d7;
 }
 
 .btn-text-filled {
-	padding          : 8px;
-	color            : white;
-	background-color : #0078d7;
-	border-radius    : 2px;
+	padding: 8px;
+	color: white;
+	background-color: #0078d7;
+	border-radius: 2px;
 }
 
 .btn-disabled {
-	pointer-events : none;
-	color          : #a6a6a6;
+	pointer-events: none;
+	color: #a6a6a6;
 }
 
-.separated, .separated-both {
-	border : solid #d0d0d0;
+.separated,
+.separated-both {
+	border: solid #d0d0d0;
 }
 
 .separated {
-	border-width : 1px 0 0 0;
+	border-width: 1px 0 0 0;
 }
 
 .separated-bottom {
-	border-width : 0 0 1px 0;
+	border-width: 0 0 1px 0;
 }
 
 .separated-both {
-	border-width : 1px 0 1px 0;
+	border-width: 1px 0 1px 0;
 }
 
 .collapsible {
-	overflow-x : hidden;
-	overflow-y : hidden;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
 .centered {
-	text-align : center;
+	text-align: center;
 }
 
 .toggler {
-	margin-top                 : 16px;
-	width                      : 100%;
-	transform : rotate(0deg);
-	transition                 : transform 0.2s;
-	-moz-transition            : transform 0.2s;
-    -o-transition              : transform 0.2s;
-	-webkit-transition         : transform 0.2s;
-	transition-timing-function : linear;	
-	color                      : #848484;
+	margin-top: 16px;
+	width: 100%;
+	transform: rotate(0deg);
+	transition: transform 0.2s;
+	-moz-transition: transform 0.2s;
+	-o-transition: transform 0.2s;
+	-webkit-transition: transform 0.2s;
+	transition-timing-function: linear;
+	color: #848484;
 }
 
 .toggler-up {
-	transform : rotate(180deg);
-}
-
-.navbar {
-	padding          : 8px 14px;
-	background-color : #f4f4f4;
-	color            : #0078d7;
+	transform: rotate(180deg);
 }
 
 .Select {
 	margin: 0 auto;
 }
 
-.Menu, .Select {
-    width              : 90%;
-    background-color   : white;
-    box-shadow         : 0 0 5px 0 rgba(0,0,0,.4);
-	transition         : width 0.2s;
-	-moz-transition    : width 0.2s;
-    -o-transition      : width 0.2s;
-	-webkit-transition : width 0.2s;
+.menu,
+.Select {
+	width: 90%;
+	background-color: white;
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
+	transition: width 0.2s;
+	-moz-transition: width 0.2s;
+	-o-transition: width 0.2s;
+	-webkit-transition: width 0.2s;
 }
 
 .singulared {
-	width  : 0;
-	height : 0;
+	width: 0;
+	height: 0;
 }
 
-.menuItem, .selectItem {
-	width              : 100%;
-	height             : 35px;
-	transition         : background-color;
-	-moz-transition    : background-color;
-    -o-transition      : background-color;
-	-webkit-transition : background-color;	
+.menu-item,
+.selectItem {
+	width: 100%;
+	transition: background-color;
+
+	&:active {
+		background-color: #e7e7e7;
+	}
+
+	&:hover {
+		background-color: #f4f4f4;
+	}
 }
 
-.menuItem:hover, .selectItem:hover {
-	background-color : #f4f4f4;
-}
-
-.menuItem:active, .selectItem:active {
-	background-color : #E7E7E7;
-}
-
-.menuText, .selectText {
-	margin      : 0;
-	padding-top : 8px;
-	color       : #333;
-}
-
-.menuText {
-	margin-left: 12px;
+.menu-item-text,
+.selectText {
+	margin: 0;
+	color: #333;
 }
 
 .selectText {
-	margin-left : 8px;
-}
-
-.menuText:before {
-	position    : relative;
-    top         : 2px;
-	padding     : 0 16px;
-	font-family : FabricMDL2Icons;
+	margin-left: 8px;
 }
 
 .side i {
-	padding : 27%;
+	padding: 27%;
 }
 
 .side i:hover {
-	color : #d0d0d0;
+	color: #d0d0d0;
 }
 
 .hidden {
-	display : none;
+	display: none;
 }
 
 @keyframes spin {
-	from { transform: rotate(0deg); }
-	to { transform: rotate(360deg); }
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
 }
