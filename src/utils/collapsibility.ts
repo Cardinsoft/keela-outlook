@@ -70,7 +70,7 @@ const getChildrenPropertyValue = (
  * @param initial initial value
  */
 const toggleCollapsedState = async (
-  trigger: HTMLButtonElement,
+  trigger: HTMLElement,
   element: HTMLElement,
   property: "height" | "width",
   interval: number,
@@ -93,8 +93,8 @@ const toggleCollapsedState = async (
   }
 
   //set recursive timeout to change height;
-  let timeout = setTimeout(function wait() {
-    trigger.disabled = true;
+  let timeout: NodeJS.Timeout = setTimeout(function wait() {
+    trigger.classList.add("disabled");
     let newProperyValue = parsePixelLength(element.style[property]) - change;
 
     if (newProperyValue < initial) {
@@ -115,7 +115,7 @@ const toggleCollapsedState = async (
     ].some(Boolean);
 
     if (shouldStop) {
-      trigger.disabled = false;
+      trigger.classList.remove("disabled");
       return clearTimeout(timeout);
     }
 
