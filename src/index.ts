@@ -61,9 +61,11 @@ export const readyCallback = async (info: Pick<Office.Context, "host">) => {
     new Utilities(),
   ]);
 
-  Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, () =>
-    initialize(cardStack, homepageTrigger.runFunction)
-  );
+  if (Office.context.requirements.isSetSupported("Mailbox", "1.5")) {
+    Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, () =>
+      initialize(cardStack, homepageTrigger.runFunction)
+    );
+  }
 
   universalActions.forEach(({ label, runFunction }) => {
     const action = new UniversalAction();
