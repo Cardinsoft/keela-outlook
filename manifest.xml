@@ -12,7 +12,7 @@
     <DefaultLocale>en-US</DefaultLocale>
 
     <DisplayName DefaultValue="Keela Outlook" />
-    <Description DefaultValue=""/>
+    <Description DefaultValue="Keela automatically matches an email address to records in Keela to see if the contact is already in their CRM."/>
 
     <!--Icons (lowres and highres)-->
     <IconUrl DefaultValue="https://cardinsoft.github.io/outlook/dist/assets/icon-80.png" />
