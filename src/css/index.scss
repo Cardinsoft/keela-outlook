@@ -166,33 +166,6 @@ body {
 	color            : #0078d7;
 }
 
-.navelem {
-	margin-left  : auto;
-    margin-right : 0;
-	height       : 35px;
-    width        : 28px;
-	text-align   : center;
-    font-size    : x-large;
-}
-
-.navelem:hover {
-    outline          : 8px solid #eaeaea;
-    background-color : #eaeaea;
-}
-
-span.menu:before {
-	content: '\205D';
-}
-
-.Menu {
-	z-index    : 999;
-	overflow-x : hidden;
-	overflow-y : hidden;
-	position   : absolute;
-    top        : 16px;
-    left       : auto;
-}
-
 .Select {
 	margin: 0 auto;
 }

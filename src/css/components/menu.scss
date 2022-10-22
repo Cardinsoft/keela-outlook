@@ -1,0 +1,28 @@
+.navelem {
+    margin: {
+        left: auto;
+        right: 0;
+    };
+	height       : 35px;
+    width        : 28px;
+	text-align   : center;
+    font-size    : x-large;
+
+    &:hover {
+        outline          : 8px solid #eaeaea;
+        background-color : #eaeaea;
+    }
+}
+
+span.menu:before {
+	content: '\205D';
+}
+
+.Menu {
+	z-index    : 999;
+	overflow-x : hidden;
+	overflow-y : hidden;
+	position   : absolute;
+    top        : 16px;
+    left       : auto;
+}
