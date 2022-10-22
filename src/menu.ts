@@ -49,6 +49,21 @@ export class AddInMenu extends RenderableComponent {
   }
 
   /**
+   * @summary checks if the menu is closed
+   */
+  isClosed() {
+    const element = (this.element ||= this.create());
+    return element.classList.contains("singulared");
+  }
+
+  /**
+   * @summary checks if the menu is open
+   */
+  isOpen() {
+    return !this.isClosed();
+  }
+
+  /**
    * @summary removes an action from the menu
    * @param type item type to remove
    * @param guid action GUID
