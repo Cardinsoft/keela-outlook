@@ -21,7 +21,7 @@ class Card extends CardServiceRenderableComponent {
     return wrapper;
   }
 
-  async render(parent: HTMLElement): Promise<HTMLElement> {
+  async render(parent: HTMLElement | null): Promise<HTMLElement> {
     const { actions, footer, header, menu, peekHeader, sections, style } = this;
 
     if (peekHeader || style === DisplayStyle.PEEK) {

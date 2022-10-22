@@ -6,7 +6,9 @@ const handleActionResponse = async (response: Components.ActionResponse) => {
   const { navigation, notification, openLink } = response;
 
   if (navigation) {
-    await cardStack[cardStack.length - 1].render();
+    await cardStack[cardStack.length - 1].render(
+      document.getElementById("app-body")
+    );
   }
 
   if (notification) {
@@ -48,7 +50,9 @@ const handleUniversalActionResponse = async (
   if (cards.length) {
     cardStack.length = 0;
     cardStack.push(...cards);
-    await cardStack[cardStack.length - 1].render();
+    await cardStack[cardStack.length - 1].render(
+      document.getElementById("app-body")
+    );
   }
 
   if (openLink) {
