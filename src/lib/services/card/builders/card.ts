@@ -1,4 +1,4 @@
-import { AddInMenu } from "../../../../menu";
+import { type AddInMenu } from "../../../../menu";
 import { type CardAction } from "../actions/card";
 import { Card } from "../components/card";
 import { type CardHeader } from "../components/card_header";
