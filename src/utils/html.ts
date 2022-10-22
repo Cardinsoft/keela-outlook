@@ -142,3 +142,22 @@ export const parseHTMLWidgetContent = (
   parent.append(...temp.childNodes);
   return parent;
 };
+
+/**
+ *
+ * @param target element to bind the listener to
+ * @param type event type
+ * @param callback event listener callback
+ */
+export const bindSelfRemovingListener = (
+  target: EventTarget,
+  type: string,
+  callback: EventListener
+) => {
+  const listener = (event: Event) => {
+    callback(event);
+    target.removeEventListener(type, listener);
+  };
+
+  target.addEventListener(type, listener);
+};
