@@ -2,6 +2,7 @@
 @import "./components/key_value";
 @import "./components/image_button";
 @import "./components/menu";
+@import "./components/overlay.scss";
 @import "./components/spinner";
 @import "./components/switch.scss";
 @import "./components/text_button";
@@ -239,18 +240,4 @@ body {
 @keyframes spin {
 	from { transform: rotate(0deg); }
 	to { transform: rotate(360deg); }
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-	width: 100%;  
-}
-
-.overlay-dark {
-	opacity : 0.5;
-}
-
-.overlay-light {
-	opacity : 0.5;
 }

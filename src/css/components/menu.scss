@@ -1,9 +1,11 @@
+$menu-height: 35px;
+
 .navelem {
     margin: {
         left: auto;
         right: 0;
     };
-	height       : 35px;
+	height       : $menu-height;
     width        : 28px;
 	text-align   : center;
     font-size    : x-large;
