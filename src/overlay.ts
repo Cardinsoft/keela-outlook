@@ -1,15 +1,15 @@
-import { Component } from "./component";
+import { RenderableComponent } from "./component";
 import { parsePixelLength } from "./utils/html";
 
 export type OverlayTone = "light" | "dark";
 
-export class Overlay extends Component {
+export class Overlay extends RenderableComponent {
   private color: string = "white";
 
   private tone: OverlayTone = "light";
 
-  constructor(parentId: string, private containerId: string) {
-    super(parentId);
+  constructor(private containerId: string) {
+    super();
   }
 
   /**
@@ -32,22 +32,16 @@ export class Overlay extends Component {
 
   /**
    * @summary creates the component element
-   * @param parentId id of the parent element
    */
-  create(parentId: string) {
+  create() {
+    const { tone, color } = this;
+
     const overlay = document.createElement("div");
     overlay.classList.add("overlay");
-    overlay.classList.add(`overlay-${this.tone}`);
+    overlay.classList.add(`overlay-${tone}`);
     overlay.hidden = true;
 
-    overlay.style.backgroundColor = this.color;
-
-    const parent = document.getElementById(parentId);
-    if (!parent) {
-      throw new Error(`missing overlay parent: #${parentId}`);
-    }
-
-    parent.append(overlay);
+    overlay.style.backgroundColor = color;
     return overlay;
   }
 
@@ -55,7 +49,9 @@ export class Overlay extends Component {
    * @summary adjusts overlay size to cover the app body
    */
   cover() {
-    const { containerId, element } = this;
+    const { containerId } = this;
+
+    const element = (this.element ||= this.create());
 
     const appContainer = document.getElementById(containerId);
     if (!appContainer) {
