@@ -48,6 +48,15 @@ export abstract class RenderableComponent extends InspectableComponent {
   abstract create(): Promise<HTMLElement> | HTMLElement;
 
   /**
+   * @summary hides the component
+   */
+  async hide() {
+    const element = (this.element ||= await this.create());
+    element.hidden = true;
+    return this;
+  }
+
+  /**
    * @summary renders the component
    * @param maybeParent parent element
    */
@@ -59,6 +68,15 @@ export abstract class RenderableComponent extends InspectableComponent {
     const parent = maybeParent || document.body;
     prepend ? parent.prepend(element) : parent.append(element);
     return element;
+  }
+
+  /**
+   * @summary shows the component
+   */
+  async show() {
+    const element = (this.element ||= await this.create());
+    element.hidden = false;
+    return this;
   }
 
   /**
