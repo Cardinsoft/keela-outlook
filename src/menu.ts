@@ -77,6 +77,15 @@ export class AddInMenu extends RenderableComponent {
   }
 
   /**
+   * @summary closes the menu
+   */
+  close() {
+    const { element } = this;
+    element?.classList.add("singulared");
+    return this;
+  }
+
+  /**
    * @summary toggles the menu open state
    */
   toggle() {
