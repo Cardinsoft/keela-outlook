@@ -5,6 +5,8 @@
         "noUnusedParameters": true,
         "noErrorTruncation": true,
         "downlevelIteration": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
         "outDir": "dist",
         "target": "ES5",
         "lib": [
