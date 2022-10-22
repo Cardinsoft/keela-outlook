@@ -1,4 +1,67 @@
 /**
+ * @summary adds a value to form inputs
+ * @param event event object
+ * @param name input name
+ * @param value input value
+ */
+const addToFormInputs = (event: EventObject, name: string, value: string) => {
+  const { formInput, formInputs } = event;
+
+  formInput[name] = value;
+  const inputs = (formInputs[name] ||= []);
+  inputs.push(value);
+};
+
+/**
+ * @summary removes a value from form inputs
+ * @param event event object
+ * @param name input name
+ * @param value input value
+ */
+const removeFromFormInputs = (
+  event: EventObject,
+  name: string,
+  value: string
+) => {
+  const { formInput, formInputs } = event;
+
+  delete formInput[name];
+
+  const values = (formInputs[name] ||= []);
+
+  const valueIndex = values.indexOf(value);
+  if (valueIndex > -1) {
+    values.splice(values.indexOf(value), 1);
+  }
+};
+
+/**
+ * @summary fills {@link EventObject.formInputs}
+ * @param event current event object
+ */
+const fillFormInputs = (event: EventObject) => {
+  const { formInput, formInputs } = event;
+
+  const forms = document.getElementsByTagName("form");
+  for (const { elements } of forms) {
+    for (const element of elements) {
+      if (!isInputLike(element)) continue;
+
+      const { name, value } = element;
+
+      if (isOfficeJSstateFormElement(element)) {
+        const selected = isSelectedStateFormElement(element);
+        const handler = selected ? addToFormInputs : removeFromFormInputs;
+        handler(event, name, value);
+      }
+
+      formInput[name] = value;
+      formInputs[name] = [value];
+    }
+  }
+};
+
+/**
  * @summary handles triggered add-on events
  * @param element trigger element
  */
