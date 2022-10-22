@@ -13,7 +13,7 @@ import { safeToString } from "../utils/strings";
  * @param action {@link Action} to get the response for
  * @param event Add-In event object
  */
-export const getActionResponse = (action: Action, event: EventObject) => {
+export const getActionResponse = async (action: Action, event: EventObject) => {
   const { indicator, name, parameters } = action;
 
   if (!name) {
@@ -22,11 +22,15 @@ export const getActionResponse = (action: Action, event: EventObject) => {
 
   Object.assign(event.parameters, parameters);
 
-  const overlay = new Overlay("app-overlay", "app-body");
+  const overlayParent = document.getElementById("app-overlay");
+
+  const overlay = new Overlay("app-body");
+  await overlay.render(overlayParent);
   overlay.show();
 
-  const spinner = new Spinner("app-overlay");
+  const spinner = new Spinner();
   spinner.setSize("large");
+  await spinner.render(overlayParent);
 
   if (indicator !== LoadIndicator.NONE) {
     spinner.show();

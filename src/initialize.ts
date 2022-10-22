@@ -14,12 +14,16 @@ export const initialize = async (
 ) => {
   const event = new EventObject();
 
-  const overlay = new Overlay("app-overlay", "app-body");
+  const overlayParent = document.getElementById("app-overlay");
+
+  const overlay = new Overlay("app-body");
   overlay.setColor("white");
+  await overlay.render(overlayParent);
   overlay.show();
 
-  const spinner = new Spinner("app-overlay");
+  const spinner = new Spinner();
   spinner.setSize("large");
+  await spinner.render(overlayParent);
   spinner.show();
 
   const homepageTrigger = window[homepageTriggerName];
