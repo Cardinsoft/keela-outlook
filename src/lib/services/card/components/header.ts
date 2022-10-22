@@ -44,7 +44,10 @@ namespace Components {
         const imageElement = document.createElement("img");
         imageElement.src = imageUrl;
         imageElement.alt = imageAltText || "";
-        imageElement.classList.add("headerIcon", `style-${imageStyle}`);
+        imageElement.classList.add(
+          "headerIcon",
+          `style-${imageStyle.toLowerCase()}`
+        );
         wrapper.append(imageElement);
       }
 

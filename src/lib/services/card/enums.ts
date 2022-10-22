@@ -5,11 +5,11 @@ enum BorderType {
   /**
    * No border style.
    */
-  NO_BORDER,
+  NO_BORDER = "NO_BORDER",
   /**
    * Stroke border style.
    */
-  STROKE,
+  STROKE = "STROKE",
 }
 
 /**
@@ -19,25 +19,29 @@ enum ComposedEmailType {
   /**
    * A draft that is a reply to another message. Default.
    */
-  REPLY_AS_DRAFT,
+  REPLY_AS_DRAFT = "REPLY_AS_DRAFT",
   /**
    * A draft that is a standalone message.
    */
-  STANDALONE_DRAFT,
+  STANDALONE_DRAFT = "STANDALONE_DRAFT",
 }
 
 /**
- * @see https://developers.google.com/apps-script/reference/card-service/switch-control-type
+ * @see https://developers.google.com/apps-script/reference/card-service/content-type
  */
-enum SwitchControlType {
+enum ContentType {
   /**
-   * Toggle-styled control for a switch widget. Default.
+   * Indicates that the generated content is plain text. Default.
    */
-  SWITCH,
+  TEXT = "TEXT",
   /**
-   * Checkbox-styled control for a switch widget.
+   * Indicates that the generated content is formatted as HTML. The content can be edited after it is generated.
    */
-  CHECK_BOX,
+  MUTABLE_HTML = "MUTABLE_HTML",
+  /**
+   * Indicates that the generated content is formatted as HTML = "HTML", but this content cannot be edited after it is generated.
+   */
+  IMMUTABLE_HTML = "IMMUTABLE_HTML",
 }
 
 /**
@@ -47,11 +51,11 @@ enum DisplayStyle {
   /**
    * Show the card header at the bottom of add-on content over existing content.
    */
-  REPLACE,
+  REPLACE = "REPLACE",
   /**
    * Show the card by replacing existing content.
    */
-  PEEK,
+  PEEK = "PEEK",
 }
 
 /**
@@ -152,11 +156,11 @@ enum ImageStyle {
   /**
    * No cropping. Default.
    */
-  SQUARE = "square",
+  SQUARE = "SQUARE",
   /**
    * Crop to a circle shape.
    */
-  CIRCLE = "circle",
+  CIRCLE = "CIRCLE",
 }
 
 /**
@@ -166,11 +170,11 @@ enum LoadIndicator {
   /**
    * Use a spinner indicator. Default.
    */
-  SPINNER,
+  SPINNER = "SPINNER",
   /**
    * Do not use an indicator.
    */
-  NONE,
+  NONE = "NONE",
 }
 
 /**
@@ -180,11 +184,11 @@ enum OnClose {
   /**
    * Do nothing on close. Default.
    */
-  NOTHING,
+  NOTHING = "NOTHING",
   /**
    * Reloads the add-on on when the window closes.
    */
-  RELOAD,
+  RELOAD = "RELOAD",
 }
 
 /**
@@ -194,11 +198,11 @@ enum OpenAs {
   /**
    * Open in a full window or tab. Default.
    */
-  FULL_SIZE,
+  FULL_SIZE = "FULL_SIZE",
   /**
    * Open as an overlay such as a pop-up.
    */
-  OVERLAY,
+  OVERLAY = "OVERLAY",
 }
 
 /**
@@ -208,15 +212,29 @@ enum SelectionInputType {
   /**
    * Checkbox input style. Default.
    */
-  CHECK_BOX,
+  CHECK_BOX = "CHECK_BOX",
   /**
    * Radio buton input style. At most one item in the group can be selected.
    */
-  RADIO_BUTTON,
+  RADIO_BUTTON = "RADIO_BUTTON",
   /**
    * Dropdown menu selection input style.
    */
-  DROPDOWN,
+  DROPDOWN = "DROPDOWN",
+}
+
+/**
+ * @see https://developers.google.com/apps-script/reference/card-service/switch-control-type
+ */
+enum SwitchControlType {
+  /**
+   * Toggle-styled control for a switch widget. Default.
+   */
+  SWITCH = "SWITCH",
+  /**
+   * Checkbox-styled control for a switch widget.
+   */
+  CHECK_BOX = "CHECK_BOX",
 }
 
 /**
@@ -226,9 +244,27 @@ enum TextButtonStyle {
   /**
    * Normal text button with clear background. Default.
    */
-  TEXT,
+  TEXT = "TEXT",
   /**
    * Text button with colored background.
    */
-  FILLED,
+  FILLED = "FILLED",
+}
+
+/**
+ * @see https://developers.google.com/apps-script/reference/card-service/update-draft-body-type
+ */
+enum UpdateDraftBodyType {
+  /**
+   * Default. Update actions insert content at the current cursor position, replacing any selected content.
+   */
+  IN_PLACE_INSERT = "IN_PLACE_INSERT",
+  /**
+   * Update actions insert content at the start of message body.
+   */
+  INSERT_AT_START = "INSERT_AT_START",
+  /**
+   * Update actions insert content at the end of the message body.
+   */
+  INSERT_AT_END = "INSERT_AT_END",
 }
