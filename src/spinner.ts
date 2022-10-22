@@ -1,33 +1,36 @@
-import { Component } from "./component";
+import { RenderableComponent } from "./component";
 
 export type SpinnerSize = "large" | "small";
 
-export class Spinner extends Component {
+export class Spinner extends RenderableComponent {
   private size: SpinnerSize = "small";
 
+  /**
+   * @summary sets the size of the spinner
+   * @param size new {@link SpinnerSize}
+   */
   setSize(size: SpinnerSize) {
-    const { element, size: oldSize } = this;
-
     this.size = size;
-
-    element.classList.remove(`spinner-${oldSize}`);
-    element.classList.add(`spinner-${size}`);
-
     return this;
   }
 
-  create(parentId: string) {
+  create() {
     const { size } = this;
-
     const spinner = document.createElement("div");
     spinner.classList.add("spinner", `spinner-${size}`);
-
-    const parent = document.getElementById(parentId);
-    if (!parent) {
-      throw new Error(`missing spinner parent: #${parentId}`);
-    }
-
-    parent.append(spinner);
     return spinner;
+  }
+
+  render(maybeParent: HTMLElement | null): Promise<HTMLElement> {
+    const element = (this.element ||= this.create());
+
+    const { classList } = element;
+    classList.forEach((token) => {
+      if (token.startsWith("spinner-")) classList.remove(token);
+    });
+
+    element.classList.add(`spinner-${this.size}`);
+
+    return super.render(maybeParent);
   }
 }
