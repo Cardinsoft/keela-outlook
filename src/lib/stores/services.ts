@@ -6,7 +6,8 @@ type ServiceType =
   | Logger
   | PropertiesService
   | CacheService
-  | LockService;
+  | LockService
+  | UrlFetchApp;
 
 class ServicesStore {
   /**
