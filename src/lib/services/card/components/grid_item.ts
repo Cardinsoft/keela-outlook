@@ -1,6 +1,6 @@
-import { RenderableComponent } from "../../../../component.js";
-import { GridItemLayout, HorizontalAlignment } from "../enums.js";
-import { type ImageComponent } from "./image_component.js";
+import { RenderableComponent } from "../../../../component";
+import { GridItemLayout, HorizontalAlignment } from "../enums";
+import { type ImageComponent } from "./image_component";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/grid-item

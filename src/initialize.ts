@@ -1,7 +1,7 @@
-import { EventObject } from "./events.js";
-import { type Card } from "./lib/services/card/components/card.js";
-import { Overlay } from "./overlay.js";
-import { Spinner } from "./spinner.js";
+import { EventObject } from "./events";
+import { type Card } from "./lib/services/card/components/card";
+import { Overlay } from "./overlay";
+import { Spinner } from "./spinner";
 
 /**
  * @summary initializes the Add-In

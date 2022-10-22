@@ -1,10 +1,5 @@
-import { Cache } from "./cache.js";
-
-export enum CacheType {
-  DOCUMENT = "DOCUMENT",
-  SCRIPT = "SCRIPT",
-  USER = "USER",
-}
+import { Cache } from "./cache";
+import { CacheType } from "./enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/cache/cache-service

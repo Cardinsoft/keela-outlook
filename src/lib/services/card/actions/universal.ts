@@ -1,10 +1,10 @@
-import { RenderableComponent } from "../../../../component.js";
-import { EventObject } from "../../../../events.js";
-import { handleEvent } from "../../../../handlers/event.js";
-import { callFunctionFromGlobalScope } from "../../../../utils/functions.js";
-import { ActionStore } from "../../../stores/actions.js";
-import { type DisplayCardsAction } from "./display_cards.js";
-import { type OpenLink } from "./open_link.js";
+import { RenderableComponent } from "../../../../component";
+import { EventObject } from "../../../../events";
+import { handleEvent } from "../../../../handlers/event";
+import { callFunctionFromGlobalScope } from "../../../../utils/functions";
+import { ActionStore } from "../../../stores/actions";
+import { type DisplayCardsAction } from "./display_cards";
+import { type OpenLink } from "./open_link";
 
 /**
  * @summary custom implementation to use in Add-In menus

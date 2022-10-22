@@ -1,37 +1,37 @@
-import { type AddInMenu } from "../../../menu.js";
-import { Action } from "./actions/action.js";
-import { AuthorizationAction } from "./actions/authorization.js";
-import { CardAction } from "./actions/card.js";
-import { OpenLink } from "./actions/open_link.js";
-import { ActionResponseBuilder } from "./builders/action_response.js";
-import { CardBuilder } from "./builders/card.js";
-import { SuggestionsResponseBuilder } from "./builders/suggestions_response.js";
-import { UniversalActionResponseBuilder } from "./builders/universal_action_response.js";
-import { Attachment } from "./components/attachment.js";
-import { AuthorizationException } from "./components/authorization_exception.js";
-import { BorderStyle } from "./components/border_style.js";
-import { ButtonSet } from "./components/button_set.js";
-import { type Card } from "./components/card.js";
-import { CardHeader } from "./components/card_header.js";
-import { CardSection } from "./components/card_section.js";
-import { DecoratedText } from "./components/decorated_text.js";
-import { Divider } from "./components/divider.js";
-import { FixedFooter } from "./components/fixed_footer.js";
-import { Grid } from "./components/grid.js";
-import { GridItem } from "./components/grid_item.js";
-import { IconImage } from "./components/icon_image.js";
-import { ImageButton } from "./components/image_button.js";
-import { ImageComponent } from "./components/image_component.js";
-import { ImageCropStyle } from "./components/image_crop_style.js";
-import { KeyValue } from "./components/key_value.js";
-import { Navigation } from "./components/navigation.js";
-import { Notification } from "./components/notification.js";
-import { SelectionInput } from "./components/selection_input.js";
-import { Suggestions } from "./components/suggestions.js";
-import { Switch } from "./components/switch.js";
-import { TextButton } from "./components/text_button.js";
-import { TextInput } from "./components/text_input.js";
-import { TextParagraph } from "./components/text_paragraph.js";
+import { type AddInMenu } from "../../../menu";
+import { Action } from "./actions/action";
+import { AuthorizationAction } from "./actions/authorization";
+import { CardAction } from "./actions/card";
+import { OpenLink } from "./actions/open_link";
+import { ActionResponseBuilder } from "./builders/action_response";
+import { CardBuilder } from "./builders/card";
+import { SuggestionsResponseBuilder } from "./builders/suggestions_response";
+import { UniversalActionResponseBuilder } from "./builders/universal_action_response";
+import { Attachment } from "./components/attachment";
+import { AuthorizationException } from "./components/authorization_exception";
+import { BorderStyle } from "./components/border_style";
+import { ButtonSet } from "./components/button_set";
+import { type Card } from "./components/card";
+import { CardHeader } from "./components/card_header";
+import { CardSection } from "./components/card_section";
+import { DecoratedText } from "./components/decorated_text";
+import { Divider } from "./components/divider";
+import { FixedFooter } from "./components/fixed_footer";
+import { Grid } from "./components/grid";
+import { GridItem } from "./components/grid_item";
+import { IconImage } from "./components/icon_image";
+import { ImageButton } from "./components/image_button";
+import { ImageComponent } from "./components/image_component";
+import { ImageCropStyle } from "./components/image_crop_style";
+import { KeyValue } from "./components/key_value";
+import { Navigation } from "./components/navigation";
+import { Notification } from "./components/notification";
+import { SelectionInput } from "./components/selection_input";
+import { Suggestions } from "./components/suggestions";
+import { Switch } from "./components/switch";
+import { TextButton } from "./components/text_button";
+import { TextInput } from "./components/text_input";
+import { TextParagraph } from "./components/text_paragraph";
 import {
   BorderType,
   ComposedEmailType,
@@ -46,7 +46,7 @@ import {
   SelectionInputType,
   SwitchControlType,
   TextButtonStyle,
-} from "./enums.js";
+} from "./enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/card-service

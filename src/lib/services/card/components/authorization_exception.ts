@@ -1,4 +1,4 @@
-import { InspectableComponent } from "../index.js";
+import { InspectableComponent } from "../index";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/authorization-exception

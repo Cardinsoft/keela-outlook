@@ -1,5 +1,5 @@
-import { InspectableComponent } from "../../index.js";
-import { type Suggestions } from "../suggestions.js";
+import { InspectableComponent } from "../../index";
+import { type Suggestions } from "../suggestions";
 
 export type SuggestionsResponseConfig = {
   suggestions?: Suggestions;

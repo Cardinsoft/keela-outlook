@@ -1,4 +1,4 @@
-import { RenderableComponent } from "./component.js";
+import { RenderableComponent } from "./component";
 
 export type SelectorOption = {
   selected?: boolean;

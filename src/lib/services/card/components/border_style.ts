@@ -1,4 +1,4 @@
-import { BorderType } from "../enums.js";
+import { BorderType } from "../enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/border-style

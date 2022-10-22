@@ -1,9 +1,9 @@
-import { handleEvent } from "../../../../handlers/event.js";
-import { parseHTMLWidgetContent } from "../../../../utils/html.js";
-import { ActionStore } from "../../../stores/actions.js";
-import { Button } from "./button.js";
-import { type IconImage } from "./icon_image.js";
-import { type Switch } from "./switch.js";
+import { handleEvent } from "../../../../handlers/event";
+import { parseHTMLWidgetContent } from "../../../../utils/html";
+import { ActionStore } from "../../../stores/actions";
+import { Button } from "./button";
+import { type IconImage } from "./icon_image";
+import { type Switch } from "./switch";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/decorated-text

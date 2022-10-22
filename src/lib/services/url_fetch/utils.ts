@@ -1,4 +1,4 @@
-import { type UrlFetchAdvancedParameters } from "./service.js";
+import { type UrlFetchAdvancedParameters } from "./service";
 
 /**
  * @summary converts UrlFetchApp payload to {@link FormData}

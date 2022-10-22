@@ -1,5 +1,5 @@
-import { MailboxAPI } from "../graph.js";
-import { GmailThread } from "./thread.js";
+import { MailboxAPI } from "../graph";
+import { GmailThread } from "./thread";
 
 /**
  * @see https://developers.google.com/apps-script/reference/gmail/gmail-label

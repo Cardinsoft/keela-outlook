@@ -1,10 +1,10 @@
-import { RenderableComponent } from "../../../../component.js";
-import { handleEvent } from "../../../../handlers/event.js";
-import { ActionStore } from "../../../stores/actions.js";
-import { ComposedEmailType } from "../enums.js";
-import { type Action } from "./action.js";
-import { type AuthorizationAction } from "./authorization.js";
-import { type OpenLink } from "./open_link.js";
+import { RenderableComponent } from "../../../../component";
+import { handleEvent } from "../../../../handlers/event";
+import { ActionStore } from "../../../stores/actions";
+import { ComposedEmailType } from "../enums";
+import { type Action } from "./action";
+import { type AuthorizationAction } from "./authorization";
+import { type OpenLink } from "./open_link";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/card-action

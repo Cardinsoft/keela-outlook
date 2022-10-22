@@ -1,4 +1,4 @@
-import { LockType } from "../enums.js";
+import { LockType } from "../enums";
 
 const locks: Record<LockType, boolean> = {
   [LockType.DOCUMENT]: false,

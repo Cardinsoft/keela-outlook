@@ -1,6 +1,6 @@
-import { RenderableComponent } from "../../../../component.js";
-import { TextButtonStyle } from "../enums.js";
-import { type TextButton } from "./text_button.js";
+import { RenderableComponent } from "../../../../component";
+import { TextButtonStyle } from "../enums";
+import { type TextButton } from "./text_button";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/fixed-footer

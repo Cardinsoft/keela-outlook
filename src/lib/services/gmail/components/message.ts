@@ -1,12 +1,12 @@
-import { MailboxAPI } from "../graph.js";
+import { MailboxAPI } from "../graph";
 import {
   type AdvancedReplyOptions,
   type AdvancedSendOptions,
   type BaseMailOptions,
-} from "../service.js";
-import { GmailAttachment } from "./attachment.js";
-import { GmailDraft } from "./draft.js";
-import { GmailThread } from "./thread.js";
+} from "../service";
+import { GmailAttachment } from "./attachment";
+import { GmailDraft } from "./draft";
+import { GmailThread } from "./thread";
 
 export type GetAttachmentsAdvancedParameters = {
   includeAttachments?: boolean;

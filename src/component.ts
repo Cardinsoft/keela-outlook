@@ -1,4 +1,4 @@
-import { InspectableComponent } from "./lib/services/card/index.js";
+import { InspectableComponent } from "./lib/services/card/index";
 
 export abstract class Component {
   /**

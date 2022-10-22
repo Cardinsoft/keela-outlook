@@ -1,8 +1,8 @@
-import { handleEvent } from "../../../../handlers/event.js";
-import { parseHTMLWidgetContent } from "../../../../utils/html.js";
-import { ActionStore } from "../../../stores/actions.js";
-import { TextButtonStyle } from "../enums.js";
-import { Button } from "./button.js";
+import { handleEvent } from "../../../../handlers/event";
+import { parseHTMLWidgetContent } from "../../../../utils/html";
+import { ActionStore } from "../../../stores/actions";
+import { TextButtonStyle } from "../enums";
+import { Button } from "./button";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/text-button

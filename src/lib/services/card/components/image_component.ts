@@ -1,6 +1,6 @@
-import { RenderableComponent } from "../../../../component.js";
-import { BorderStyle } from "./border_style.js";
-import { ImageCropStyle } from "./image_crop_style.js";
+import { RenderableComponent } from "../../../../component";
+import { BorderStyle } from "./border_style";
+import { ImageCropStyle } from "./image_crop_style";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/image-component

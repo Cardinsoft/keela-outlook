@@ -1,6 +1,6 @@
-import { type OpenLink } from "../../actions/open_link.js";
-import { InspectableComponent } from "../../index.js";
-import { type Card } from "../card.js";
+import { type OpenLink } from "../../actions/open_link";
+import { InspectableComponent } from "../../index";
+import { type Card } from "../card";
 
 export type UniversalActionResponseConfig = {
   cards: Card[];

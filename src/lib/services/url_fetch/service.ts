@@ -1,5 +1,5 @@
-import { HTTPResponse } from "./components/http_response.js";
-import { payloadToFormData } from "./utils.js";
+import { HTTPResponse } from "./components/http_response";
+import { payloadToFormData } from "./utils";
 
 export type UrlFetchAdvancedParameters = {
   contentType?: string;

@@ -1,4 +1,4 @@
-import { type EventObject } from "../events.js";
+import { type EventObject } from "../events";
 
 /**
  * @summary looks up and call function in the global scope

@@ -1,7 +1,7 @@
-import { RenderableComponent } from "./component.js";
-import { type CardAction } from "./lib/services/card/actions/card.js";
-import { type UniversalAction } from "./lib/services/card/actions/universal.js";
-import { getGuid } from "./utils/identifiers.js";
+import { RenderableComponent } from "./component";
+import { type CardAction } from "./lib/services/card/actions/card";
+import { type UniversalAction } from "./lib/services/card/actions/universal";
+import { getGuid } from "./utils/identifiers";
 
 export type MenuItemType = "card" | "universal";
 

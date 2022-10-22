@@ -1,4 +1,4 @@
-import { ImageCropType } from "../enums.js";
+import { ImageCropType } from "../enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/image-crop-style

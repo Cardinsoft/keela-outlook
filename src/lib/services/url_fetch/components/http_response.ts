@@ -1,4 +1,4 @@
-import { Blob } from "../../base/blob.js";
+import { Blob } from "../../base/blob";
 
 /**
  * @see https://developers.google.com/apps-script/reference/url-fetch/http-response

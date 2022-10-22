@@ -1,4 +1,4 @@
-import { User } from "./components/user.js";
+import { User } from "./components/user";
 
 /**
  * @see https://developers.google.com/apps-script/reference/base/session

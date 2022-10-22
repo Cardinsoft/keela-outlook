@@ -1,8 +1,8 @@
-import { getGuid } from "../../utils/identifiers.js";
-import { type Action } from "../services/card/actions/action.js";
-import { type AuthorizationAction } from "../services/card/actions/authorization.js";
-import { type DisplayCardsAction } from "../services/card/actions/display_cards.js";
-import { type OpenLink } from "../services/card/actions/open_link.js";
+import { getGuid } from "../../utils/identifiers";
+import { type Action } from "../services/card/actions/action";
+import { type AuthorizationAction } from "../services/card/actions/authorization";
+import { type DisplayCardsAction } from "../services/card/actions/display_cards";
+import { type OpenLink } from "../services/card/actions/open_link";
 
 export type ActionType =
   | AuthorizationAction

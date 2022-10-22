@@ -1,8 +1,8 @@
-import { RenderableComponent } from "../../../../component.js";
-import { type Action } from "../actions/action.js";
-import { type AuthorizationAction } from "../actions/authorization.js";
-import { type OpenLink } from "../actions/open_link.js";
-import { ComposedEmailType } from "../enums.js";
+import { RenderableComponent } from "../../../../component";
+import { type Action } from "../actions/action";
+import { type AuthorizationAction } from "../actions/authorization";
+import { type OpenLink } from "../actions/open_link";
+import { ComposedEmailType } from "../enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/button

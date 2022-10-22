@@ -1,5 +1,5 @@
-import { RenderableComponent } from "../../../../component.js";
-import { ImageStyle } from "../enums.js";
+import { RenderableComponent } from "../../../../component";
+import { ImageStyle } from "../enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/card-header

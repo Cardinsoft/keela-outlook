@@ -1,11 +1,11 @@
-import { AddInMenu } from "../../../../menu.js";
-import { type CardAction } from "../actions/card.js";
-import { Card } from "../components/card.js";
-import { type CardHeader } from "../components/card_header.js";
-import { CardSection } from "../components/card_section.js";
-import { type FixedFooter } from "../components/fixed_footer.js";
-import { DisplayStyle } from "../enums.js";
-import { CardServiceBuilder } from "./index.js";
+import { AddInMenu } from "../../../../menu";
+import { type CardAction } from "../actions/card";
+import { Card } from "../components/card";
+import { type CardHeader } from "../components/card_header";
+import { CardSection } from "../components/card_section";
+import { type FixedFooter } from "../components/fixed_footer";
+import { DisplayStyle } from "../enums";
+import { CardServiceBuilder } from "./index";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/card-builder

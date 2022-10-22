@@ -1,4 +1,4 @@
-import { type Card } from "../components/card.js";
+import { type Card } from "../components/card";
 
 /**
  * @summary custom implementation to use in Add-In menus

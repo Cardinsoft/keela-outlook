@@ -1,10 +1,9 @@
-/// <reference types="@microsoft/microsoft-graph-types" />
-
-import { GmailDraft } from "./components/draft.js";
-import { GmailLabel } from "./components/label.js";
-import { GmailMessage } from "./components/message.js";
-import { GmailThread } from "./components/thread.js";
-import { MailboxAPI } from "./graph.js";
+import microsoftgraph from "@microsoft/microsoft-graph-types";
+import { GmailDraft } from "./components/draft";
+import { GmailLabel } from "./components/label";
+import { GmailMessage } from "./components/message";
+import { GmailThread } from "./components/thread";
+import { MailboxAPI } from "./graph";
 
 export type BaseMailOptions = {
   attachments?: {}[];

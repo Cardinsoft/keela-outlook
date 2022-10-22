@@ -1,5 +1,5 @@
-import { Properties } from "./components/properties.js";
-import { PropertiesStoreType } from "./enums.js";
+import { Properties } from "./components/properties";
+import { PropertiesStoreType } from "./enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/properties/properties-service

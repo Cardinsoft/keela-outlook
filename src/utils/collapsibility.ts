@@ -1,4 +1,4 @@
-import { parsePixelLength } from "./html.js";
+import { parsePixelLength } from "./html";
 
 /**
  * @summary computes element height given the number of elements to show

@@ -1,18 +1,19 @@
-import { cardStack } from "./handlers/response.js";
-import { initialize } from "./initialize.js";
-import { Logger } from "./lib/services/base/logger.js";
-import { CacheService } from "./lib/services/cache/service.js";
-import { UniversalAction } from "./lib/services/card/actions/universal.js";
-import { CardService } from "./lib/services/card/service.js";
-import { GmailApp } from "./lib/services/gmail/service.js";
-import { LockService } from "./lib/services/lock/service.js";
-import { PropertiesService } from "./lib/services/properties/service.js";
-import { Session } from "./lib/services/session/service.js";
-import { UrlFetchApp } from "./lib/services/url_fetch/service.js";
-import { Utilities } from "./lib/services/utilities/service.js";
-import { ServicesStore } from "./lib/stores/services.js";
-import { AddInMenu } from "./menu.js";
-import { log } from "./utils/log.js";
+import { cardStack } from "./handlers/response";
+import { initialize } from "./initialize";
+import { Logger } from "./lib/services/base/logger";
+import { CacheService } from "./lib/services/cache/service";
+import { UniversalAction } from "./lib/services/card/actions/universal";
+import { CardService } from "./lib/services/card/service";
+import { GmailApp } from "./lib/services/gmail/service";
+import { LockService } from "./lib/services/lock/service";
+import { PropertiesService } from "./lib/services/properties/service";
+import { Session } from "./lib/services/session/service";
+import { UrlFetchApp } from "./lib/services/url_fetch/service";
+import { Utilities } from "./lib/services/utilities/service";
+import { ServicesStore } from "./lib/stores/services";
+import { type GmailAddOnManifest } from "./manifest";
+import { AddInMenu } from "./menu";
+import { log } from "./utils/log";
 
 /**
  * @summary callback to call once the Add-In is ready

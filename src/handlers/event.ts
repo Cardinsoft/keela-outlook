@@ -1,10 +1,10 @@
-import { EventObject } from "../events.js";
+import { EventObject } from "../events";
 import {
   isInputLike,
   isOfficeJSstateFormElement,
   isSelectedStateFormElement,
-} from "../utils/guards.js";
-import { handleAction } from "./action.js";
+} from "../utils/guards";
+import { handleAction } from "./action";
 
 /**
  * @summary adds a value to form inputs

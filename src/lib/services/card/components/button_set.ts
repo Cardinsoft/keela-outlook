@@ -1,5 +1,5 @@
-import { RenderableComponent } from "../../../../component.js";
-import { type Button } from "./button.js";
+import { RenderableComponent } from "../../../../component";
+import { type Button } from "./button";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/button-set

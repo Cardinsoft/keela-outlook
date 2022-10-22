@@ -1,17 +1,21 @@
-import { type EventObject } from "../events.js";
-import { getActionResponse } from "../getters/action.js";
-import { getDisplayCardsResponse } from "../getters/display_cards.js";
-import { getOpenLinkResponse } from "../getters/open_link.js";
-import { Action } from "../lib/services/card/actions/action.js";
-import { DisplayCardsAction } from "../lib/services/card/actions/display_cards.js";
-import { OpenLink } from "../lib/services/card/actions/open_link.js";
-import { ActionResponse } from "../lib/services/card/components/responses/action_response.js";
-import { SuggestionsResponse } from "../lib/services/card/components/responses/suggestions_response.js";
-import { UniversalActionResponse } from "../lib/services/card/components/responses/universal_action_response.js";
-import { ActionStore, type ActionType } from "../lib/stores/actions.js";
-import { log } from "../utils/log.js";
-import { safeToString } from "../utils/strings.js";
-import { handleActionResponse, handleSuggestionsResponse, handleUniversalActionResponse } from "./response.js";
+import { type EventObject } from "../events";
+import { getActionResponse } from "../getters/action";
+import { getDisplayCardsResponse } from "../getters/display_cards";
+import { getOpenLinkResponse } from "../getters/open_link";
+import { Action } from "../lib/services/card/actions/action";
+import { DisplayCardsAction } from "../lib/services/card/actions/display_cards";
+import { OpenLink } from "../lib/services/card/actions/open_link";
+import { ActionResponse } from "../lib/services/card/components/responses/action_response";
+import { SuggestionsResponse } from "../lib/services/card/components/responses/suggestions_response";
+import { UniversalActionResponse } from "../lib/services/card/components/responses/universal_action_response";
+import { ActionStore, type ActionType } from "../lib/stores/actions";
+import { log } from "../utils/log";
+import { safeToString } from "../utils/strings";
+import {
+  handleActionResponse,
+  handleSuggestionsResponse,
+  handleUniversalActionResponse,
+} from "./response";
 
 export type ActionResponseType =
   | ActionResponse

@@ -1,4 +1,4 @@
-import { LoadIndicator } from "../enums.js";
+import { LoadIndicator } from "../enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/action

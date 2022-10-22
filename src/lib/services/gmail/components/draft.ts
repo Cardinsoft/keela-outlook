@@ -1,6 +1,6 @@
-import { MailboxAPI } from "../graph.js";
-import { type BaseMailOptions } from "../service.js";
-import { GmailMessage } from "./message.js";
+import { MailboxAPI } from "../graph";
+import { type BaseMailOptions } from "../service";
+import { GmailMessage } from "./message";
 
 /**
  * @see https://developers.google.com/apps-script/reference/gmail/gmail-draft

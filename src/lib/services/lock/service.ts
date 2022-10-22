@@ -1,5 +1,5 @@
-import { Lock } from "./components/lock.js";
-import { LockType } from "./enums.js";
+import { Lock } from "./components/lock";
+import { LockType } from "./enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/lock/lock-service

@@ -1,4 +1,4 @@
-import { OnClose, OpenAs } from "../enums.js";
+import { OnClose, OpenAs } from "../enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/open-link

@@ -1,9 +1,9 @@
-import { RenderableComponent } from "../../../../component.js";
-import { handleEvent } from "../../../../handlers/event.js";
-import { safeToString } from "../../../../utils/strings.js";
-import { ActionStore } from "../../../stores/actions.js";
-import { type Action } from "../actions/action.js";
-import { SelectionInputType } from "../enums.js";
+import { RenderableComponent } from "../../../../component";
+import { handleEvent } from "../../../../handlers/event";
+import { safeToString } from "../../../../utils/strings";
+import { ActionStore } from "../../../stores/actions";
+import { type Action } from "../actions/action";
+import { SelectionInputType } from "../enums";
 
 export type SelectionInputItemProps = {
   selected: boolean;

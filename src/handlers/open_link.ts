@@ -1,7 +1,7 @@
-import { readyCallback } from "../index.js";
-import { type OpenLink } from "../lib/services/card/actions/open_link.js";
-import { OnClose, OpenAs } from "../lib/services/card/enums.js";
-import { openURL, type OpenType } from "../utils/anchors.js";
+import { readyCallback } from "../index";
+import { type OpenLink } from "../lib/services/card/actions/open_link";
+import { OnClose, OpenAs } from "../lib/services/card/enums";
+import { openURL, type OpenType } from "../utils/anchors";
 
 /**
  * @summary handles an action with {@link OpenLink} set

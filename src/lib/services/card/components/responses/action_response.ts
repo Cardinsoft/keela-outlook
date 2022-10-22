@@ -1,7 +1,7 @@
-import { type OpenLink } from "../../actions/open_link.js";
-import { InspectableComponent } from "../../index.js";
-import { type Navigation } from "../navigation.js";
-import { type Notification } from "../notification.js";
+import { type OpenLink } from "../../actions/open_link";
+import { InspectableComponent } from "../../index";
+import { type Navigation } from "../navigation";
+import { type Notification } from "../notification";
 
 export type ActionResponseConfig = {
   navigation?: Navigation;

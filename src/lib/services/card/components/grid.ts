@@ -1,6 +1,6 @@
-import { BorderStyle } from "./border_style.js";
-import { Button } from "./button.js";
-import { type GridItem } from "./grid_item.js";
+import { BorderStyle } from "./border_style";
+import { Button } from "./button";
+import { type GridItem } from "./grid_item";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/grid

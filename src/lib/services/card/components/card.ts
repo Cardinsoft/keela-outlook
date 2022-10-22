@@ -1,10 +1,10 @@
-import { RenderableComponent } from "../../../../component.js";
-import { type AddInMenu } from "../../../../menu.js";
-import { type CardAction } from "../actions/card.js";
-import { DisplayStyle } from "../enums.js";
-import { type CardHeader } from "./card_header.js";
-import { type CardSection } from "./card_section.js";
-import { type FixedFooter } from "./fixed_footer.js";
+import { RenderableComponent } from "../../../../component";
+import { type AddInMenu } from "../../../../menu";
+import { type CardAction } from "../actions/card";
+import { DisplayStyle } from "../enums";
+import { type CardHeader } from "./card_header";
+import { type CardSection } from "./card_section";
+import { type FixedFooter } from "./fixed_footer";
 
 export type CardConfig = {
   actions: CardAction[];

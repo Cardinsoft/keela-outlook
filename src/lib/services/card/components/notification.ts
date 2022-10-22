@@ -1,4 +1,4 @@
-import { RenderableComponent } from "../../../../component.js";
+import { RenderableComponent } from "../../../../component";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/notification

@@ -1,11 +1,11 @@
 /// <reference path="../../../../index.d.ts" />
 
-import { RenderableComponent } from "../../../../component.js";
-import { handleEvent } from "../../../../handlers/event.js";
-import { safeToString } from "../../../../utils/strings.js";
-import { ActionStore } from "../../../stores/actions.js";
-import { type Action } from "../actions/action.js";
-import { SwitchControlType } from "../enums.js";
+import { RenderableComponent } from "../../../../component";
+import { handleEvent } from "../../../../handlers/event";
+import { safeToString } from "../../../../utils/strings";
+import { ActionStore } from "../../../stores/actions";
+import { type Action } from "../actions/action";
+import { SwitchControlType } from "../enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/switch

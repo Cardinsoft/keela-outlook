@@ -1,7 +1,7 @@
-import { type OpenLink } from "../actions/open_link.js";
-import { type Card } from "../components/card.js";
-import { UniversalActionResponse } from "../components/responses/universal_action_response.js";
-import { CardServiceBuilder } from "./index.js";
+import { type OpenLink } from "../actions/open_link";
+import { type Card } from "../components/card";
+import { UniversalActionResponse } from "../components/responses/universal_action_response";
+import { CardServiceBuilder } from "./index";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/universal-action-response-builder

@@ -38,7 +38,7 @@ interface AddOnManifest extends AppsScriptManifest {
   };
 }
 
-interface GmailAddOnManifest extends AddOnManifest {
+export interface GmailAddOnManifest extends AddOnManifest {
   addOns: {
     common: AddOnManifest["addOns"]["common"];
     gmail: {

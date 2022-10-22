@@ -1,4 +1,4 @@
-import { CacheType } from "./service.js";
+import { CacheType } from "./enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/cache/cache

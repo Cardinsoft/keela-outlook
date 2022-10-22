@@ -1,7 +1,7 @@
-import { handleEvent } from "../../../../handlers/event.js";
-import { ActionStore } from "../../../stores/actions.js";
-import { Icon } from "../enums.js";
-import { Button } from "./button.js";
+import { handleEvent } from "../../../../handlers/event";
+import { ActionStore } from "../../../stores/actions";
+import { Icon } from "../enums";
+import { Button } from "./button";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/image-button

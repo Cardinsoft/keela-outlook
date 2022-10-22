@@ -1,9 +1,9 @@
-import { RenderableComponent } from "../../../../component.js";
+import { RenderableComponent } from "../../../../component";
 import {
   getUncollapsedHeight,
   toggleCollapsedState,
-} from "../../../../utils/collapsibility.js";
-import { type Widget } from "./widget.js";
+} from "../../../../utils/collapsibility";
+import { type Widget } from "./widget";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/card-section

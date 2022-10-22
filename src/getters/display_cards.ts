@@ -1,5 +1,5 @@
-import { type DisplayCardsAction } from "../lib/services/card/actions/display_cards.js";
-import { UniversalActionResponseBuilder } from "../lib/services/card/builders/universal_action_response.js";
+import { type DisplayCardsAction } from "../lib/services/card/actions/display_cards";
+import { UniversalActionResponseBuilder } from "../lib/services/card/builders/universal_action_response";
 
 /**
  * @summary gets {@link Components.UniversalActionResponse} for a {@link DisplayCardsAction}

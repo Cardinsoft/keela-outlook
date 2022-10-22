@@ -1,5 +1,5 @@
-import { dialogCallback, DialogErrorCode } from "./dialogs.js";
-import { forceHttps } from "./network.js";
+import { dialogCallback, DialogErrorCode } from "./dialogs";
+import { forceHttps } from "./network";
 
 export type OpenType = "browser" | "dialog" | "web";
 

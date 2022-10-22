@@ -1,5 +1,5 @@
-import { type OpenLink } from "../lib/services/card/actions/open_link.js";
-import { UniversalActionResponseBuilder } from "../lib/services/card/builders/universal_action_response.js";
+import { type OpenLink } from "../lib/services/card/actions/open_link";
+import { UniversalActionResponseBuilder } from "../lib/services/card/builders/universal_action_response";
 
 /**
  * @summary gets {@link UniversalActionResponse} for a {@link OpenLink}

@@ -1,8 +1,8 @@
-import { type Card } from "../lib/services/card/components/card.js";
-import { type ActionResponse } from "../lib/services/card/components/responses/action_response.js";
-import { type SuggestionsResponse } from "../lib/services/card/components/responses/suggestions_response.js";
-import { type UniversalActionResponse } from "../lib/services/card/components/responses/universal_action_response.js";
-import { handleOpenLinkAction } from "./open_link.js";
+import { type Card } from "../lib/services/card/components/card";
+import { type ActionResponse } from "../lib/services/card/components/responses/action_response";
+import { type SuggestionsResponse } from "../lib/services/card/components/responses/suggestions_response";
+import { type UniversalActionResponse } from "../lib/services/card/components/responses/universal_action_response";
+import { handleOpenLinkAction } from "./open_link";
 
 /**
  * @summary global card stack

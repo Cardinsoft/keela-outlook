@@ -1,8 +1,8 @@
-import { type OpenLink } from "../actions/open_link.js";
-import { type Navigation } from "../components/navigation.js";
-import { type Notification } from "../components/notification.js";
-import { ActionResponse } from "../components/responses/action_response.js";
-import { CardServiceBuilder } from "./index.js";
+import { type OpenLink } from "../actions/open_link";
+import { type Navigation } from "../components/navigation";
+import { type Notification } from "../components/notification";
+import { ActionResponse } from "../components/responses/action_response";
+import { CardServiceBuilder } from "./index";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/action-response-builder

@@ -1,5 +1,5 @@
-import { RenderableComponent } from "../../../../component.js";
-import { parseHTMLWidgetContent } from "../../../../utils/html.js";
+import { RenderableComponent } from "../../../../component";
+import { parseHTMLWidgetContent } from "../../../../utils/html";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/text-paragraph

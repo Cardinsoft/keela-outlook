@@ -1,12 +1,12 @@
-import { type EventObject } from "../events.js";
-import { type Action } from "../lib/services/card/actions/action.js";
-import { type ActionResponse } from "../lib/services/card/components/responses/action_response.js";
-import { LoadIndicator } from "../lib/services/card/enums.js";
-import { Overlay } from "../overlay.js";
-import { Spinner } from "../spinner.js";
-import { callFunctionFromGlobalScope } from "../utils/functions.js";
-import { log } from "../utils/log.js";
-import { safeToString } from "../utils/strings.js";
+import { type EventObject } from "../events";
+import { type Action } from "../lib/services/card/actions/action";
+import { type ActionResponse } from "../lib/services/card/components/responses/action_response";
+import { LoadIndicator } from "../lib/services/card/enums";
+import { Overlay } from "../overlay";
+import { Spinner } from "../spinner";
+import { callFunctionFromGlobalScope } from "../utils/functions";
+import { log } from "../utils/log";
+import { safeToString } from "../utils/strings";
 
 /**
  * @summary gets {@link ActionResponse} for an {@link Action}

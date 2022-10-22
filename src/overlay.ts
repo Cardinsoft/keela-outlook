@@ -1,5 +1,5 @@
-import { Component } from "./component.js";
-import { parsePixelLength } from "./utils/html.js";
+import { Component } from "./component";
+import { parsePixelLength } from "./utils/html";
 
 export type OverlayTone = "light" | "dark";
 

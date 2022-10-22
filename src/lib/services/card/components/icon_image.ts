@@ -1,5 +1,5 @@
-import { RenderableComponent } from "../../../../component.js";
-import { Icon, ImageCropType } from "../enums.js";
+import { RenderableComponent } from "../../../../component";
+import { Icon, ImageCropType } from "../enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/icon-image

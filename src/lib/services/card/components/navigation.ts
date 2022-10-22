@@ -1,5 +1,5 @@
-import { InspectableComponent } from "../index.js";
-import { type Card } from "./card.js";
+import { InspectableComponent } from "../index";
+import { type Card } from "./card";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/navigation

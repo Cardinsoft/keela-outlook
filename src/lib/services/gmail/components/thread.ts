@@ -1,4 +1,4 @@
-import { GmailLabel } from "./label.js";
+import { GmailLabel } from "./label";
 
 /**
  * @see https://developers.google.com/apps-script/reference/gmail/gmail-thread

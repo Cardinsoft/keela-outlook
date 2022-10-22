@@ -1,4 +1,4 @@
-import { type PropertiesStoreType } from "../enums.js";
+import { type PropertiesStoreType } from "../enums";
 
 /**
  * @see https://developers.google.com/apps-script/reference/properties/properties

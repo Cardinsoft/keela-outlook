@@ -1,6 +1,6 @@
-import { SuggestionsResponse } from "../components/responses/suggestions_response.js";
-import { type Suggestions } from "../components/suggestions.js";
-import { CardServiceBuilder } from "./index.js";
+import { SuggestionsResponse } from "../components/responses/suggestions_response";
+import { type Suggestions } from "../components/suggestions";
+import { CardServiceBuilder } from "./index";
 
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/suggestions-response-builder

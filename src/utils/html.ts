@@ -1,6 +1,6 @@
-import { addAnchorListener, addTelListener } from "./anchors.js";
-import { isElementNode, isHTMLAnchorElement } from "./guards.js";
-import { addMailtoListener } from "./mailbox.js";
+import { addAnchorListener, addTelListener } from "./anchors";
+import { isElementNode, isHTMLAnchorElement } from "./guards";
+import { addMailtoListener } from "./mailbox";
 
 export type AnchorHandler = (anchor: HTMLAnchorElement) => void;
 
