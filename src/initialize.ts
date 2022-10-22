@@ -4,10 +4,13 @@ type Services = {
 
 /**
  * @summary initializes the Add-In
- * @param cardStack Add-In {@link Card} stack
+ * @param cardStack Add-In {@link Components.Card} stack
  * @param homepageTriggerName main Add-In function name
  */
-const initialize = async (cardStack: Card[], homepageTriggerName: string) => {
+const initialize = async (
+  cardStack: Components.Card[],
+  homepageTriggerName: string
+) => {
   const event = new EventObject();
 
   const overlay = new Overlay("app-overlay", "app-body");
@@ -23,7 +26,7 @@ const initialize = async (cardStack: Card[], homepageTriggerName: string) => {
     throw new Error(`missing homepage trigger "${homepageTriggerName}"`);
   }
 
-  const cards: Card[] = await homepageTrigger(event);
+  const cards: Components.Card[] = await homepageTrigger(event);
 
   const lastCard = cards.at(-1);
   if (!lastCard) {

@@ -2,6 +2,29 @@
  * @see https://developers.google.com/apps-script/reference/card-service/action-response-builder
  */
 class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse> {
+  private navigation?: Components.Navigation;
+  private notification?: Components.Notification;
+  private openLink?: Components.OpenLink;
+  private stateChanged: boolean = false;
+
+  /**
+   * @see https://developers.google.com/apps-script/reference/card-service/action-response-builder#build
+   *
+   * @summary Builds the current action response and validates it.
+   */
+  build() {
+    const response = new Components.ActionResponse({
+      navigation: this.navigation,
+      notification: this.notification,
+      openLink: this.openLink,
+      stateChanged: this.stateChanged,
+    });
+
+    super.build(response);
+
+    return response;
+  }
+
   /**
    * @see https://developers.google.com/apps-script/reference/card-service/action-response-builder#setNavigation(Navigation)
    *
@@ -9,7 +32,7 @@ class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse
    * @param navigation The {@link Components.Navigation} to use.
    */
   setNavigation(navigation: Components.Navigation) {
-    this.item.navigation = navigation;
+    this.navigation = navigation;
     return this;
   }
 
@@ -20,7 +43,7 @@ class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse
    * @param notification The {@link Components.Notification} to use.
    */
   setNotification(notification: Components.Notification) {
-    this.item.notification = notification;
+    this.notification = notification;
     return this;
   }
 
@@ -31,7 +54,7 @@ class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse
    * @param openLink The {@link Components.OpenLink} to use.
    */
   setOpenLink(openLink: Components.OpenLink) {
-    this.item.openLink = openLink;
+    this.openLink = openLink;
     return this;
   }
 
@@ -42,7 +65,7 @@ class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse
    * @param stateChanged Whether this action has changed the existing state data. Defaults to false.
    */
   setStateChanged(stateChanged: boolean) {
-    this.item.stateChanged = stateChanged;
+    this.stateChanged = stateChanged;
     return this;
   }
 
@@ -50,7 +73,7 @@ class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse
    * @summary validates the {@link ActionResponse}
    */
   protected validate() {
-    const { navigation, notification, openLink } = this.item;
+    const { navigation, notification, openLink } = this;
     return [navigation, notification, openLink].some(Boolean);
   }
 }

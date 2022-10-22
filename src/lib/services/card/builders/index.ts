@@ -1,9 +1,7 @@
 abstract class CardServiceBuilder<T extends { constructor: Function }> {
-  constructor(protected item: T) {}
+  constructor() {}
 
-  build(): T {
-    const { item } = this;
-
+  build(item: T): T {
     if (!this.validate()) {
       throw new Error(`Invalid ${item.constructor.name}`);
     }

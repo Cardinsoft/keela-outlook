@@ -18,13 +18,16 @@ type ActionHandlerRule = {
 }[string];
 
 type ActionResponseHandlerRule = {
-  [T in ActionResponseType as string]: [new () => T, ActionResponseHandler<T>];
+  [T in ActionResponseType as string]: [
+    new (config: any) => T,
+    ActionResponseHandler<T>
+  ];
 }[string];
 
 /**
  * @summary global card stack
  */
-const cardStack: Card[] = [];
+const cardStack: Components.Card[] = [];
 
 /**
  * @summary callback to call once the Add-In is ready

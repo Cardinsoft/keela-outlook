@@ -1,7 +1,19 @@
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/card-builder
  */
-class CardBuilder extends CardServiceBuilder<Card> {
+class CardBuilder extends CardServiceBuilder<Components.Card> {
+  private actions: CardAction[] = [];
+  private footer?: Components.FixedFooter;
+  private header?: Components.CardHeader;
+  private name?: string;
+  private peekHeader?: Components.CardHeader;
+  private sections: Components.CardSection[] = [];
+  private style: DisplayStyle = DisplayStyle.REPLACE;
+
+  constructor(private menu: AddInMenu) {
+    super();
+  }
+
   /**
    * @see https://developers.google.com/apps-script/reference/card-service/card-builder#addcardactioncardaction
    *
@@ -9,7 +21,7 @@ class CardBuilder extends CardServiceBuilder<Card> {
    * @param cardAction The {@link CardAction} to use.
    */
   addCardAction(cardAction: CardAction) {
-    this.item.actions.push(cardAction);
+    this.actions.push(cardAction);
     return this;
   }
 
@@ -20,7 +32,7 @@ class CardBuilder extends CardServiceBuilder<Card> {
    * @param section The {@link Components.CardSection} to use.
    */
   addSection(section: Components.CardSection) {
-    const { sections } = this.item;
+    const { sections } = this;
 
     if (sections.length === 100) {
       throw new Error("Can't add more than 100 sections to a card");
@@ -36,11 +48,19 @@ class CardBuilder extends CardServiceBuilder<Card> {
    * @summary Builds the current {@link Card} and validates it.
    */
   build() {
-    if (!this.validate()) {
-      throw new Error("Invalid card");
-    }
+    const card = new Components.Card(this.menu, {
+      actions: this.actions,
+      footer: this.footer,
+      header: this.header,
+      name: this.name,
+      peekHeader: this.peekHeader,
+      sections: this.sections,
+      style: this.style,
+    });
 
-    return this.item;
+    super.build(card);
+
+    return card;
   }
 
   /**
@@ -50,7 +70,7 @@ class CardBuilder extends CardServiceBuilder<Card> {
    * @param displayStyle The {@link DisplayStyle} to set.
    */
   setDisplayStyle(displayStyle: DisplayStyle) {
-    this.item.style = displayStyle;
+    this.style = displayStyle;
     return this;
   }
 
@@ -61,7 +81,7 @@ class CardBuilder extends CardServiceBuilder<Card> {
    * @param fixedFooter The {@link Components.FixedFooter} to use.
    */
   setFixedFooter(fixedFooter: Components.FixedFooter) {
-    this.item.footer = fixedFooter;
+    this.footer = fixedFooter;
     return this;
   }
 
@@ -72,7 +92,7 @@ class CardBuilder extends CardServiceBuilder<Card> {
    * @param cardHeader The {@link Components.CardHeader} to use.
    */
   setHeader(cardHeader: Components.CardHeader) {
-    this.item.header = cardHeader;
+    this.header = cardHeader;
     return this;
   }
 
@@ -83,7 +103,7 @@ class CardBuilder extends CardServiceBuilder<Card> {
    * @param name The name.
    */
   setName(name: string) {
-    this.item.name = name;
+    this.name = name;
     return this;
   }
 
@@ -94,7 +114,7 @@ class CardBuilder extends CardServiceBuilder<Card> {
    * @param peekCardHeader The {@link Components.CardHeader} to set.
    */
   setPeekCardHeader(peekCardHeader: Components.CardHeader) {
-    this.item.peekHeader = peekCardHeader;
+    this.peekHeader = peekCardHeader;
     return this;
   }
 

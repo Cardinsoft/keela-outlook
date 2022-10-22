@@ -16,7 +16,7 @@ class CardService {
   SwitchControlType = SwitchControlType;
   TextButtonStyle = TextButtonStyle;
 
-  cardStack: Card[] = [];
+  cardStack: Components.Card[] = [];
 
   constructor(
     protected primaryColor: string,
@@ -33,8 +33,13 @@ class CardService {
     return new Action();
   }
 
+  /**
+   * @see https://developers.google.com/apps-script/reference/card-service/card-service#newactionresponsebuilder
+   *
+   * @summary Creates a new {@link ActionResponseBuilder}.
+   */
   newActionResponseBuilder() {
-    return new ActionResponseBuilder(new Components.ActionResponse());
+    return new ActionResponseBuilder();
   }
 
   newAttachment() {
@@ -71,7 +76,7 @@ class CardService {
    * @summary Creates a new {@link CardBuilder}.
    */
   newCardBuilder() {
-    return new CardBuilder(new Card(this.menu));
+    return new CardBuilder(this.menu);
   }
 
   /**
@@ -192,8 +197,13 @@ class CardService {
     return new Components.Suggestions();
   }
 
+  /**
+   * @see https://developers.google.com/apps-script/reference/card-service/card-service#newsuggestionsresponsebuilder
+   *
+   * @summary Creates a new {@link SuggestionsResponseBuilder}.
+   */
   newSuggestionsResponseBuilder() {
-    return new SuggestionsResponseBuilder(new Components.SuggestionsResponse());
+    return new SuggestionsResponseBuilder();
   }
 
   newSwitch() {
@@ -228,9 +238,7 @@ class CardService {
    * @summary Creates a new {@link UniversalActionResponseBuilder}.
    */
   newUniversalActionResponseBuilder() {
-    return new UniversalActionResponseBuilder(
-      new Components.UniversalActionResponse()
-    );
+    return new UniversalActionResponseBuilder();
   }
 
   newUpdateDraftActionResponseBuilder() {
