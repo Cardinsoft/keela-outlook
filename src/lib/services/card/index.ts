@@ -1,4 +1,4 @@
-abstract class CardServiceComponent {
+abstract class InspectableComponent {
   /**
    * @summary Prints the JSON representation of this object.
    */
@@ -7,7 +7,7 @@ abstract class CardServiceComponent {
   }
 }
 
-abstract class CardServiceRenderableComponent extends CardServiceComponent {
+abstract class CardServiceRenderableComponent extends InspectableComponent {
   /**
    * @summary component element
    */

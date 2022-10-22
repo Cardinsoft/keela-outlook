@@ -2,7 +2,7 @@ namespace Components {
   /**
    * @see https://developers.google.com/apps-script/reference/card-service/navigation
    */
-  export class Navigation extends CardServiceComponent {
+  export class Navigation extends InspectableComponent {
     constructor(private stack: Card[] = []) {
       super();
     }
