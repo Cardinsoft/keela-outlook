@@ -1,6 +1,6 @@
-type LogLevel = "log" | "warn" | "error";
+export type LogLevel = "log" | "warn" | "error";
 
-type Log = {
+export type Log = {
   message: string;
   on: string;
   at: string;
@@ -13,7 +13,11 @@ type Log = {
  * @param message log message
  * @param data event data
  */
-const log = (level: LogLevel, message: string, data: string | object) => {
+export const log = (
+  level: LogLevel,
+  message: string,
+  data: string | object
+) => {
   const current = new Date();
 
   const stamp = current.toISOString();

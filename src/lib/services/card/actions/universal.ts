@@ -1,7 +1,15 @@
+import { RenderableComponent } from "../../../../component.js";
+import { EventObject } from "../../../../events.js";
+import { handleEvent } from "../../../../handlers/event.js";
+import { callFunctionFromGlobalScope } from "../../../../utils/functions.js";
+import { ActionStore } from "../../../stores/actions.js";
+import { type DisplayCardsAction } from "./display_cards.js";
+import { type OpenLink } from "./open_link.js";
+
 /**
  * @summary custom implementation to use in Add-In menus
  */
-class UniversalAction extends CardServiceRenderableComponent {
+export class UniversalAction extends RenderableComponent {
   private functionName?: string;
   private text?: string;
 
@@ -25,9 +33,10 @@ class UniversalAction extends CardServiceRenderableComponent {
       throw new Error("universal actions must have a function name set");
     }
 
-    return callFunctionFromGlobalScope<
-      Components.OpenLink | DisplayCardsAction
-    >(functionName, new EventObject());
+    return callFunctionFromGlobalScope<OpenLink | DisplayCardsAction>(
+      functionName,
+      new EventObject()
+    );
   }
 
   /**

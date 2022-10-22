@@ -1,4 +1,7 @@
-type UrlFetchAdvancedParameters = {
+import { HTTPResponse } from "./components/http_response.js";
+import { payloadToFormData } from "./utils.js";
+
+export type UrlFetchAdvancedParameters = {
   contentType?: string;
   headers?: Record<string, string>;
   method?: "get" | "post" | "put" | "patch" | "delete";
@@ -12,7 +15,7 @@ type UrlFetchAdvancedParameters = {
 /**
  * @see https://developers.google.com/apps-script/reference/url-fetch/url-fetch-app
  */
-class UrlFetchApp {
+export class UrlFetchApp {
   /**
    * @see https://developers.google.com/apps-script/reference/url-fetch/url-fetch-app#fetchurl,-params
    *
@@ -55,7 +58,7 @@ class UrlFetchApp {
       throw new Error(`DNS error: ${url}`);
     }
 
-    return new Components.HTTPResponse(request);
+    return new HTTPResponse(request);
   }
 
   /**

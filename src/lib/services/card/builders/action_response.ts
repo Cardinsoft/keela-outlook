@@ -1,10 +1,16 @@
+import { type OpenLink } from "../actions/open_link.js";
+import { type Navigation } from "../components/navigation.js";
+import { type Notification } from "../components/notification.js";
+import { ActionResponse } from "../components/responses/action_response.js";
+import { CardServiceBuilder } from "./index.js";
+
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/action-response-builder
  */
-class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse> {
-  private navigation?: Components.Navigation;
-  private notification?: Components.Notification;
-  private openLink?: Components.OpenLink;
+export class ActionResponseBuilder extends CardServiceBuilder<ActionResponse> {
+  private navigation?: Navigation;
+  private notification?: Notification;
+  private openLink?: OpenLink;
   private stateChanged: boolean = false;
 
   /**
@@ -13,7 +19,7 @@ class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse
    * @summary Builds the current action response and validates it.
    */
   build() {
-    const response = new Components.ActionResponse({
+    const response = new ActionResponse({
       navigation: this.navigation,
       notification: this.notification,
       openLink: this.openLink,
@@ -28,10 +34,10 @@ class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse
   /**
    * @see https://developers.google.com/apps-script/reference/card-service/action-response-builder#setNavigation(Navigation)
    *
-   * @summary Sets the response to a {@link Components.Navigation} action.
-   * @param navigation The {@link Components.Navigation} to use.
+   * @summary Sets the response to a {@link Navigation} action.
+   * @param navigation The {@link Navigation} to use.
    */
-  setNavigation(navigation: Components.Navigation) {
+  setNavigation(navigation: Navigation) {
     this.navigation = navigation;
     return this;
   }
@@ -40,9 +46,9 @@ class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse
    * @see https://developers.google.com/apps-script/reference/card-service/action-response-builder#setnotificationnotification
    *
    * @summary Sets the notification to display when the action is activated.
-   * @param notification The {@link Components.Notification} to use.
+   * @param notification The {@link Notification} to use.
    */
-  setNotification(notification: Components.Notification) {
+  setNotification(notification: Notification) {
     this.notification = notification;
     return this;
   }
@@ -51,9 +57,9 @@ class ActionResponseBuilder extends CardServiceBuilder<Components.ActionResponse
    * @see https://developers.google.com/apps-script/reference/card-service/action-response-builder#setopenlinkopenlink
    *
    * @summary Sets the URL to navigate to when the action is activated.
-   * @param openLink The {@link Components.OpenLink} to use.
+   * @param openLink The {@link OpenLink} to use.
    */
-  setOpenLink(openLink: Components.OpenLink) {
+  setOpenLink(openLink: OpenLink) {
     this.openLink = openLink;
     return this;
   }

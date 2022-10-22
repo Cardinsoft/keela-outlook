@@ -1,8 +1,10 @@
+import { type UrlFetchAdvancedParameters } from "./service.js";
+
 /**
  * @summary converts UrlFetchApp payload to {@link FormData}
  * @param payload payload to convert
  */
-const payloadToFormData = (
+export const payloadToFormData = (
   payload: Exclude<UrlFetchAdvancedParameters["payload"], undefined>
 ) => {
   const formData = new FormData();

@@ -1,12 +1,16 @@
-type AnchorHandler = (anchor: HTMLAnchorElement) => void;
+import { addAnchorListener, addTelListener } from "./anchors.js";
+import { isElementNode, isHTMLAnchorElement } from "./guards.js";
+import { addMailtoListener } from "./mailbox.js";
 
-type AnchorHandlerRule = [string, AnchorHandler];
+export type AnchorHandler = (anchor: HTMLAnchorElement) => void;
+
+export type AnchorHandlerRule = [string, AnchorHandler];
 
 /**
  * @summary parses length (i.e. "1 px") into a number
  * @param length stringified length
  */
-const parsePixelLength = (length: string) => {
+export const parsePixelLength = (length: string) => {
   return Math.ceil(+length.replace("px", ""));
 };
 
@@ -16,7 +20,7 @@ const parsePixelLength = (length: string) => {
  * @param rules anchor handler rules
  * @param defaultHandler default anchor hander
  */
-const bindAnchorListener = (
+export const bindAnchorListener = (
   anchor: HTMLAnchorElement,
   rules: AnchorHandlerRule[],
   defaultHandler: AnchorHandler
@@ -35,7 +39,7 @@ const bindAnchorListener = (
  * @param element element to sanitize
  * @param allowedAttributes map of tag names to allowed attribute names
  */
-const sanitizeAttributes = (
+export const sanitizeAttributes = (
   element: Element,
   allowedAttributes: Record<string, string[]>
 ) => {
@@ -59,7 +63,7 @@ const sanitizeAttributes = (
  * @param node node to sanitize
  * @param allowedNodeNames list of allowed node names
  */
-const sanitizeContent = (node: Node, allowedNodeNames: string[]) => {
+export const sanitizeContent = (node: Node, allowedNodeNames: string[]) => {
   const nodeName = node.nodeName.toLowerCase();
 
   if (allowedNodeNames.includes(nodeName)) return node;
@@ -79,7 +83,10 @@ const sanitizeContent = (node: Node, allowedNodeNames: string[]) => {
  * @param parent element to parse content for
  * @param content content HTML string
  */
-const parseHTMLWidgetContent = (parent: HTMLElement, content: string) => {
+export const parseHTMLWidgetContent = (
+  parent: HTMLElement,
+  content: string
+) => {
   const temp = document.createElement("div");
   temp.innerHTML = content;
 

@@ -1,8 +1,19 @@
+import { type Card } from "../lib/services/card/components/card.js";
+import { type ActionResponse } from "../lib/services/card/components/responses/action_response.js";
+import { type SuggestionsResponse } from "../lib/services/card/components/responses/suggestions_response.js";
+import { type UniversalActionResponse } from "../lib/services/card/components/responses/universal_action_response.js";
+import { handleOpenLinkAction } from "./open_link.js";
+
 /**
- * @summary handles an {@link Components.ActionResponse}
- * @param response {@link Components.ActionResponse} to handle
+ * @summary global card stack
  */
-const handleActionResponse = async (response: Components.ActionResponse) => {
+export const cardStack: Card[] = [];
+
+/**
+ * @summary handles an {@link ActionResponse}
+ * @param response {@link ActionResponse} to handle
+ */
+export const handleActionResponse = async (response: ActionResponse) => {
   const { navigation, notification, openLink } = response;
 
   if (navigation) {
@@ -22,12 +33,12 @@ const handleActionResponse = async (response: Components.ActionResponse) => {
 };
 
 /**
- * @summary handles a {@link Components.SuggestionsResponse}
- * @param response {@link Components.SuggestionsResponse} to handle
+ * @summary handles a {@link SuggestionsResponse}
+ * @param response {@link SuggestionsResponse} to handle
  * @param element triggering {@link Element}
  */
-const handleSuggestionsResponse = (
-  response: Components.SuggestionsResponse,
+export const handleSuggestionsResponse = (
+  response: SuggestionsResponse,
   element: Element
 ) => {
   element.dispatchEvent(
@@ -39,11 +50,11 @@ const handleSuggestionsResponse = (
 };
 
 /**
- * @summary handles a {@link Components.UniversalActionResponse}
- * @param response {@link Components.UniversalActionResponse} to handle
+ * @summary handles a {@link UniversalActionResponse}
+ * @param response {@link UniversalActionResponse} to handle
  */
-const handleUniversalActionResponse = async (
-  response: Components.UniversalActionResponse
+export const handleUniversalActionResponse = async (
+  response: UniversalActionResponse
 ) => {
   const { cards, openLink } = response;
 

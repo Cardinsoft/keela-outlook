@@ -1,4 +1,14 @@
-type ServiceType =
+import { type Logger } from "../services/base/logger.js";
+import { type CacheService } from "../services/cache/service.js";
+import { type CardService } from "../services/card/service.js";
+import { type GmailApp } from "../services/gmail/service.js";
+import { type LockService } from "../services/lock/service.js";
+import { type PropertiesService } from "../services/properties/service.js";
+import { type Session } from "../services/session/service.js";
+import { type UrlFetchApp } from "../services/url_fetch/service.js";
+import { type Utilities } from "../services/utilities/service.js";
+
+export type ServiceType =
   | CardService
   | GmailApp
   | Utilities
@@ -9,7 +19,7 @@ type ServiceType =
   | LockService
   | UrlFetchApp;
 
-class ServicesStore {
+export class ServicesStore {
   /**
    * @summary map of guids to services
    */

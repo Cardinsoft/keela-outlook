@@ -1,9 +1,19 @@
+import { type EventObject } from "../events.js";
+import { type Action } from "../lib/services/card/actions/action.js";
+import { type ActionResponse } from "../lib/services/card/components/responses/action_response.js";
+import { LoadIndicator } from "../lib/services/card/enums.js";
+import { Overlay } from "../overlay.js";
+import { Spinner } from "../spinner.js";
+import { callFunctionFromGlobalScope } from "../utils/functions.js";
+import { log } from "../utils/log.js";
+import { safeToString } from "../utils/strings.js";
+
 /**
- * @summary gets {@link Components.ActionResponse} for an {@link Action}
+ * @summary gets {@link ActionResponse} for an {@link Action}
  * @param action {@link Action} to get the response for
  * @param event Add-In event object
  */
-const getActionResponse = (action: Action, event: EventObject) => {
+export const getActionResponse = (action: Action, event: EventObject) => {
   const { indicator, name, parameters } = action;
 
   if (!name) {
@@ -23,7 +33,7 @@ const getActionResponse = (action: Action, event: EventObject) => {
   }
 
   try {
-    return callFunctionFromGlobalScope<Components.ActionResponse>(name, event);
+    return callFunctionFromGlobalScope<ActionResponse>(name, event);
   } catch (error) {
     log("error", "failed to handle action", safeToString(error));
     throw error;

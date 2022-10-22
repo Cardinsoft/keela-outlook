@@ -1,3 +1,11 @@
+import { EventObject } from "../events.js";
+import {
+  isInputLike,
+  isOfficeJSstateFormElement,
+  isSelectedStateFormElement,
+} from "../utils/guards.js";
+import { handleAction } from "./action.js";
+
 /**
  * @summary adds a value to form inputs
  * @param event event object
@@ -65,7 +73,7 @@ const fillFormInputs = (event: EventObject) => {
  * @summary handles triggered add-on events
  * @param element trigger element
  */
-const handleEvent = (element: Element) => {
+export const handleEvent = (element: Element) => {
   const event = new EventObject();
   fillFormInputs(event);
   handleAction(event, element);

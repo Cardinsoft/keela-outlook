@@ -1,8 +1,11 @@
+import { type OpenLink } from "../lib/services/card/actions/open_link.js";
+import { UniversalActionResponseBuilder } from "../lib/services/card/builders/universal_action_response.js";
+
 /**
- * @summary gets {@link Components.UniversalActionResponse} for a {@link Components.OpenLink}
- * @param action {@link Components.OpenLink} to get the response for
+ * @summary gets {@link UniversalActionResponse} for a {@link OpenLink}
+ * @param action {@link OpenLink} to get the response for
  */
-const getOpenLinkResponse = (action: Components.OpenLink) => {
+export const getOpenLinkResponse = (action: OpenLink) => {
   const builder = new UniversalActionResponseBuilder();
   builder.setOpenLink(action);
   return builder.build();

@@ -1,8 +1,12 @@
+import { SuggestionsResponse } from "../components/responses/suggestions_response.js";
+import { type Suggestions } from "../components/suggestions.js";
+import { CardServiceBuilder } from "./index.js";
+
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/suggestions-response-builder
  */
-class SuggestionsResponseBuilder extends CardServiceBuilder<Components.SuggestionsResponse> {
-  private suggestions?: Components.Suggestions;
+export class SuggestionsResponseBuilder extends CardServiceBuilder<SuggestionsResponse> {
+  private suggestions?: Suggestions;
 
   /**
    * @see https://developers.google.com/apps-script/reference/card-service/suggestions-response-builder#build
@@ -10,7 +14,7 @@ class SuggestionsResponseBuilder extends CardServiceBuilder<Components.Suggestio
    * @summary Builds the current suggestions response and validates it.
    */
   build() {
-    const response = new Components.SuggestionsResponse({
+    const response = new SuggestionsResponse({
       suggestions: this.suggestions,
     });
 
@@ -23,9 +27,9 @@ class SuggestionsResponseBuilder extends CardServiceBuilder<Components.Suggestio
    * @see https://developers.google.com/apps-script/reference/card-service/suggestions-response-builder#setSuggestions(Suggestions)
    *
    * @summary Sets the suggestions used in auto complete in text fields.
-   * @param suggestions The {@link Components.Suggestions} to use.
+   * @param suggestions The {@link Suggestions} to use.
    */
-  setSuggestions(suggestions: Components.Suggestions) {
+  setSuggestions(suggestions: Suggestions) {
     this.suggestions = suggestions;
     return this;
   }

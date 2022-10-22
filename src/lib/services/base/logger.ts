@@ -1,9 +1,9 @@
-type LoggerLog = { message: string; timestamp: string };
+export type LoggerLog = { message: string; timestamp: string };
 
 /**
  * @see https://developers.google.com/apps-script/reference/base/logger
  */
-class Logger {
+export class Logger {
   private stack: LoggerLog[] = [];
 
   /**

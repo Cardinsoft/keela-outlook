@@ -1,38 +1,39 @@
-namespace Components {
+import { RenderableComponent } from "../../../../component.js";
+import { parseHTMLWidgetContent } from "../../../../utils/html.js";
+
+/**
+ * @see https://developers.google.com/apps-script/reference/card-service/text-paragraph
+ */
+export class TextParagraph extends RenderableComponent {
+  private text?: string;
+
   /**
-   * @see https://developers.google.com/apps-script/reference/card-service/text-paragraph
+   * @see https://developers.google.com/apps-script/reference/card-service/text-paragraph#settexttext
+   *
+   * @summary Sets the text of the paragraph. Required.
+   * @param text The text to display.
    */
-  export class TextParagraph extends CardServiceRenderableComponent {
-    private text?: string;
+  setText(text: string) {
+    this.text = text;
+    return this;
+  }
 
-    /**
-     * @see https://developers.google.com/apps-script/reference/card-service/text-paragraph#settexttext
-     *
-     * @summary Sets the text of the paragraph. Required.
-     * @param text The text to display.
-     */
-    setText(text: string) {
-      this.text = text;
-      return this;
+  create(): HTMLElement {
+    const { text } = this;
+
+    if (!text) {
+      throw new Error("TextParagraph must have text set");
     }
 
-    create(): HTMLElement {
-      const { text } = this;
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("row");
 
-      if (!text) {
-        throw new Error("TextParagraph must have text set");
-      }
+    const contentText = document.createElement("span");
+    contentText.classList.add("ms-font-m-plus");
+    wrapper.append(contentText);
 
-      const wrapper = document.createElement("div");
-      wrapper.classList.add("row");
+    parseHTMLWidgetContent(contentText, text);
 
-      const contentText = document.createElement("span");
-      contentText.classList.add("ms-font-m-plus");
-      wrapper.append(contentText);
-
-      parseHTMLWidgetContent(contentText, text);
-
-      return wrapper;
-    }
+    return wrapper;
   }
 }

@@ -1,7 +1,7 @@
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/authorization-action
  */
-class AuthorizationAction {
+export class AuthorizationAction {
   url?: string;
 
   /**

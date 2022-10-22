@@ -1,10 +1,12 @@
+import { parsePixelLength } from "./html.js";
+
 /**
  * @summary computes element height given the number of elements to show
  * @param element element to compute the height for
  * @param numberOfUncollapsibleWidgets number of widgets to show
  * @returns uncollapsed element height
  */
-const getUncollapsedHeight = (
+export const getUncollapsedHeight = (
   element: HTMLElement,
   numberOfUncollapsibleWidgets: number
 ) => {
@@ -69,7 +71,7 @@ const getChildrenPropertyValue = (
  * @param increment animation speed
  * @param initial initial value
  */
-const toggleCollapsedState = async (
+export const toggleCollapsedState = async (
   trigger: HTMLElement,
   element: HTMLElement,
   property: "height" | "width",

@@ -1,13 +1,15 @@
-enum CacheType {
-  DOCUMENT = "document",
-  SCRIPT = "script",
-  USER = "user",
+import { Cache } from "./cache.js";
+
+export enum CacheType {
+  DOCUMENT = "DOCUMENT",
+  SCRIPT = "SCRIPT",
+  USER = "USER",
 }
 
 /**
  * @see https://developers.google.com/apps-script/reference/cache/cache-service
  */
-class CacheService {
+export class CacheService {
   /**
    * @see https://developers.google.com/apps-script/reference/cache/cache-service#getdocumentcache
    *
@@ -15,7 +17,7 @@ class CacheService {
    */
   getDocumentCache() {
     const { localStorage } = window;
-    return new Components.Cache(localStorage, CacheType.DOCUMENT);
+    return new Cache(localStorage, CacheType.DOCUMENT);
   }
 
   /**
@@ -25,7 +27,7 @@ class CacheService {
    */
   getScriptCache() {
     const { localStorage } = window;
-    return new Components.Cache(localStorage, CacheType.SCRIPT);
+    return new Cache(localStorage, CacheType.SCRIPT);
   }
 
   /**
@@ -35,6 +37,6 @@ class CacheService {
    */
   getUserCache() {
     const { localStorage } = window;
-    return new Components.Cache(localStorage, CacheType.USER);
+    return new Cache(localStorage, CacheType.USER);
   }
 }

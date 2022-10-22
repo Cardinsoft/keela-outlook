@@ -1,20 +1,22 @@
-type DialogErrorEvent = {
+import { log } from "./log.js";
+
+export type DialogErrorEvent = {
   error: number;
 };
 
-type DialogSuccessEvent = {
+export type DialogSuccessEvent = {
   message: string;
   origin: string | undefined;
 };
 
-type DialogEvent = DialogSuccessEvent | DialogErrorEvent;
+export type DialogEvent = DialogSuccessEvent | DialogErrorEvent;
 
-type DialogEventLog = {
+export type DialogEventLog = {
   event: string;
   type: "dialog";
 };
 
-enum DialogErrorCode {
+export enum DialogErrorCode {
   CLOSED = 12006,
   HTTPS_ERROR = 12003,
   LOAD_ERROR = 12002,
@@ -25,7 +27,7 @@ enum DialogErrorCode {
  * @param event dialog event
  * @param onClose callback to call when the dialog is closed
  */
-const dialogCallback = (
+export const dialogCallback = (
   event: DialogEvent,
   onClose?: (...args: any[]) => void
 ) => {

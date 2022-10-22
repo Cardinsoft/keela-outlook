@@ -1,7 +1,9 @@
+import { LoadIndicator } from "../enums.js";
+
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/action
  */
-class Action {
+export class Action {
   indicator: LoadIndicator = LoadIndicator.SPINNER;
   name?: string;
   parameters: Record<string, string> = {};

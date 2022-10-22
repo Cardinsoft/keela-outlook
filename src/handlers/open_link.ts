@@ -1,8 +1,13 @@
+import { readyCallback } from "../index.js";
+import { type OpenLink } from "../lib/services/card/actions/open_link.js";
+import { OnClose, OpenAs } from "../lib/services/card/enums.js";
+import { openURL, type OpenType } from "../utils/anchors.js";
+
 /**
- * @summary handles an action with {@link Components.OpenLink} set
+ * @summary handles an action with {@link OpenLink} set
  * @param openLink open link to handle
  */
-const handleOpenLinkAction = (openLink: Components.OpenLink) => {
+export const handleOpenLinkAction = (openLink: OpenLink) => {
   const { onClose, openAs, url = "" } = openLink;
 
   const openTypeMap: Record<OpenAs, OpenType> = {

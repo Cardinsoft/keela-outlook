@@ -1,30 +1,32 @@
+import { type Card } from "../components/card.js";
+
 /**
  * @summary custom implementation to use in Add-In menus
  */
-class DisplayCardsAction {
+export class DisplayCardsAction {
   /**
-   * @summary list of {@link Components.Card}s to display
+   * @summary list of {@link Card}s to display
    */
-  private cards: Components.Card[] = [];
+  private cards: Card[] = [];
 
   /**
-   * @summary gets {@link Components.Card}s of this action
+   * @summary gets {@link Card}s of this action
    */
   getCards() {
     return [...this.cards];
   }
 
   /**
-   * @summary sets {@link Components.Card}s to this action
-   * @param cards {@link Components.Card}s to set
+   * @summary sets {@link Card}s to this action
+   * @param cards {@link Card}s to set
    */
-  setCards(cards: Components.Card[]) {
+  setCards(cards: Card[]) {
     this.cards = [...cards];
     return this;
   }
 
   /**
-   * @summary renders set {@link Components.Card}s
+   * @summary renders set {@link Card}s
    */
   async displayCards() {
     const cards = this.getCards();

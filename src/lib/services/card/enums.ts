@@ -1,7 +1,7 @@
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/border-type
  */
-enum BorderType {
+export enum BorderType {
   /**
    * No border style.
    */
@@ -15,7 +15,7 @@ enum BorderType {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/composed-email-type
  */
-enum ComposedEmailType {
+export enum ComposedEmailType {
   /**
    * A draft that is a reply to another message. Default.
    */
@@ -29,7 +29,7 @@ enum ComposedEmailType {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/content-type
  */
-enum ContentType {
+export enum ContentType {
   /**
    * Indicates that the generated content is plain text. Default.
    */
@@ -47,7 +47,7 @@ enum ContentType {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/display-style
  */
-enum DisplayStyle {
+export enum DisplayStyle {
   /**
    * Show the card header at the bottom of add-on content over existing content.
    */
@@ -61,7 +61,7 @@ enum DisplayStyle {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/grid-item-layout
  */
-enum GridItemLayout {
+export enum GridItemLayout {
   /**
    * The title and subtitle are shown below the grid item's image.
    */
@@ -75,7 +75,7 @@ enum GridItemLayout {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/horizontal-alignment
  */
-enum HorizontalAlignment {
+export enum HorizontalAlignment {
   /**
    * Align the widget to the start of the sentence side.
    */
@@ -93,7 +93,7 @@ enum HorizontalAlignment {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/icon
  */
-enum Icon {
+export enum Icon {
   NONE = "",
   AIRPLANE = "AIRPLANE",
   BOOKMARK = "BOOKMARK",
@@ -130,7 +130,7 @@ enum Icon {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/image-crop-type
  */
-enum ImageCropType {
+export enum ImageCropType {
   /**
    * Square shape crop style.
    */
@@ -152,7 +152,7 @@ enum ImageCropType {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/image-style
  */
-enum ImageStyle {
+export enum ImageStyle {
   /**
    * No cropping. Default.
    */
@@ -166,7 +166,7 @@ enum ImageStyle {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/load-indicator
  */
-enum LoadIndicator {
+export enum LoadIndicator {
   /**
    * Use a spinner indicator. Default.
    */
@@ -180,7 +180,7 @@ enum LoadIndicator {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/on-close
  */
-enum OnClose {
+export enum OnClose {
   /**
    * Do nothing on close. Default.
    */
@@ -194,7 +194,7 @@ enum OnClose {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/open-as
  */
-enum OpenAs {
+export enum OpenAs {
   /**
    * Open in a full window or tab. Default.
    */
@@ -208,7 +208,7 @@ enum OpenAs {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/selection-input-type
  */
-enum SelectionInputType {
+export enum SelectionInputType {
   /**
    * Checkbox input style. Default.
    */
@@ -226,7 +226,7 @@ enum SelectionInputType {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/switch-control-type
  */
-enum SwitchControlType {
+export enum SwitchControlType {
   /**
    * Toggle-styled control for a switch widget. Default.
    */
@@ -240,7 +240,7 @@ enum SwitchControlType {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/text-button-style
  */
-enum TextButtonStyle {
+export enum TextButtonStyle {
   /**
    * Normal text button with clear background. Default.
    */
@@ -254,7 +254,7 @@ enum TextButtonStyle {
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/update-draft-body-type
  */
-enum UpdateDraftBodyType {
+export enum UpdateDraftBodyType {
   /**
    * Default. Update actions insert content at the current cursor position, replacing any selected content.
    */

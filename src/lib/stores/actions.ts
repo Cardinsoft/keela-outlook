@@ -1,10 +1,16 @@
-type ActionType =
+import { getGuid } from "../../utils/identifiers.js";
+import { type Action } from "../services/card/actions/action.js";
+import { type AuthorizationAction } from "../services/card/actions/authorization.js";
+import { type DisplayCardsAction } from "../services/card/actions/display_cards.js";
+import { type OpenLink } from "../services/card/actions/open_link.js";
+
+export type ActionType =
   | AuthorizationAction
   | Action
-  | Components.OpenLink
+  | OpenLink
   | DisplayCardsAction;
 
-class ActionStore {
+export class ActionStore {
   /**
    * @summary map of guids to actions
    */

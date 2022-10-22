@@ -1,14 +1,17 @@
+import { Lock } from "./components/lock.js";
+import { LockType } from "./enums.js";
+
 /**
  * @see https://developers.google.com/apps-script/reference/lock/lock-service
  */
-class LockService {
+export class LockService {
   /**
    * @see https://developers.google.com/apps-script/reference/lock/lock-service#getdocumentlock
    *
    * @summary Gets a lock that prevents any user of the current document from concurrently running a section of code.
    */
   getDocumentLock() {
-    return new Components.Lock(LockType.DOCUMENT);
+    return new Lock(LockType.DOCUMENT);
   }
 
   /**
@@ -17,7 +20,7 @@ class LockService {
    * @summary Gets a lock that prevents any user from concurrently running a section of code.
    */
   getScriptLock() {
-    return new Components.Lock(LockType.SCRIPT);
+    return new Lock(LockType.SCRIPT);
   }
 
   /**
@@ -26,6 +29,6 @@ class LockService {
    * @summary Gets a lock that prevents the current user from concurrently running a section of code.
    */
   getUserLock() {
-    return new Components.Lock(LockType.USER);
+    return new Lock(LockType.USER);
   }
 }

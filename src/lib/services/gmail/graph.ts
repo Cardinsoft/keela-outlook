@@ -1,4 +1,4 @@
-type MailboxAPIRequestOptions<T = unknown> = {
+export type MailboxAPIRequestOptions<T = unknown> = {
   authorize?: boolean;
   method: "GET" | "POST" | "PATCH" | "DELETE";
   path: string;
@@ -8,7 +8,7 @@ type MailboxAPIRequestOptions<T = unknown> = {
   type?: "application/json" | "text/plain";
 };
 
-class MailboxAPI {
+export class MailboxAPI {
   private static baseURL = "https://graph.microsoft.com/v1.0";
 
   /**

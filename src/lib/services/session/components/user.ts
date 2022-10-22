@@ -1,7 +1,7 @@
 /**
  * @see https://developers.google.com/apps-script/reference/base/user
  */
-class User {
+export class User {
   constructor(private item: Office.UserProfile) {}
 
   /**

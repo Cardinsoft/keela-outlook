@@ -1,4 +1,4 @@
-type MessageFormParameters = {
+export type MessageFormParameters = {
   attachments: Array<{
     isInline: boolean;
     itemId: string;
@@ -18,7 +18,7 @@ type MessageFormParameters = {
  * @param target target link
  * @param to recipient email address
  */
-const addMailtoListener = (target: EventTarget, to: string) => {
+export const addMailtoListener = (target: EventTarget, to: string) => {
   target.addEventListener("click", (event) => {
     event.preventDefault();
 

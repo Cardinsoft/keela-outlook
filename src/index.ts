@@ -1,39 +1,24 @@
-type ActionResponseType =
-  | Components.ActionResponse
-  | Components.SuggestionsResponse
-  | Components.UniversalActionResponse;
-
-type ActionHandler<T extends ActionType> = (
-  action: T,
-  event: EventObject
-) => Promise<ActionResponseType> | ActionResponseType;
-
-type ActionResponseHandler<T extends ActionResponseType> = (
-  response: T,
-  element: Element
-) => Promise<void> | void;
-
-type ActionHandlerRule = {
-  [T in ActionType as string]: [new () => T, ActionHandler<T>];
-}[string];
-
-type ActionResponseHandlerRule = {
-  [T in ActionResponseType as string]: [
-    new (config: any) => T,
-    ActionResponseHandler<T>
-  ];
-}[string];
-
-/**
- * @summary global card stack
- */
-const cardStack: Components.Card[] = [];
+import { cardStack } from "./handlers/response.js";
+import { initialize } from "./initialize.js";
+import { Logger } from "./lib/services/base/logger.js";
+import { CacheService } from "./lib/services/cache/service.js";
+import { UniversalAction } from "./lib/services/card/actions/universal.js";
+import { CardService } from "./lib/services/card/service.js";
+import { GmailApp } from "./lib/services/gmail/service.js";
+import { LockService } from "./lib/services/lock/service.js";
+import { PropertiesService } from "./lib/services/properties/service.js";
+import { Session } from "./lib/services/session/service.js";
+import { UrlFetchApp } from "./lib/services/url_fetch/service.js";
+import { Utilities } from "./lib/services/utilities/service.js";
+import { ServicesStore } from "./lib/stores/services.js";
+import { AddInMenu } from "./menu.js";
+import { log } from "./utils/log.js";
 
 /**
  * @summary callback to call once the Add-In is ready
  * @param info Office context info
  */
-const readyCallback = async (info: Pick<Office.Context, "host">) => {
+export const readyCallback = async (info: Pick<Office.Context, "host">) => {
   const { host } = info;
 
   if (host && host !== Office.HostType.Outlook) {

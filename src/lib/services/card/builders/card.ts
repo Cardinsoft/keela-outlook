@@ -1,13 +1,22 @@
+import { AddInMenu } from "../../../../menu.js";
+import { type CardAction } from "../actions/card.js";
+import { Card } from "../components/card.js";
+import { type CardHeader } from "../components/card_header.js";
+import { CardSection } from "../components/card_section.js";
+import { type FixedFooter } from "../components/fixed_footer.js";
+import { DisplayStyle } from "../enums.js";
+import { CardServiceBuilder } from "./index.js";
+
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/card-builder
  */
-class CardBuilder extends CardServiceBuilder<Components.Card> {
+export class CardBuilder extends CardServiceBuilder<Card> {
   private actions: CardAction[] = [];
-  private footer?: Components.FixedFooter;
-  private header?: Components.CardHeader;
+  private footer?: FixedFooter;
+  private header?: CardHeader;
   private name?: string;
-  private peekHeader?: Components.CardHeader;
-  private sections: Components.CardSection[] = [];
+  private peekHeader?: CardHeader;
+  private sections: CardSection[] = [];
   private style: DisplayStyle = DisplayStyle.REPLACE;
 
   constructor(private menu: AddInMenu) {
@@ -29,9 +38,9 @@ class CardBuilder extends CardServiceBuilder<Components.Card> {
    * @see https://developers.google.com/apps-script/reference/card-service/card-builder#addsectionsection
    *
    * @summary Adds a section to this {@link Card}.
-   * @param section The {@link Components.CardSection} to use.
+   * @param section The {@link CardSection} to use.
    */
-  addSection(section: Components.CardSection) {
+  addSection(section: CardSection) {
     const { sections } = this;
 
     if (sections.length === 100) {
@@ -48,7 +57,7 @@ class CardBuilder extends CardServiceBuilder<Components.Card> {
    * @summary Builds the current {@link Card} and validates it.
    */
   build() {
-    const card = new Components.Card(this.menu, {
+    const card = new Card(this.menu, {
       actions: this.actions,
       footer: this.footer,
       header: this.header,
@@ -78,9 +87,9 @@ class CardBuilder extends CardServiceBuilder<Components.Card> {
    * @see https://developers.google.com/apps-script/reference/card-service/card-builder#setfixedfooterfixedfooter
    *
    * @summary Sets a fixed footer for this {@link Card}.
-   * @param fixedFooter The {@link Components.FixedFooter} to use.
+   * @param fixedFooter The {@link FixedFooter} to use.
    */
-  setFixedFooter(fixedFooter: Components.FixedFooter) {
+  setFixedFooter(fixedFooter: FixedFooter) {
     this.footer = fixedFooter;
     return this;
   }
@@ -89,9 +98,9 @@ class CardBuilder extends CardServiceBuilder<Components.Card> {
    * @see https://developers.google.com/apps-script/reference/card-service/card-builder#setheadercardheader
    *
    * @summary Sets the header for this {@link Card}.
-   * @param cardHeader The {@link Components.CardHeader} to use.
+   * @param cardHeader The {@link CardHeader} to use.
    */
-  setHeader(cardHeader: Components.CardHeader) {
+  setHeader(cardHeader: CardHeader) {
     this.header = cardHeader;
     return this;
   }
@@ -111,9 +120,9 @@ class CardBuilder extends CardServiceBuilder<Components.Card> {
    * @see https://developers.google.com/apps-script/reference/card-service/card-builder#setpeekcardheaderpeekcardheader
    *
    * @summary Sets the peek card header.
-   * @param peekCardHeader The {@link Components.CardHeader} to set.
+   * @param peekCardHeader The {@link CardHeader} to set.
    */
-  setPeekCardHeader(peekCardHeader: Components.CardHeader) {
+  setPeekCardHeader(peekCardHeader: CardHeader) {
     this.peekHeader = peekCardHeader;
     return this;
   }

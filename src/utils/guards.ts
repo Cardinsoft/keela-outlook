@@ -2,7 +2,7 @@
  * @summary checks if a given {@link node} is an {@link Element} node
  * @param node {@link Node} to check
  */
-const isElementNode = (node: Node): node is Element => {
+export const isElementNode = (node: Node): node is Element => {
   return node.nodeType === Node.ELEMENT_NODE;
 };
 
@@ -10,7 +10,9 @@ const isElementNode = (node: Node): node is Element => {
  * @summary checks if a given {@link node} is an {@link HTMLTextAreaElement}
  * @param node {@link Node} to check
  */
-const isHTMLTextAreaElement = (node: Node): node is HTMLTextAreaElement => {
+export const isHTMLTextAreaElement = (
+  node: Node
+): node is HTMLTextAreaElement => {
   return node.nodeName.toLowerCase() === "textarea";
 };
 
@@ -18,7 +20,7 @@ const isHTMLTextAreaElement = (node: Node): node is HTMLTextAreaElement => {
  * @summary checks if a given {@link node} is an {@link HTMLAnchorElement}
  * @param node {@link Node} to check
  */
-const isHTMLAnchorElement = (node: Node): node is HTMLAnchorElement => {
+export const isHTMLAnchorElement = (node: Node): node is HTMLAnchorElement => {
   return node.nodeName.toLowerCase() === "a";
 };
 
@@ -26,7 +28,7 @@ const isHTMLAnchorElement = (node: Node): node is HTMLAnchorElement => {
  * @summary checks if an element is input-like (defined as having a name and a value)
  * @param element element to check
  */
-const isInputLike = (
+export const isInputLike = (
   element: Element
 ): element is Element & { name: string; value: string } => {
   return "name" in element && "value" in element;
@@ -36,7 +38,7 @@ const isInputLike = (
  * @summary checks if an element is OfficeUI toggle, checkbox, or radio button
  * @param element element to check
  */
-const isOfficeJSstateFormElement = (
+export const isOfficeJSstateFormElement = (
   element: Element
 ): element is HTMLInputElement => {
   const { classList } = element;
@@ -49,6 +51,6 @@ const isOfficeJSstateFormElement = (
  * @summary checks if an OfficeUI state element is selected
  * @param element element to check
  */
-const isSelectedStateFormElement = (element: HTMLInputElement) => {
+export const isSelectedStateFormElement = (element: HTMLInputElement) => {
   return element.classList.contains("is-selected") || element.checked;
 };

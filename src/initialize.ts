@@ -1,14 +1,15 @@
-type Services = {
-  CardService: CardService;
-};
+import { EventObject } from "./events.js";
+import { type Card } from "./lib/services/card/components/card.js";
+import { Overlay } from "./overlay.js";
+import { Spinner } from "./spinner.js";
 
 /**
  * @summary initializes the Add-In
- * @param cardStack Add-In {@link Components.Card} stack
+ * @param cardStack Add-In {@link Card} stack
  * @param homepageTriggerName main Add-In function name
  */
-const initialize = async (
-  cardStack: Components.Card[],
+export const initialize = async (
+  cardStack: Card[],
   homepageTriggerName: string
 ) => {
   const event = new EventObject();
@@ -26,7 +27,7 @@ const initialize = async (
     throw new Error(`missing homepage trigger "${homepageTriggerName}"`);
   }
 
-  const cards: Components.Card[] = await homepageTrigger(event);
+  const cards: Card[] = await homepageTrigger(event);
 
   const lastCard = cards.at(-1);
   if (!lastCard) {

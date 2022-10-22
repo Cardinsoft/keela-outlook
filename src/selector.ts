@@ -1,10 +1,12 @@
-type SelectorOption = {
+import { RenderableComponent } from "./component.js";
+
+export type SelectorOption = {
   selected?: boolean;
   text: string;
   value: string;
 };
 
-class Selector extends CardServiceRenderableComponent {
+export class Selector extends RenderableComponent {
   options: SelectorOption[] = [];
   open = false;
 

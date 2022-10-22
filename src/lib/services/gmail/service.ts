@@ -1,6 +1,12 @@
 /// <reference types="@microsoft/microsoft-graph-types" />
 
-type BaseMailOptions = {
+import { GmailDraft } from "./components/draft.js";
+import { GmailLabel } from "./components/label.js";
+import { GmailMessage } from "./components/message.js";
+import { GmailThread } from "./components/thread.js";
+import { MailboxAPI } from "./graph.js";
+
+export type BaseMailOptions = {
   attachments?: {}[];
   bcc?: string;
   cc?: string;
@@ -11,14 +17,14 @@ type BaseMailOptions = {
   replyTo?: string;
 };
 
-type AdvancedSendOptions = BaseMailOptions & { noReply?: boolean };
+export type AdvancedSendOptions = BaseMailOptions & { noReply?: boolean };
 
-type AdvancedReplyOptions = AdvancedSendOptions & { subject?: string };
+export type AdvancedReplyOptions = AdvancedSendOptions & { subject?: string };
 
 /**
  * @see https://developers.google.com/apps-script/reference/gmail/gmail-app
  */
-class GmailApp {
+export class GmailApp {
   /**
    * @see https://developers.google.com/apps-script/reference/gmail/gmail-app#createdraftrecipient,-subject,-body,-options
    * @see https://learn.microsoft.com/en-us/graph/api/user-post-messages?view=graph-rest-1.0&tabs=http
@@ -59,7 +65,7 @@ class GmailApp {
     };
 
     const item = await MailboxAPI.createMessage(data);
-    return new Components.GmailDraft(item);
+    return new GmailDraft(item);
   }
 
   /**
@@ -75,7 +81,7 @@ class GmailApp {
     };
 
     const item = await MailboxAPI.createCategory(data);
-    return new Components.GmailLabel(item);
+    return new GmailLabel(item);
   }
 
   /**
@@ -84,7 +90,7 @@ class GmailApp {
    * @summary Deletes the specified label.
    * @param label the label to delete
    */
-  async deleteLabel(label: Components.GmailLabel) {
+  async deleteLabel(label: GmailLabel) {
     await label.deleteLabel();
     return this;
   }
@@ -107,7 +113,7 @@ class GmailApp {
    */
   async getDraft(draftId: string) {
     const message = await MailboxAPI.getMessage(draftId);
-    return new Components.GmailDraft(message);
+    return new GmailDraft(message);
   }
 
   /**
@@ -118,7 +124,7 @@ class GmailApp {
   async getDraftMessages() {
     const messages = await MailboxAPI.listMessages("isDraft eq true");
     return messages.map((message) => {
-      return new Components.GmailMessage(message);
+      return new GmailMessage(message);
     });
   }
 
@@ -130,7 +136,7 @@ class GmailApp {
   async getDrafts() {
     const messages = await MailboxAPI.listMessages("isDraft eq true");
     return messages.map((message) => {
-      return new Components.GmailDraft(message);
+      return new GmailDraft(message);
     });
   }
 
@@ -159,15 +165,15 @@ class GmailApp {
    */
   async getMessageById(id: string) {
     const message = await MailboxAPI.getMessage(id);
-    return new Components.GmailMessage(message);
+    return new GmailMessage(message);
   }
 
-  async getMessagesForThread(_thread: Components.GmailThread) {
+  async getMessagesForThread(_thread: GmailThread) {
     // TODO: future releases
     return [];
   }
 
-  async getMessagesForThreads(_threads: Components.GmailThread[]) {
+  async getMessagesForThreads(_threads: GmailThread[]) {
     // TODO: future releases
     return [];
   }
@@ -211,7 +217,7 @@ class GmailApp {
 
   async getThreadById(id: string) {
     // TODO: future releases
-    return new Components.GmailThread({
+    return new GmailThread({
       id,
     });
   }
@@ -234,7 +240,7 @@ class GmailApp {
     if (!category) {
       throw new Error(`GmailLabel "${name}" does not exist`);
     }
-    return new Components.GmailLabel(category);
+    return new GmailLabel(category);
   }
 
   /**
@@ -245,7 +251,7 @@ class GmailApp {
   async getUserLabels() {
     const categories = await MailboxAPI.listCategories();
     return categories.map((category) => {
-      return new Components.GmailLabel(category);
+      return new GmailLabel(category);
     });
   }
 
@@ -255,7 +261,7 @@ class GmailApp {
    * @summary Marks this message read and forces the message to refresh.
    * @param message the message to mark as read
    */
-  async markMessageRead(message: Components.GmailMessage) {
+  async markMessageRead(message: GmailMessage) {
     await message.markRead();
     return this;
   }
@@ -266,7 +272,7 @@ class GmailApp {
    * @summary Marks this message unread and forces the message to refresh.
    * @param message the message to mark as unread
    */
-  async markMessageUnread(message: Components.GmailMessage) {
+  async markMessageUnread(message: GmailMessage) {
     await message.markUnread();
     return this;
   }
@@ -277,7 +283,7 @@ class GmailApp {
    * @summary Marks these messages read and forces the messages to refresh.
    * @param messages an array of messages to mark as read
    */
-  async markMessagesRead(messages: Components.GmailMessage[]) {
+  async markMessagesRead(messages: GmailMessage[]) {
     for (const message of messages) {
       await this.markMessageRead(message);
     }
@@ -290,29 +296,29 @@ class GmailApp {
    * @summary Marks these messages unread and forces the messages to refresh.
    * @param messages an array of messages to mark as unread
    */
-  async markMessagesUnread(messages: Components.GmailMessage[]) {
+  async markMessagesUnread(messages: GmailMessage[]) {
     for (const message of messages) {
       await this.markMessageUnread(message);
     }
     return this;
   }
 
-  async markThreadImportant(_thread: Components.GmailThread) {
+  async markThreadImportant(_thread: GmailThread) {
     // TODO: future releases
     return this;
   }
 
-  async markThreadRead(_thread: Components.GmailThread) {
+  async markThreadRead(_thread: GmailThread) {
     // TODO: future releases
     return this;
   }
 
-  async markThreadUnimportant(_thread: Components.GmailThread) {
+  async markThreadUnimportant(_thread: GmailThread) {
     // TODO: future releases
     return this;
   }
 
-  async markThreadUnread(_thread: Components.GmailThread) {
+  async markThreadUnread(_thread: GmailThread) {
     // TODO: future releases
     return this;
   }
@@ -323,7 +329,7 @@ class GmailApp {
    * @summary Marks these threads as important and forces the threads to refresh.
    * @param threads an array of threads to mark as important
    */
-  async markThreadsImportant(threads: Components.GmailThread[]) {
+  async markThreadsImportant(threads: GmailThread[]) {
     for (const thread of threads) {
       await this.markThreadImportant(thread);
     }
@@ -336,7 +342,7 @@ class GmailApp {
    * @summary Marks these threads as read and forces the threads to refresh.
    * @param threads an array of threads to mark as read
    */
-  async markThreadsRead(threads: Components.GmailThread[]) {
+  async markThreadsRead(threads: GmailThread[]) {
     for (const thread of threads) {
       await this.markThreadRead(thread);
     }
@@ -349,7 +355,7 @@ class GmailApp {
    * @summary Marks these threads as unimportant and forces the threads to refresh.
    * @param threads an array of threads to mark as unimportant
    */
-  async markThreadsUnimportant(threads: Components.GmailThread[]) {
+  async markThreadsUnimportant(threads: GmailThread[]) {
     for (const thread of threads) {
       await this.markThreadUnimportant(thread);
     }
@@ -362,7 +368,7 @@ class GmailApp {
    * @summary Marks these threads as unread and forces the threads to refresh.
    * @param threads an array of threads to mark as unread
    */
-  async markThreadsUnread(threads: Components.GmailThread[]) {
+  async markThreadsUnread(threads: GmailThread[]) {
     for (const thread of threads) {
       await this.markThreadUnread(thread);
     }
@@ -375,7 +381,7 @@ class GmailApp {
    * @summary Moves the message to the trash and forces the message to refresh.
    * @param message the message to be trashed
    */
-  async moveMessageToTrash(message: Components.GmailMessage) {
+  async moveMessageToTrash(message: GmailMessage) {
     await message.moveToTrash();
     return this;
   }
@@ -386,7 +392,7 @@ class GmailApp {
    * @summary Moves the specified messages to the trash and forces the messages to refresh.
    * @param messages the messages to be trashed
    */
-  async moveMessagesToTrash(messages: Components.GmailMessage[]) {
+  async moveMessagesToTrash(messages: GmailMessage[]) {
     for (const message of messages) {
       await this.moveMessageToTrash(message);
     }
@@ -399,7 +405,7 @@ class GmailApp {
    * @summary Moves this thread to the archive and forces the thread to refresh.
    * @param thread the thread to be archived
    */
-  async moveThreadToArchive(thread: Components.GmailThread) {
+  async moveThreadToArchive(thread: GmailThread) {
     await thread.moveToArchive();
     return this;
   }
@@ -410,7 +416,7 @@ class GmailApp {
    * @summary Moves this thread to the inbox and forces the thread to refresh.
    * @param thread the thread to be moved to the inbox
    */
-  async moveThreadToInbox(thread: Components.GmailThread) {
+  async moveThreadToInbox(thread: GmailThread) {
     await thread.moveToInbox();
     return this;
   }
@@ -421,7 +427,7 @@ class GmailApp {
    * @summary Moves this thread to spam and forces the thread to refresh.
    * @param thread the thread to be moved to spam
    */
-  async moveThreadToSpam(thread: Components.GmailThread) {
+  async moveThreadToSpam(thread: GmailThread) {
     await thread.moveToSpam();
     return this;
   }
@@ -432,7 +438,7 @@ class GmailApp {
    * @summary Moves this thread to the trash and forces the thread to refresh.
    * @param thread the thread to be trashed
    */
-  async moveThreadToTrash(thread: Components.GmailThread) {
+  async moveThreadToTrash(thread: GmailThread) {
     await thread.moveToTrash();
     return this;
   }
@@ -443,7 +449,7 @@ class GmailApp {
    * @summary Moves these threads to the archive and forces the threads to refresh.
    * @param threads an array of threads to be archived
    */
-  async moveThreadsToArchive(threads: Components.GmailThread[]) {
+  async moveThreadsToArchive(threads: GmailThread[]) {
     for (const thread of threads) {
       await thread.moveToArchive();
     }
@@ -456,7 +462,7 @@ class GmailApp {
    * @summary Moves these threads to the inbox and forces the threads to refresh.
    * @param threads an array of threads to be moved to the inbox
    */
-  async moveThreadsToInbox(threads: Components.GmailThread[]) {
+  async moveThreadsToInbox(threads: GmailThread[]) {
     for (const thread of threads) {
       await thread.moveToInbox();
     }
@@ -469,7 +475,7 @@ class GmailApp {
    * @summary Moves these threads to spam and forces the threads to refresh.
    * @param threads an array of threads to be moved to spam
    */
-  async moveThreadsToSpam(threads: Components.GmailThread[]) {
+  async moveThreadsToSpam(threads: GmailThread[]) {
     for (const thread of threads) {
       await thread.moveToSpam();
     }
@@ -482,7 +488,7 @@ class GmailApp {
    * @summary Moves these threads to the trash and forces the threads to refresh.
    * @param threads an array of threads to be trashed
    */
-  async moveThreadsToTrash(threads: Components.GmailThread[]) {
+  async moveThreadsToTrash(threads: GmailThread[]) {
     for (const thread of threads) {
       await thread.moveToTrash();
     }
@@ -495,7 +501,7 @@ class GmailApp {
    * @summary Reloads the message and associated state from Gmail (useful in case the labels, read state, etc., have changed).
    * @param message the message to be refreshed
    */
-  async refreshMessage(message: Components.GmailMessage) {
+  async refreshMessage(message: GmailMessage) {
     await message.refresh();
     return this;
   }
@@ -506,7 +512,7 @@ class GmailApp {
    * @summary Reloads the messages and associated state from Gmail (useful in case the labels, read state, etc., have changed).
    * @param messages the messages to be refreshed
    */
-  async refreshMessages(messages: Components.GmailMessage[]) {
+  async refreshMessages(messages: GmailMessage[]) {
     for (const message of messages) {
       await this.refreshMessage(message);
     }
@@ -519,7 +525,7 @@ class GmailApp {
    * @summary Reloads the thread and associated state from Gmail (useful in case the labels, read state, etc., have changed).
    * @param thread the thread to be refreshed
    */
-  async refreshThread(thread: Components.GmailThread) {
+  async refreshThread(thread: GmailThread) {
     await thread.refresh();
     return this;
   }
@@ -530,7 +536,7 @@ class GmailApp {
    * @summary Reloads the threads and associated state from Gmail (useful in case the labels, read state, etc., have changed).
    * @param threads the threads to be refreshed
    */
-  async refreshThreads(threads: Components.GmailThread[]) {
+  async refreshThreads(threads: GmailThread[]) {
     for (const thread of threads) {
       await this.refreshThread(thread);
     }
@@ -590,7 +596,7 @@ class GmailApp {
    * @summary Adds a star to this message and forces the message to refresh.
    * @param message the message to star
    */
-  async starMessage(message: Components.GmailMessage) {
+  async starMessage(message: GmailMessage) {
     await message.star();
     return this;
   }
@@ -601,7 +607,7 @@ class GmailApp {
    * @summary Adds stars to these messages and forces the messages to refresh.
    * @param messages an array of messages to star
    */
-  async starMessages(messages: Components.GmailMessage[]) {
+  async starMessages(messages: GmailMessage[]) {
     for (const message of messages) {
       await this.starMessage(message);
     }
@@ -614,7 +620,7 @@ class GmailApp {
    * @summary Removes a star from this message and forces the message to refresh.
    * @param message the message to unstar
    */
-  async unstarMessage(message: Components.GmailMessage) {
+  async unstarMessage(message: GmailMessage) {
     await message.unstar();
     return this;
   }
@@ -625,7 +631,7 @@ class GmailApp {
    * @summary Removes stars from these messages and forces the messages to refresh.
    * @param messages an array of messages to unstar
    */
-  async unstarMessages(messages: Components.GmailMessage[]) {
+  async unstarMessages(messages: GmailMessage[]) {
     for (const message of messages) {
       await this.unstarMessage(message);
     }

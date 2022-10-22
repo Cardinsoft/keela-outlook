@@ -1,17 +1,19 @@
+import { Blob } from "../base/blob.js";
+
 /**
  * @see https://developers.google.com/apps-script/reference/utilities/utilities
  */
-class Utilities {
+export class Utilities {
   /**
    * @see https://developers.google.com/apps-script/reference/utilities/utilities#newblobdata,-contenttype,-name
    *
-   * @summary Create a new Blob object from a byte array, content type, and name.
+   * @summary Create a new {@link Blob} object from a byte array, content type, and name.
    * @param data the bytes for the blob
    * @param contentType the content type of the blob - can be null
    * @param name the name of the blob - can be null
    */
   newBlob(data: string | number[], contentType?: string, name?: string) {
-    const blob = new _Blob();
+    const blob = new Blob();
     if (contentType) blob.setContentType(contentType);
     if (name) blob.setName(name);
 

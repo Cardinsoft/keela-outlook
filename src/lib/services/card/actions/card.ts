@@ -1,8 +1,16 @@
+import { RenderableComponent } from "../../../../component.js";
+import { handleEvent } from "../../../../handlers/event.js";
+import { ActionStore } from "../../../stores/actions.js";
+import { ComposedEmailType } from "../enums.js";
+import { type Action } from "./action.js";
+import { type AuthorizationAction } from "./authorization.js";
+import { type OpenLink } from "./open_link.js";
+
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/card-action
  */
-class CardAction extends CardServiceRenderableComponent {
-  action?: AuthorizationAction | Action | Components.OpenLink;
+export class CardAction extends RenderableComponent {
+  action?: AuthorizationAction | Action | OpenLink;
   composedEmailType: ComposedEmailType = ComposedEmailType.REPLY_AS_DRAFT;
   text?: string;
 
@@ -56,9 +64,9 @@ class CardAction extends CardServiceRenderableComponent {
    * @see https://developers.google.com/apps-script/reference/card-service/card-action#setopenlinkopenlink
    *
    * @summary Sets a URL to be opened when the object is clicked.
-   * @param openLink An {@link Components.OpenLink} object describing the URL to open.
+   * @param openLink An {@link OpenLink} object describing the URL to open.
    */
-  setOpenLink(openLink: Components.OpenLink) {
+  setOpenLink(openLink: OpenLink) {
     this.action = openLink;
     return this;
   }

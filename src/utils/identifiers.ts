@@ -3,7 +3,7 @@
  * @param store identifier store
  * @param seed generator seed
  */
-const getGuid = (store: string[], seed = 1e5): string => {
+export const getGuid = (store: string[], seed = 1e5): string => {
   const id = btoa((Math.random() * seed).toString());
 
   if (!store.includes(id)) {

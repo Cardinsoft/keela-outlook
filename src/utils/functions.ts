@@ -1,9 +1,11 @@
+import { type EventObject } from "../events.js";
+
 /**
  * @summary looks up and call function in the global scope
  * @param name function name
  * @param event event object
  */
-const callFunctionFromGlobalScope = <T>(
+export const callFunctionFromGlobalScope = <T>(
   name: string,
   event: EventObject
 ): T => {

@@ -1,9 +1,14 @@
+import { type OpenLink } from "../actions/open_link.js";
+import { type Card } from "../components/card.js";
+import { UniversalActionResponse } from "../components/responses/universal_action_response.js";
+import { CardServiceBuilder } from "./index.js";
+
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/universal-action-response-builder
  */
-class UniversalActionResponseBuilder extends CardServiceBuilder<Components.UniversalActionResponse> {
-  private cards: Components.Card[] = [];
-  private openLink?: Components.OpenLink;
+export class UniversalActionResponseBuilder extends CardServiceBuilder<UniversalActionResponse> {
+  private cards: Card[] = [];
+  private openLink?: OpenLink;
 
   /**
    * @see https://developers.google.com/apps-script/reference/card-service/universal-action-response-builder#build
@@ -11,7 +16,7 @@ class UniversalActionResponseBuilder extends CardServiceBuilder<Components.Unive
    * @summary Builds the current universal action response and validates it.
    */
   build() {
-    const response = new Components.UniversalActionResponse({
+    const response = new UniversalActionResponse({
       cards: this.cards,
       openLink: this.openLink,
     });
@@ -25,9 +30,9 @@ class UniversalActionResponseBuilder extends CardServiceBuilder<Components.Unive
    * @see https://developers.google.com/apps-script/reference/card-service/universal-action-response-builder#displayaddoncardscardobjects
    *
    * @summary Displays the add-on with the specified cards.
-   * @param cardObjects An array of {@link Components.Card}s to display.
+   * @param cardObjects An array of {@link Card}s to display.
    */
-  displayAddOnCards(cardObjects: Components.Card[]) {
+  displayAddOnCards(cardObjects: Card[]) {
     this.cards = cardObjects;
     return this;
   }
@@ -38,7 +43,7 @@ class UniversalActionResponseBuilder extends CardServiceBuilder<Components.Unive
    * @summary Sets the URL to open when the universal action is selected.
    * @param openLink The link object to use.
    */
-  setOpenLink(openLink: Components.OpenLink) {
+  setOpenLink(openLink: OpenLink) {
     this.openLink = openLink;
     return this;
   }

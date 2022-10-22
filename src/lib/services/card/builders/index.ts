@@ -1,4 +1,4 @@
-abstract class CardServiceBuilder<T extends { constructor: Function }> {
+export abstract class CardServiceBuilder<T extends { constructor: Function }> {
   constructor() {}
 
   build(item: T): T {

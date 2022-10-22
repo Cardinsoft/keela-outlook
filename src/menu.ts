@@ -1,6 +1,11 @@
-type MenuItemType = "card" | "universal";
+import { RenderableComponent } from "./component.js";
+import { type CardAction } from "./lib/services/card/actions/card.js";
+import { type UniversalAction } from "./lib/services/card/actions/universal.js";
+import { getGuid } from "./utils/identifiers.js";
 
-class AddInMenu extends CardServiceRenderableComponent {
+export type MenuItemType = "card" | "universal";
+
+export class AddInMenu extends RenderableComponent {
   private cardActions: Record<string, CardAction> = {};
   private universalActions: Record<string, UniversalAction> = {};
 

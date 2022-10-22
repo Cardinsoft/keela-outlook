@@ -1,7 +1,9 @@
+import { User } from "./components/user.js";
+
 /**
  * @see https://developers.google.com/apps-script/reference/base/session
  */
-class Session {
+export class Session {
   /**
    * @see https://developers.google.com/apps-script/reference/base/session#getactiveuser
    *

@@ -1,6 +1,9 @@
-type OverlayTone = "light" | "dark";
+import { Component } from "./component.js";
+import { parsePixelLength } from "./utils/html.js";
 
-class Overlay extends Component {
+export type OverlayTone = "light" | "dark";
+
+export class Overlay extends Component {
   private color: string = "white";
 
   private tone: OverlayTone = "light";

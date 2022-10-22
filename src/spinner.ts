@@ -1,6 +1,8 @@
-type SpinnerSize = "large" | "small";
+import { Component } from "./component.js";
 
-class Spinner extends Component {
+export type SpinnerSize = "large" | "small";
+
+export class Spinner extends Component {
   private size: SpinnerSize = "small";
 
   setSize(size: SpinnerSize) {

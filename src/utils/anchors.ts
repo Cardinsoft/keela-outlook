@@ -1,4 +1,7 @@
-type OpenType = "browser" | "dialog" | "web";
+import { dialogCallback, DialogErrorCode } from "./dialogs.js";
+import { forceHttps } from "./network.js";
+
+export type OpenType = "browser" | "dialog" | "web";
 
 /**
  * @summary opens an Office Dialog to navigate to the link
@@ -6,7 +9,7 @@ type OpenType = "browser" | "dialog" | "web";
  * @param type link handler type
  * @param onClose callback to call when the dialog is closed
  */
-const openURL = (
+export const openURL = (
   href: string,
   type: OpenType,
   onClose?: (...args: any[]) => void
@@ -45,7 +48,7 @@ const openURL = (
  * @param href URL string to follow
  * @param type link handler type
  */
-const addAnchorListener = (
+export const addAnchorListener = (
   target: EventTarget,
   href: string,
   type: OpenType
@@ -61,7 +64,7 @@ const addAnchorListener = (
  * @summary intercepts tel clicks to load in the same-window context
  * @param target target link
  */
-const addTelListener = (target: HTMLAnchorElement) => {
+export const addTelListener = (target: HTMLAnchorElement) => {
   target.addEventListener("click", (event) => {
     event.stopPropagation();
     target.target = "_self";

@@ -1,7 +1,7 @@
 /**
  * @see https://developers.google.com/apps-script/reference/base/blob
  */
-class _Blob {
+export class Blob {
   protected content: ArrayBuffer = new ArrayBuffer(0);
   protected name: string | null = null;
   protected type: string | null = null;
@@ -13,7 +13,7 @@ class _Blob {
    */
   copyBlob() {
     const { type, name } = this;
-    const blob = new _Blob();
+    const blob = new Blob();
     blob.setBytes(this.getBytes());
     if (name) blob.setName(name);
     if (type) blob.setContentType(type);
