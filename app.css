@@ -1,0 +1,401 @@
+* {
+	list-style-type: none;
+}
+
+html,
+body {
+    margin  : 0;
+    padding : 0;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.pointer {
+	cursor : pointer;
+}
+
+.KeyValue p {
+    margin : 0.6em 0;
+}
+
+.KeyValueImage {
+    position      : relative;
+    top           : 2px;
+	width         : 24px;
+    height        : 24px;
+    border-radius : 5px;
+}
+
+.KeyValueText {
+	white-space: pre-wrap;
+}
+
+.KeyValueTopLabel, .KeyValueBottomLabel, .SelectionInputTopLabel, .TextInputTopLabel, .TextInputBottomLabel {
+	display       : block;
+	color         : #a6a6a6;
+}
+
+.KeyValueTopLabel {
+	margin-bottom: 4px;
+}
+
+.KeyValueBottomLabel {
+	margin-top: 4px;
+}
+
+.TextInputLabel {
+	padding : 0 !important;
+}
+
+.TextInputInput {
+	min-height  : 28px;
+	padding     : 8px 0 !important;
+	line-height : 150%;
+	font-family : Arial;
+	font-size   : 14px;
+	resize      : vertical;
+	overflow-y  : hidden;
+}
+
+.TextInputLabel {
+	width : 0 !important;
+}
+
+.CardHeader {
+	display     : flex;
+    align-items : center;
+	padding     : 8px 16px;
+	min-height  : 32px;
+}
+
+.CardSection {
+	padding : 12px 18px;
+}
+
+.sectionHeader {
+	margin : 0px 0 8px 0;
+	color  : #848484;
+}
+
+.headerIcon {
+	width        : 32px;
+	height       : 32px;
+	margin-right : 16px;
+}
+
+.row {
+	display     : flex;
+	align-items : center;
+	margin      : 12px 0;
+	width       : 100%;
+	min-height  : 20px;
+}
+
+.column {
+	flex-grow : 1;
+}
+
+.column-icon {
+	margin-right: 16px;
+}
+
+.column-label > .ImageButton {
+	margin-right : 0;
+}
+
+.column-text {
+	margin-right : 8px;
+	flex-grow    : 100;
+	word-break   : break-word;
+}
+
+.ButtonSet {
+	margin : 0;
+}
+
+.collapsible > .ButtonSet {
+	margin: 12px 0;
+}
+
+.SetElement {
+	display : inline;
+}
+
+.ButtonSet .TextButton, .ButtonSet .ImageButton {
+	margin : 4px 16px 0 0;
+}
+
+.row + .TextButton {
+    margin : 12px 0;
+}
+
+.ImageButton, .TextButton {
+	padding    : 0;
+	cursor     : pointer;
+}
+
+.ImageButton {
+    width      : 24px;
+    height     : 24px;
+	margin-top : 4px;
+}
+
+.TextButton {
+    display        : block;
+	text-transform : uppercase;
+    font-weight    : bold;
+    border         : none;
+}
+
+.TextButton:focus {
+	outline : none;
+}
+
+.btn-filled {
+	padding : 8px;
+}
+
+.btn-text {
+	text-align : right;
+	background : none;
+	color      : #0078d7;
+}
+
+.btn-text-filled {
+	padding          : 8px;
+	color            : white;
+	background-color : #0078d7;
+	border-radius    : 2px;
+}
+
+.btn-disabled {
+	pointer-events : none;
+	color          : #a6a6a6;
+}
+
+.Switch {
+	margin : 0;
+	top    : 4px;
+}
+
+.separated, .separated-both {
+	border : solid #d0d0d0;
+}
+
+.separated {
+	border-width : 1px 0 0 0;
+}
+
+.separated-bottom {
+	border-width : 0 0 1px 0;
+}
+
+.separated-both {
+	border-width : 1px 0 1px 0;
+}
+
+.collapsible {
+	overflow-x : hidden;
+	overflow-y : hidden;
+}
+
+.centered {
+	text-align : center;
+}
+
+.toggler {
+	margin-top                 : 16px;
+	width                      : 100%;
+	transform : rotate(0deg);
+	transition                 : transform 0.2s;
+	-moz-transition            : transform 0.2s;
+    -o-transition              : transform 0.2s;
+	-webkit-transition         : transform 0.2s;
+	transition-timing-function : linear;	
+	color                      : #848484;
+}
+
+.toggler-up {
+	transform : rotate(180deg);
+}
+
+.navbar {
+	padding          : 8px 14px;
+	background-color : #f4f4f4;
+	color            : #0078d7;
+}
+
+.navelem {
+	margin-left  : auto;
+    margin-right : 0;
+	height       : 35px;
+    width        : 28px;
+	text-align   : center;
+    font-size    : x-large;
+}
+
+.navelem:hover {
+    outline          : 8px solid #eaeaea;
+    background-color : #eaeaea;
+}
+
+span.menu:before {
+	content: '\205D';
+}
+
+.Menu {
+	z-index    : 999;
+	overflow-x : hidden;
+	overflow-y : hidden;
+	position   : absolute;
+    top        : 16px;
+    left       : auto;
+}
+
+.Select {
+	margin: 0 auto;
+}
+
+.Menu, .Select {
+    width              : 90%;
+    background-color   : white;
+    box-shadow         : 0 0 5px 0 rgba(0,0,0,.4);
+	transition         : width 0.2s;
+	-moz-transition    : width 0.2s;
+    -o-transition      : width 0.2s;
+	-webkit-transition : width 0.2s;
+}
+
+.singulared {
+	width  : 0;
+	height : 0;
+}
+
+.menuItem, .selectItem {
+	width              : 100%;
+	height             : 35px;
+	transition         : background-color;
+	-moz-transition    : background-color;
+    -o-transition      : background-color;
+	-webkit-transition : background-color;	
+}
+
+.menuItem:hover, .selectItem:hover {
+	background-color : #f4f4f4;
+}
+
+.menuItem:active, .selectItem:active {
+	background-color : #E7E7E7;
+}
+
+.menuText, .selectText {
+	margin      : 0;
+	padding-top : 8px;
+	color       : #333;
+}
+
+.menuText {
+	margin-left: 12px;
+}
+
+.selectText {
+	margin-left : 8px;
+}
+
+.menuText:before {
+	position    : relative;
+    top         : 2px;
+	padding     : 0 16px;
+	font-family : FabricMDL2Icons;
+}
+
+.side i {
+	padding : 27%;
+}
+
+.side i:hover {
+	color : #d0d0d0;
+}
+
+.hidden {
+	display : none;
+}
+
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+	width: 100%;  
+}
+
+.overlay-dark {
+	opacity : 0.5;
+}
+
+.overlay-light {
+	opacity : 0.5;
+}
+
+.spinner {
+	position                  : absolute;
+    top                       : calc(100%/3);
+	box-sizing                : border-box;
+    animation-name            : spin;
+    animation-duration        : 1.3s;
+    animation-iteration-count : infinite;
+    animation-timing-function : cubic-bezier(0.53, 0.21, 0.29, 0.67);
+	border-radius             : 50%;
+	border-style              : solid;
+	border-color              : rgb(0, 120, 212) rgb(199, 224, 244) rgb(199, 224, 244);
+	border-image              : initial;
+}
+
+.spinner-large {
+	left          : calc(100%/2 - 20px);
+    width         : 40px;
+    height        : 40px;
+    border-width  : 2px;
+}
+
+.spinner-medium {
+	left         : calc(100%/2 - 15px);
+	width        : 30px;
+	height       : 30px;
+	border-width : 1.5px;
+}
+
+.spinner-small {
+	left         : calc(100%/2 - 10px);
+	width        : 20px;
+	height       : 20px;
+	border-width : 1px;
+}
+
+.ms-TextField {
+	width : 100%;
+}
+
+.ms-Dropdown-title {
+	border  : none;
+	padding : 6px 40px 0 0;
+}
+
+.ms-ContextualHost {
+	left : 94px !important;
+	top  : 8px  !important;
+}
+
+.ms-Panel-contentInner {
+	margin  : 0;
+	padding : 0;
+}
+
+.ms-MessageBar {
+	width : 93.5%;
+}
