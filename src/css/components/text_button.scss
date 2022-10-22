@@ -1,0 +1,10 @@
+.TextButton {
+    display        : block;
+	text-transform : uppercase;
+    font-weight    : bold;
+    border         : none;
+}
+
+.TextButton:focus {
+	outline : none;
+}

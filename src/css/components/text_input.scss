@@ -1,0 +1,17 @@
+.TextInputLabel {
+	padding : 0 !important;
+}
+
+.TextInputInput {
+	min-height  : 28px;
+	padding     : 8px 0 !important;
+	line-height : 150%;
+	font-family : Arial;
+	font-size   : 14px;
+	resize      : vertical;
+	overflow-y  : hidden;
+}
+
+.TextInputLabel {
+	width : 0 !important;
+}
