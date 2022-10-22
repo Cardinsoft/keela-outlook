@@ -1,6 +1,7 @@
 import { RenderableComponent } from "./component";
 import { type CardAction } from "./lib/services/card/actions/card";
 import { type UniversalAction } from "./lib/services/card/actions/universal";
+import { bindSelfRemovingListener } from "./utils/html";
 import { getGuid } from "./utils/identifiers";
 
 export type MenuItemType = "card" | "universal";
@@ -96,27 +97,16 @@ export class AddInMenu extends RenderableComponent {
 
   create(): HTMLElement {
     const element = document.createElement("div");
-    element.classList.add("Menu", "singulared");
+    element.classList.add("menu", "singulared");
 
     document.querySelector(".navelem")?.addEventListener("click", (event) => {
       event.stopPropagation();
       event.preventDefault();
       this.toggle();
-    });
 
-    element.addEventListener("pointerover", () => {
-      const out = () => {
-        element.removeEventListener("pointerout", out);
-
-        const switchMenu = () => {
-          this.toggle();
-          document.body.removeEventListener("click", switchMenu);
-        };
-
-        document.body.addEventListener("click", switchMenu);
-      };
-
-      element.addEventListener("pointerout", out);
+      if (this.isOpen()) {
+        bindSelfRemovingListener(document.body, "click", () => this.close());
+      }
     });
 
     return element;
@@ -125,7 +115,7 @@ export class AddInMenu extends RenderableComponent {
   async render(maybeParent: HTMLElement | null): Promise<HTMLElement> {
     const { cardActions, universalActions } = this;
 
-    const element = this.element || this.create();
+    const element = (this.element ||= this.create());
 
     for (const action of Object.values(cardActions)) {
       await action.render(element);
