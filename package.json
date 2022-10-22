@@ -7,7 +7,8 @@
         "keela"
     ],
     "scripts": {
-        "build": "npm run test && gulp --gulpfile scripts/gulpfile.ts",
+        "build": "npm run test && npm run clean && gulp --gulpfile scripts/gulpfile.ts",
+        "clean": "rm -rf dist",
         "test": "npm run typecheck",
         "typecheck": "tsc -p tsconfig.json --noEmit"
     },
@@ -26,9 +27,11 @@
         "@types/gulp-inject": "^5.0.0",
         "@types/gulp-postcss": "^8.0.2",
         "@types/gulp-sass": "^5.0.0",
+        "@types/gulp-uglify": "^3.0.7",
         "@types/jquery": "^3.5.14",
         "@types/luxon": "^3.0.1",
         "@types/office-js": "^1.0.289",
+        "@types/vinyl-buffer": "^1.0.0",
         "@types/vinyl-source-stream": "^0.0.30",
         "autoprefixer": "^10.4.12",
         "browserify": "^17.0.0",
@@ -36,15 +39,19 @@
         "gulp": "^4.0.2",
         "gulp-inject": "^5.0.5",
         "gulp-postcss": "^9.0.1",
+        "gulp-replace": "^1.1.3",
         "gulp-sass": "^5.1.0",
+        "gulp-uglify": "^3.0.2",
         "postcss": "^8.4.18",
         "sass": "^1.55.0",
         "ts-node": "^10.9.1",
         "tsify": "^5.0.4",
         "typescript": "^4.8.4",
+        "vinyl-buffer": "^1.0.1",
         "vinyl-source-stream": "^2.0.0"
     },
     "dependencies": {
+        "luxon": "^3.0.4",
         "office-ui-fabric-js": "^1.5.0"
     }
 }
