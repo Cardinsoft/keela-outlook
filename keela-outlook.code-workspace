@@ -1,0 +1,12 @@
+{
+    "folders": [
+        {
+            "name": "Keela Outlook",
+            "path": "."
+        },
+        {
+            "name": "Cardin Puller",
+            "path": "./scripts/pull_cardin"
+        }
+    ]
+}
