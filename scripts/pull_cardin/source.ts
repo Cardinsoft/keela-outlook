@@ -1,3 +1,4 @@
+import console from "fancy-log";
 import ts from "typescript";
 import { parseRules } from "./parsers.js";
 
@@ -17,7 +18,10 @@ export const parseSourceText = (content: string) => {
     const { kind } = node;
 
     const [, parser] = parseRules.find(([k]) => k === kind) || [];
-    if (!parser) return;
+    if (!parser) {
+      console.info(`no parser registered for ${ts.SyntaxKind[kind]} nodes`);
+      return;
+    }
 
     const [name, parsed] = parser(sourceFile, node);
 
