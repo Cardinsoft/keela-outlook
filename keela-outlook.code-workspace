@@ -8,5 +8,8 @@
             "name": "Cardin Puller",
             "path": "./scripts/pull_cardin"
         }
-    ]
+    ],
+    "settings": {
+        "liveServer.settings.multiRootWorkspaceName": "Keela Outlook"
+    }
 }
