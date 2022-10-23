@@ -9,7 +9,8 @@
     "scripts": {
         "build": "npm run test && npm run clean && gulp --gulpfile scripts/gulpfile.ts",
         "clean": "rm -rf dist",
-        "pull:cardin": "ts-node --esm --project scripts/pull_cardin/tsconfig.json scripts/pull_cardin/index.ts",
+        "pull:cardin": "ts-node --esm --project scripts/shared/tsconfig.json scripts/pull_cardin/index.ts",
+        "pull:keela": "ts-node --esm --project scripts/shared/tsconfig.json scripts/pull_keela/index.ts",
         "test": "npm run typecheck",
         "typecheck": "tsc -p tsconfig.json --noEmit",
         "validate": "office-addin-manifest validate manifest.xml"

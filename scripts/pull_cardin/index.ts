@@ -3,10 +3,10 @@ import console from "fancy-log";
 import { writeFile } from "fs/promises";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-import { getOctokit } from "./auth.js";
+import { getOctokit } from "../shared/auth.js";
+import { printNodes } from "../shared/printer.js";
 import { getRepositoryFileContent } from "./content.js";
 import { wrapIntoLibraryGlobalVariable } from "./library.js";
-import { printNodes } from "./printer.js";
 import { parseSourceText } from "./source.js";
 
 const { parsed = {} } = dotenv.config({

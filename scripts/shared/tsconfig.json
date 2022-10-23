@@ -4,6 +4,6 @@
         "module": "es2022",
         "target": "es2022"
     },
-    "include": ["."],
+    "include": ["../pull_cardin", "../pull_keela", "."],
     "exclude": []
 }
