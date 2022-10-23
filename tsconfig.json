@@ -16,6 +16,10 @@
             "DOM.Iterable"
         ]
     },
+    "exclude": [
+        "src/cardin.js", 
+        "scripts"
+    ],
     "include": [
         "src"
     ],

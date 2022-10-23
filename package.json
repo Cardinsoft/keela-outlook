@@ -9,6 +9,7 @@
     "scripts": {
         "build": "npm run test && npm run clean && gulp --gulpfile scripts/gulpfile.ts",
         "clean": "rm -rf dist",
+        "pull:cardin": "ts-node --esm --project scripts/pull_cardin/tsconfig.json scripts/pull_cardin/index.ts",
         "test": "npm run typecheck",
         "typecheck": "tsc -p tsconfig.json --noEmit",
         "validate": "office-addin-manifest validate manifest.xml"
@@ -24,6 +25,7 @@
     "devDependencies": {
         "@microsoft/microsoft-graph-types": "^2.25.0",
         "@types/browserify": "^12.0.37",
+        "@types/fancy-log": "^2.0.0",
         "@types/gulp": "^4.0.9",
         "@types/gulp-inject": "^5.0.0",
         "@types/gulp-postcss": "^8.0.2",
@@ -38,12 +40,15 @@
         "browserify": "^17.0.0",
         "cssnano": "^5.1.13",
         "del": "^6.1.1",
+        "dotenv": "^16.0.3",
+        "fancy-log": "^2.0.0",
         "gulp": "^4.0.2",
         "gulp-inject": "^5.0.5",
         "gulp-postcss": "^9.0.1",
         "gulp-replace": "^1.1.3",
         "gulp-sass": "^5.1.0",
         "gulp-uglify": "^3.0.2",
+        "octokit": "^2.0.9",
         "office-addin-manifest": "^1.10.3",
         "postcss": "^8.4.18",
         "sass": "^1.55.0",
