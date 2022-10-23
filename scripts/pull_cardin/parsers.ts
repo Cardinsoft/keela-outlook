@@ -20,7 +20,10 @@ export const parseVariableDeclaration: DeclarationParser = (source, node) => {
     ts.Expression
   ];
 
-  return [identifier, ts.factory.createPropertyAssignment(identifier, expression)];
+  return [
+    identifier,
+    ts.factory.createPropertyAssignment(identifier, expression),
+  ];
 };
 
 const parseFunctionDeclaration: DeclarationParser = (_source, node) => {
@@ -43,6 +46,6 @@ const parseFunctionDeclaration: DeclarationParser = (_source, node) => {
 };
 
 export const parseRules: [ts.SyntaxKind, DeclarationParser][] = [
-  [ts.SyntaxKind.VariableDeclaration, parseVariableDeclaration],
+  [ts.SyntaxKind.FirstStatement, parseVariableDeclaration],
   [ts.SyntaxKind.FunctionDeclaration, parseFunctionDeclaration],
 ];
