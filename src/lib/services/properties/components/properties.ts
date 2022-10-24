@@ -30,19 +30,18 @@ export class Properties {
   /**
    * @summary gets internal storage by type
    */
-  private get typedStore(): Promise<Record<string, string>> {
-    return new Promise(async (resolve) => {
-      const { store, type } = this;
+  private get typedStore(): Record<string, string> {
+    const { store, type } = this;
 
-      const typedStore: Record<string, string> = store.get(type);
-      if (!typedStore) {
-        const defaultStore: Record<string, string> = {};
-        store.set(type, defaultStore);
-        await this.save();
-      }
+    const typedStore: Record<string, string> = store.get(type);
+    if (!typedStore) {
+      const defaultStore: Record<string, string> = {};
+      store.set(type, defaultStore);
+      this.save();
+      return defaultStore;
+    }
 
-      resolve(typedStore);
-    });
+    return typedStore;
   }
 
   /**
@@ -50,10 +49,10 @@ export class Properties {
    *
    * @summary Deletes all properties in the current {@link Properties} store.
    */
-  async deleteAllProperties() {
+  deleteAllProperties() {
     const { store, type } = this;
     store.set(type, {});
-    await this.save();
+    this.save();
     return this;
   }
 
@@ -63,12 +62,11 @@ export class Properties {
    * @summary Deletes the property with the given key in the current {@link Properties} store.
    * @param key the key for the property to delete
    */
-  async deleteProperty(key: string) {
-    const { store, type } = this;
-    const typedStore = await this.typedStore;
+  deleteProperty(key: string) {
+    const { store, type, typedStore } = this;
     delete typedStore[key];
     store.set(type, typedStore);
-    await this.save();
+    this.save();
     return this;
   }
 
@@ -77,8 +75,8 @@ export class Properties {
    *
    * @summary Gets all keys in the current {@link Properties} store.
    */
-  async getKeys() {
-    const typedStore = await this.typedStore;
+  getKeys() {
+    const { typedStore } = this;
     return Object.keys(typedStore);
   }
 
@@ -87,9 +85,9 @@ export class Properties {
    *
    * @summary Gets a copy of all key-value pairs in the current {@link Properties} store.
    */
-  async getProperties() {
-    const store = await this.typedStore;
-    return { ...store };
+  getProperties() {
+    const { typedStore } = this;
+    return { ...typedStore };
   }
 
   /**
@@ -98,9 +96,9 @@ export class Properties {
    * @summary Gets the value associated with the given key in the current {@link Properties} store, or null if no such key exists.
    * @param key the key for the property value to retrieve
    */
-  async getProperty(key: string) {
-    const store = await this.typedStore;
-    return key in store ? store[key] : null;
+  getProperty(key: string) {
+    const { typedStore } = this;
+    return key in typedStore ? typedStore[key] : null;
   }
 
   /**
@@ -110,21 +108,18 @@ export class Properties {
    * @param properties an object containing key-values pairs to set
    * @param deleteAllOthers true to delete all other key-value pairs in the properties object; false to not
    */
-  async setProperties(
-    properties: Record<string, string>,
-    deleteAllOthers = false
-  ) {
+  setProperties(properties: Record<string, string>, deleteAllOthers = false) {
     const { store, type } = this;
 
     const newTypedStore = deleteAllOthers
       ? { ...properties }
       : {
-          ...(await this.typedStore),
+          ...this.typedStore,
           ...properties,
         };
 
     store.set(type, newTypedStore);
-    await this.save();
+    this.save();
     return this;
   }
 
@@ -135,12 +130,11 @@ export class Properties {
    * @param key the key for the property
    * @param value the value to associate with the key
    */
-  async setProperty(key: string, value: string) {
-    const { store, type } = this;
-    const typedStore = await this.typedStore;
+  setProperty(key: string, value: string) {
+    const { store, type, typedStore } = this;
     typedStore[key] = value.toString();
     store.set(type, typedStore);
-    await this.save();
+    this.save();
     return this;
   }
 }
