@@ -29,11 +29,7 @@ export const readyCallback = async (info: Pick<Office.Context, "host">) => {
   const { host } = info;
 
   if (host !== Office.HostType.Outlook) {
-    log(
-      "error",
-      "Add-In initialized outside host application",
-      safeToString(host)
-    );
+    log("log", "initialized outside host application", safeToString(host));
   }
 
   const res = await fetch(`${location.origin}/appsscript.json`);
