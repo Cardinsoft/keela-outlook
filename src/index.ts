@@ -1,21 +1,11 @@
-import { cardStack } from "./handlers/response";
+import { AddInMenu } from "./gas-js/components/menu";
+import { UniversalAction } from "./gas-js/services/card/actions/universal";
+import { CardServiceConfig } from "./gas-js/services/card/service";
+import { log } from "./gas-js/utils/log";
+import { getSettings, supportsSet } from "./gas-js/utils/office";
+import { safeToString } from "./gas-js/utils/strings";
 import { initialize } from "./initialize";
-import { Logger } from "./lib/services/base/logger";
-import { CacheService } from "./lib/services/cache/service";
-import { UniversalAction } from "./lib/services/card/actions/universal";
-import { CardService } from "./lib/services/card/service";
-import { GmailApp } from "./lib/services/gmail/service";
-import { LockService } from "./lib/services/lock/service";
-import { PropertiesService } from "./lib/services/properties/service";
-import { Session } from "./lib/services/session/service";
-import { UrlFetchApp } from "./lib/services/url_fetch/service";
-import { Utilities } from "./lib/services/utilities/service";
-import { ServicesStore } from "./lib/stores/services";
 import { type GmailAddOnManifest } from "./manifest";
-import { AddInMenu } from "./menu";
-import { log } from "./utils/log";
-import { getSettings, supportsSet } from "./utils/office";
-import { safeToString } from "./utils/strings";
 
 /**
  * @summary callback to call once the Add-In is ready
@@ -50,24 +40,17 @@ export const readyCallback = async (info: Pick<Office.Context, "host">) => {
 
   const menu = new AddInMenu();
 
-  ServicesStore.setAll([
-    new CardService(primaryColor, secondaryColor, menu),
-    new CacheService(),
-    new GmailApp(),
-    new LockService(),
-    new Logger(),
-    new PropertiesService(),
-    new Session(),
-    new UrlFetchApp(),
-    new Utilities(),
-  ]);
+  CardServiceConfig.set("primaryColor", primaryColor).set(
+    "secondaryColor",
+    secondaryColor
+  );
 
   if (host && supportsSet("Mailbox", 1.5)) {
     Office.context.mailbox.addHandlerAsync(
       Office.EventType.ItemChanged,
       async () => {
         getSettings().saveAsync(() => {
-          initialize(cardStack, homepageTrigger.runFunction);
+          initialize(homepageTrigger.runFunction);
         });
       }
     );
@@ -84,7 +67,7 @@ export const readyCallback = async (info: Pick<Office.Context, "host">) => {
 
   showRootElement("app-body");
 
-  return initialize(cardStack, homepageTrigger.runFunction);
+  return initialize(homepageTrigger.runFunction);
 };
 
 Office.onReady(readyCallback);

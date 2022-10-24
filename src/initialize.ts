@@ -1,17 +1,14 @@
-import { EventObject } from "./events";
-import { type Card } from "./lib/services/card/components/card";
-import { Overlay } from "./overlay";
-import { Spinner } from "./spinner";
+import { Overlay } from "./gas-js/components/overlay";
+import { Spinner } from "./gas-js/components/spinner";
+import { EventObject } from "./gas-js/events";
+import { type Card } from "./gas-js/services/card/components/card";
+import { CardServiceConfig } from "./gas-js/services/card/service";
 
 /**
  * @summary initializes the Add-In
- * @param cardStack Add-In {@link Card} stack
  * @param homepageTriggerName main Add-In function name
  */
-export const initialize = async (
-  cardStack: Card[],
-  homepageTriggerName: string
-) => {
+export const initialize = async (homepageTriggerName: string) => {
   const event = new EventObject();
 
   const overlayParent = document.getElementById("app-overlay");
@@ -38,8 +35,7 @@ export const initialize = async (
     throw new Error("Add-In must initialize with at least 1 card");
   }
 
-  cardStack.length = 0;
-  cardStack.push(...cards);
+  await CardServiceConfig.resetCardStack(cards);
 
   await lastCard.render(document.getElementById("app-body"));
 
