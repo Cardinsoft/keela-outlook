@@ -14,6 +14,8 @@ import { ServicesStore } from "./lib/stores/services";
 import { type GmailAddOnManifest } from "./manifest";
 import { AddInMenu } from "./menu";
 import { log } from "./utils/log";
+import { getSettings, supportsSet } from "./utils/office";
+import { safeToString } from "./utils/strings";
 
 /**
  * @summary callback to call once the Add-In is ready
@@ -22,13 +24,12 @@ import { log } from "./utils/log";
 export const readyCallback = async (info: Pick<Office.Context, "host">) => {
   const { host } = info;
 
-  if (host && host !== Office.HostType.Outlook) {
-    log("error", "Add-In is loaded in a wrong host", host.toString());
-    return;
-  }
-
-  if (host === null) {
-    console.debug("add-in initialized outside host application");
+  if (host !== Office.HostType.Outlook) {
+    log(
+      "error",
+      "Add-In initialized outside host application",
+      safeToString(host)
+    );
   }
 
   const res = await fetch(`${location.origin}/appsscript.json`);
@@ -61,9 +62,14 @@ export const readyCallback = async (info: Pick<Office.Context, "host">) => {
     new Utilities(),
   ]);
 
-  if (Office.context.requirements.isSetSupported("Mailbox", "1.5")) {
-    Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, () =>
-      initialize(cardStack, homepageTrigger.runFunction)
+  if (host && supportsSet("Mailbox", 1.5)) {
+    Office.context.mailbox.addHandlerAsync(
+      Office.EventType.ItemChanged,
+      async () => {
+        getSettings().saveAsync(() => {
+          initialize(cardStack, homepageTrigger.runFunction);
+        });
+      }
     );
   }
 
@@ -73,11 +79,12 @@ export const readyCallback = async (info: Pick<Office.Context, "host">) => {
     action.setRunFunction(runFunction);
     menu.addUniversalAction(action);
   });
+
   await menu.render(document.getElementById("app-menu"));
 
   showRootElement("app-body");
 
-  initialize(cardStack, homepageTrigger.runFunction);
+  return initialize(cardStack, homepageTrigger.runFunction);
 };
 
 Office.onReady(readyCallback);
