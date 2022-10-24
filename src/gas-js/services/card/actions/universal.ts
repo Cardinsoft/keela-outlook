@@ -3,7 +3,8 @@ import { EventObject } from "../../../../gas-js/events";
 import { handleEvent } from "../../../../gas-js/handlers/event";
 import { ActionStore } from "../../../../gas-js/stores/actions";
 import { callFunctionFromGlobalScope } from "../../../../gas-js/utils/functions";
-import { type DisplayCardsAction } from "./display_cards";
+import { type Card } from "../components/card";
+import { DisplayCardsAction } from "./display_cards";
 import { type OpenLink } from "./open_link";
 
 /**
@@ -33,10 +34,16 @@ export class UniversalAction extends RenderableComponent {
       throw new Error("universal actions must have a function name set");
     }
 
-    return callFunctionFromGlobalScope<OpenLink | DisplayCardsAction>(
+    // TODO: allow background actions (return type: undefined)
+
+    const maybeAction = callFunctionFromGlobalScope<OpenLink | Card>(
       functionName,
       new EventObject()
     );
+
+    return window.CardServiceConfig.isInstance<typeof Card>(maybeAction, "Card")
+      ? new DisplayCardsAction().setCards([maybeAction])
+      : maybeAction;
   }
 
   /**
