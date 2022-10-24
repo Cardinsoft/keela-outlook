@@ -3,7 +3,7 @@ import ts from "typescript";
 export type DeclarationParser = (
   s: ts.SourceFile,
   n: ts.Node
-) => [ts.Identifier, ts.PropertyAssignment | ts.MethodDeclaration];
+) => [ts.Identifier, ts.ShorthandPropertyAssignment];
 
 export const parseVariableDeclaration: DeclarationParser = (source, node) => {
   const [listOrJSDoc, listIfJSDoc] = node
@@ -15,16 +15,9 @@ export const parseVariableDeclaration: DeclarationParser = (source, node) => {
 
   const decl = list.getChildAt(1, source).getChildAt(0, source);
 
-  const [identifier, , expression] = decl.getChildren(source) as [
-    ts.Identifier,
-    unknown, // FirstAssignment
-    ts.Expression
-  ];
+  const [identifier] = decl.getChildren(source) as [ts.Identifier];
 
-  return [
-    identifier,
-    ts.factory.createPropertyAssignment(identifier, expression),
-  ];
+  return [identifier, ts.factory.createShorthandPropertyAssignment(identifier)];
 };
 
 const parseFunctionDeclaration: DeclarationParser = (_source, node) => {
@@ -32,18 +25,9 @@ const parseFunctionDeclaration: DeclarationParser = (_source, node) => {
     throw new Error("function parser works on FunctionDeclaration nodes");
   }
 
-  const parsed = ts.factory.createMethodDeclaration(
-    node.modifiers,
-    node.asteriskToken,
-    node.name!,
-    node.questionToken,
-    node.typeParameters,
-    node.parameters,
-    node.type,
-    node.body || ts.factory.createBlock([])
-  );
+  const { name } = node;
 
-  return [node.name!, parsed];
+  return [name!, ts.factory.createShorthandPropertyAssignment(name!)];
 };
 
 export const parseRules: [ts.SyntaxKind, DeclarationParser][] = [
