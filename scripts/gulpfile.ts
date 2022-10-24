@@ -51,12 +51,24 @@ export const injectLocalCSS = () => {
 };
 
 export const injectLocalJS = () => {
-  return inject(gulp.src(config.paths.dist.js, { cwd: ".." }), {
-    removeTags: true,
-    transform: (_path, file) => {
-      return `<script>\n${file?.contents?.toString() || ""}\n</script>`;
-    },
-  });
+  return inject(
+    gulp.src(
+      [
+        config.paths.external.cardin,
+        config.paths.external.keela,
+        config.paths.dist.js,
+      ],
+      {
+        cwd: "..",
+      }
+    ),
+    {
+      removeTags: true,
+      transform: (_path, file) => {
+        return `<script>\n${file?.contents?.toString() || ""}\n</script>`;
+      },
+    }
+  );
 };
 
 export const injectRemoteCSS = () => {
