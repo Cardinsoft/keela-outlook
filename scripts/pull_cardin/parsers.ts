@@ -15,8 +15,9 @@ export const parseVariableDeclaration: DeclarationParser = (source, node) => {
 
   const decl = list.getChildAt(1, source).getChildAt(0, source);
 
-  const [identifier, expression] = decl.getChildren(source) as [
+  const [identifier, , expression] = decl.getChildren(source) as [
     ts.Identifier,
+    unknown, // FirstAssignment
     ts.Expression
   ];
 
