@@ -1,4 +1,4 @@
-import { readyCallback } from "../../index";
+import { readyCallback } from "../../ready";
 import { type OpenLink } from "../services/card/actions/open_link";
 import { OnClose, OpenAs } from "../services/card/enums";
 import { openURL, type OpenType } from "../utils/anchors";
