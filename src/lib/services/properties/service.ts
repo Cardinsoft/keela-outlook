@@ -1,3 +1,4 @@
+import { getSettings } from "../../../utils/office";
 import { Properties } from "./components/properties";
 import { PropertiesStoreType } from "./enums";
 
@@ -11,10 +12,7 @@ export class PropertiesService {
    * @summary Gets a property store (for this script only) that all users can access within the open document, spreadsheet, or form.
    */
   getDocumentProperties() {
-    return new Properties(
-      Office.context.roamingSettings,
-      PropertiesStoreType.DOCUMENT
-    );
+    return new Properties(getSettings(), PropertiesStoreType.DOCUMENT);
   }
 
   /**
@@ -23,10 +21,7 @@ export class PropertiesService {
    * @summary Gets a property store that all users can access, but only within this script.
    */
   getScriptProperties() {
-    return new Properties(
-      Office.context.roamingSettings,
-      PropertiesStoreType.SCRIPT
-    );
+    return new Properties(getSettings(), PropertiesStoreType.SCRIPT);
   }
 
   /**
@@ -35,9 +30,6 @@ export class PropertiesService {
    * @summary Gets a property store that only the current user can access, and only within this script.
    */
   getUserProperties() {
-    return new Properties(
-      Office.context.roamingSettings,
-      PropertiesStoreType.USER
-    );
+    return new Properties(getSettings(), PropertiesStoreType.USER);
   }
 }
