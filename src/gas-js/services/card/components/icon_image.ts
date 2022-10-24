@@ -43,7 +43,9 @@ export class IconImage extends RenderableComponent {
 
     const image = document.createElement("img");
     image.alt = altText;
+    image.height = 20;
     image.src = imageSource;
+    image.width = 20;
     wrapper.append(image);
 
     return wrapper;
