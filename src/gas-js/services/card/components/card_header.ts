@@ -34,6 +34,17 @@ export class CardHeader extends RenderableComponent {
   }
 
   /**
+   * @see https://developers.google.com/apps-script/reference/card-service/card-header#setimageurlimageurl
+   *
+   * @summary Sets the image to use in the header by providing its URL or data string.
+   * @param imageUrl The URL address of a hosted image to use, or an encoded image string.
+   */
+  setImageUrl(imageUrl: string) {
+    this.imageUrl = imageUrl;
+    return this;
+  }
+
+  /**
    * @see https://developers.google.com/apps-script/reference/card-service/card-header#setsubtitlesubtitle
    *
    * @summary Sets the subtitle of the card header. Optional.
