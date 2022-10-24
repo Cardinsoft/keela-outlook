@@ -84,6 +84,23 @@ export class CardServiceConfig {
     this[name] = value;
     return this;
   }
+
+  /**
+   * @summary validates configuration options
+   */
+  static validate() {
+    const required: Array<keyof typeof CardServiceConfig> = [
+      "menu",
+      "primaryColor",
+      "secondaryColor",
+    ];
+
+    required.forEach((key) => {
+      if (!this[key]) {
+        throw new Error(`CardService config is missing "${key}"`);
+      }
+    });
+  }
 }
 
 /**
