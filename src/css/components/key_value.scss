@@ -1,22 +1,27 @@
 .KeyValue p {
-    margin : 0.6em 0;
+	margin: 0.6em 0;
 }
 
 .KeyValueImage {
-    position      : relative;
-    top           : 2px;
-	width         : 24px;
-    height        : 24px;
-    border-radius : 5px;
+	position: relative;
+	top: 2px;
+	width: 24px;
+	height: 24px;
+	border-radius: 5px;
 }
 
 .KeyValueText {
 	white-space: pre-wrap;
+	word-break: break-word;
 }
 
-.KeyValueTopLabel, .KeyValueBottomLabel, .SelectionInputTopLabel, .TextInputTopLabel, .TextInputBottomLabel {
-	display       : block;
-	color         : #a6a6a6;
+.KeyValueTopLabel,
+.KeyValueBottomLabel,
+.SelectionInputTopLabel,
+.TextInputTopLabel,
+.TextInputBottomLabel {
+	display: block;
+	color: #a6a6a6;
 }
 
 .KeyValueTopLabel {
