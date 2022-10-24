@@ -67,9 +67,7 @@ export class CardBuilder extends CardServiceBuilder<Card> {
       style: this.style,
     });
 
-    super.build(card);
-
-    return card;
+    return super.build(card);
   }
 
   /**
