@@ -102,8 +102,10 @@ export class CardAction extends RenderableComponent {
 
     // TODO: handle actions with icons
 
-    ActionStore.set(wrapper, action);
-    wrapper.addEventListener("click", () => handleEvent(wrapper));
+    wrapper.addEventListener("click", () => {
+      ActionStore.set(wrapper, action);
+      handleEvent(wrapper);
+    });
 
     wrapper.append(textElement);
     return wrapper;
