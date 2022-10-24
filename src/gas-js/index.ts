@@ -1,6 +1,6 @@
 import { Logger } from "./services/base/logger";
 import { CacheService } from "./services/cache/service";
-import { CardService } from "./services/card/service";
+import { CardService, CardServiceConfig } from "./services/card/service";
 import { GmailApp } from "./services/gmail/service";
 import { LockService } from "./services/lock/service";
 import { PropertiesService } from "./services/properties/service";
@@ -20,3 +20,5 @@ ServicesStore.setAll([
   new UrlFetchApp(),
   new Utilities(),
 ]);
+
+window[CardServiceConfig.name] = CardServiceConfig;
