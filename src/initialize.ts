@@ -28,7 +28,9 @@ export const initialize = async (homepageTriggerName: string) => {
     throw new Error(`missing homepage trigger "${homepageTriggerName}"`);
   }
 
-  const cards: Card[] = await homepageTrigger(event);
+  const maybeCards: Card | Card[] = await homepageTrigger(event);
+
+  const cards = maybeCards instanceof Array ? maybeCards : [maybeCards];
 
   const lastCard = cards.at(-1);
   if (!lastCard) {
