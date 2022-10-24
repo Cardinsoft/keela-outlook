@@ -1,5 +1,7 @@
+@import "./flex";
 @import "./ms-overrides";
 @import "./components/key_value";
+@import "./components/icon_image";
 @import "./components/image_button";
 @import "./components/menu";
 @import "./components/overlay.scss";
@@ -7,6 +9,7 @@
 @import "./components/switch.scss";
 @import "./components/text_button";
 @import "./components//text_input";
+@import "./components/widget";
 
 * {
 	list-style-type: none;
@@ -75,7 +78,7 @@ body {
 
 .column-text {
 	margin-right: 8px;
-	flex-grow: 100;
+	flex-grow: 1;
 	word-break: break-word;
 }
 
