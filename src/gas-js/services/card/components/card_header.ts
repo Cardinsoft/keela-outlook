@@ -8,6 +8,7 @@ export class CardHeader extends RenderableComponent {
   private imageAltText?: string;
   private imageStyle: ImageStyle = ImageStyle.SQUARE;
   private imageUrl?: string;
+  private subtitle?: string;
   private title?: string;
 
   /**
@@ -32,8 +33,30 @@ export class CardHeader extends RenderableComponent {
     return this;
   }
 
+  /**
+   * @see https://developers.google.com/apps-script/reference/card-service/card-header#setsubtitlesubtitle
+   *
+   * @summary Sets the subtitle of the card header. Optional.
+   * @param subtitle The header subtitle text.
+   */
+  setSubtitle(subtitle?: string) {
+    this.subtitle = subtitle;
+    return this;
+  }
+
+  /**
+   * @see https://developers.google.com/apps-script/reference/card-service/card-header#settitletitle
+   *
+   * @summary Sets the title of the card header. Required.
+   * @param title The header text.
+   */
+  setTitle(title: string) {
+    this.title = title;
+    return this;
+  }
+
   create(): HTMLElement {
-    const { imageUrl, title, imageAltText, imageStyle } = this;
+    const { imageUrl, title, imageAltText, imageStyle, subtitle } = this;
 
     if (!title) {
       throw new Error("card header must have a title");
@@ -58,6 +81,14 @@ export class CardHeader extends RenderableComponent {
     titleElement.id = "card-header-title";
     titleElement.textContent = title;
     wrapper.append(titleElement);
+
+    if (subtitle) {
+      const subtitleElement = document.createElement("span");
+      subtitleElement.classList.add("card-header-subtitle", "ms-fontSize-14");
+      subtitleElement.textContent = subtitle;
+      wrapper.append(subtitleElement);
+    }
+
     return wrapper;
   }
 }
