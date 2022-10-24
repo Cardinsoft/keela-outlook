@@ -123,19 +123,19 @@ export class DecoratedText extends Button {
       throw new Error("DecoratedText must have text set");
     }
 
-    const decorations = [button, startIcon, endIcon, switchControl];
+    const actionableWidgets = [button, endIcon, switchControl];
 
-    if (decorations.length > 1) {
+    if (actionableWidgets.filter(Boolean).length > 1) {
       throw new Error(
         "A DecoratedText can only support one button, one switch or one icon."
       );
     }
 
     const wrapper = document.createElement("div");
-    wrapper.classList.add("KeyValue", "row", "ms-Grid");
+    wrapper.classList.add("KeyValue", "ms-Grid", "card-widget");
 
     const row = document.createElement("div");
-    row.classList.add("ms-Grid-row");
+    row.classList.add("ms-Grid-row", "flex");
     wrapper.append(row);
 
     if (action) {
@@ -150,11 +150,10 @@ export class DecoratedText extends Button {
       icon.classList.add("ms-Grid-col", "ms-sm2", "ms-md2", "ms-lg2");
     }
 
-    const clsSuff = decorations.some(Boolean) ? 10 : 12;
+    const clsSuff = actionableWidgets.some(Boolean) || startIcon ? 10 : 12;
 
     const contentWrapper = document.createElement("div");
     contentWrapper.classList.add(
-      "column-text",
       "ms-Grid-col",
       `ms-sm${clsSuff}`,
       `ms-md${clsSuff}`,
