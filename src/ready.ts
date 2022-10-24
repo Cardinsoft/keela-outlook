@@ -1,6 +1,5 @@
 import { AddInMenu } from "./gas-js/components/menu";
 import { UniversalAction } from "./gas-js/services/card/actions/universal";
-import { CardServiceConfig } from "./gas-js/services/card/service";
 import { log } from "./gas-js/utils/log";
 import { getSettings, supportsSet } from "./gas-js/utils/office";
 import { safeToString } from "./gas-js/utils/strings";
@@ -50,9 +49,10 @@ export const readyCallback = async (info: Pick<Office.Context, "host">) => {
 
   const menu = new AddInMenu();
 
-  CardServiceConfig.set("primaryColor", primaryColor)
+  window.CardServiceConfig.set("primaryColor", primaryColor)
     .set("secondaryColor", secondaryColor)
-    .set("menu", menu);
+    .set("menu", menu)
+    .validate();
 
   if (host && supportsSet("Mailbox", 1.5)) {
     Office.context.mailbox.addHandlerAsync(
