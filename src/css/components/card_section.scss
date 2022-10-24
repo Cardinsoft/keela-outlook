@@ -1,0 +1,12 @@
+$section-header-mb: 18px;
+$section-padding-h: 18px;
+$section-padding-v: 12px;
+
+.card-section {
+    padding: $section-padding-v $section-padding-h;
+}
+
+.card-section-header {
+    margin: 0 0 $section-header-mb 0;
+    color: #848484;
+}

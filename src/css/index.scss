@@ -1,5 +1,6 @@
 @import "./flex";
 @import "./ms-overrides";
+@import "./components/card_section";
 @import "./components/key_value";
 @import "./components/icon_image";
 @import "./components/image_button";
@@ -39,15 +40,6 @@ body {
 	align-items: center;
 	padding: 8px 16px;
 	min-height: 32px;
-}
-
-.CardSection {
-	padding: 12px 18px;
-}
-
-.sectionHeader {
-	margin: 0px 0 8px 0;
-	color: #848484;
 }
 
 .headerIcon {
