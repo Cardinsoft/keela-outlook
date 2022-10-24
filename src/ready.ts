@@ -50,10 +50,9 @@ export const readyCallback = async (info: Pick<Office.Context, "host">) => {
 
   const menu = new AddInMenu();
 
-  CardServiceConfig.set("primaryColor", primaryColor).set(
-    "secondaryColor",
-    secondaryColor
-  );
+  CardServiceConfig.set("primaryColor", primaryColor)
+    .set("secondaryColor", secondaryColor)
+    .set("menu", menu);
 
   if (host && supportsSet("Mailbox", 1.5)) {
     Office.context.mailbox.addHandlerAsync(
