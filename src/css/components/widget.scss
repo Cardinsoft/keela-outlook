@@ -1,0 +1,8 @@
+$widget-gap-v: 12px;
+$widget-min-h: 20px;
+
+.card-widget {
+    margin: $widget-gap-v 0;
+    width: 100%;
+    min-height: $widget-min-h;
+}
