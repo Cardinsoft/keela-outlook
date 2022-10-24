@@ -1,5 +1,9 @@
 {
     "paths": {
+        "external": {
+            "cardin":"external/cardin.js",
+            "keela": "external/keela.js"
+        },
         "remote": {
             "css": [
                 "https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css",
