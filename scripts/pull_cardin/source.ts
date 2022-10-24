@@ -12,7 +12,7 @@ export const parseSourceText = (content: string) => {
   );
 
   const privateNodes: ts.Node[] = [];
-  const publicNodes: Array<ts.PropertyAssignment | ts.MethodDeclaration> = [];
+  const publicNodes: Array<ts.ShorthandPropertyAssignment> = [];
 
   ts.forEachChild(sourceFile, (node) => {
     const { kind } = node;
@@ -23,13 +23,13 @@ export const parseSourceText = (content: string) => {
       return;
     }
 
-    const [name, parsed] = parser(sourceFile, node);
+    const [name, shorthand] = parser(sourceFile, node);
 
-    if (name.text.endsWith("_")) {
-      privateNodes.push(node);
+    privateNodes.push(node);
+
+    if (!name.text.endsWith("_")) {
+      publicNodes.push(shorthand);
     }
-
-    publicNodes.push(parsed);
   });
 
   return [publicNodes, privateNodes] as const;
