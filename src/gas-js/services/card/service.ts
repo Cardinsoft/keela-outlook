@@ -11,7 +11,7 @@ import { Attachment } from "./components/attachment";
 import { AuthorizationException } from "./components/authorization_exception";
 import { BorderStyle } from "./components/border_style";
 import { ButtonSet } from "./components/button_set";
-import { type Card } from "./components/card";
+import { Card } from "./components/card";
 import { CardHeader } from "./components/card_header";
 import { CardSection } from "./components/card_section";
 import { DecoratedText } from "./components/decorated_text";
@@ -57,9 +57,25 @@ export class CardServiceConfig {
   static secondaryColor: string;
   static menu: AddInMenu;
 
+  private static classes = {
+    [Card.name]: Card,
+  };
+
   static get lastCard() {
     const { cardStack } = this;
     return cardStack[cardStack.length - 1];
+  }
+
+  /**
+   * @summary runtime-safe instanceof guard
+   * @param instance possible instance of a class
+   * @param className name of the class
+   */
+  static isInstance<T extends new (...args: any[]) => any>(
+    instance: unknown,
+    className: string
+  ): instance is InstanceType<T> {
+    return instance instanceof this.classes[className];
   }
 
   static async resetCardStack(newCards: Card[]) {
