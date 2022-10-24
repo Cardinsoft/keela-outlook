@@ -68,13 +68,13 @@ export class CardSection extends RenderableComponent {
     const { collapsible, header, numUncollapsibleWidgets, widgets } = this;
 
     const wrapper = document.createElement("form");
-    wrapper.classList.add("CardSection");
+    wrapper.classList.add("card-section");
 
     if (header) {
       const headerElement = document.createElement("p");
-      headerElement.classList.add("ms-font-m-plus", "sectionHeader");
+      headerElement.classList.add("ms-font-m-plus", "card-section-header");
       headerElement.textContent = header;
-      wrapper.append(header);
+      wrapper.append(headerElement);
     }
 
     if (collapsible && widgets.length > numUncollapsibleWidgets) {
