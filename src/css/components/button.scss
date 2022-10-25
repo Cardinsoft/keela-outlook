@@ -1,0 +1,6 @@
+@import "../mixins";
+
+.btn--disabled {
+    @include disabled;
+    color: #a6a6a6;
+}

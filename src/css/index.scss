@@ -1,5 +1,6 @@
 @import "./flex";
 @import "./ms-overrides";
+@import "./components/button";
 @import "./components/card_section";
 @import "./components/decorated_text";
 @import "./components/key_value";
@@ -100,28 +101,6 @@ body {
 .TextButton {
 	padding: 0;
 	cursor: pointer;
-}
-
-.btn-filled {
-	padding: 8px;
-}
-
-.btn-text {
-	text-align: right;
-	background: none;
-	color: #0078d7;
-}
-
-.btn-text-filled {
-	padding: 8px;
-	color: white;
-	background-color: #0078d7;
-	border-radius: 2px;
-}
-
-.btn-disabled {
-	pointer-events: none;
-	color: #a6a6a6;
 }
 
 .separated,
