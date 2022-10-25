@@ -15,7 +15,9 @@ export const handleOpenLinkAction = (openLink: OpenLink) => {
     [OpenAs.OVERLAY]: "dialog",
   };
 
-  openURL(url, openTypeMap[openAs], () => {
+  const openType: OpenType = Office.context.host ? openTypeMap[openAs] : "web";
+
+  openURL(url, openType, () => {
     if (onClose === OnClose.RELOAD) {
       readyCallback(Office.context);
     }
