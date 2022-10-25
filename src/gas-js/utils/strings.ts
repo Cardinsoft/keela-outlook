@@ -17,7 +17,10 @@ export const safeToString = (item: unknown) => {
     ],
   ];
 
-  const [, handler] = rules.find(([condition]) => !!condition) || [];
+  const defaultHandler = (item: unknown) =>
+    Object.prototype.toString.call(item);
 
-  return handler?.(item as string) || Object.prototype.toString.call(item);
+  const [, handler] = rules.find(([c]) => !!c) || [, defaultHandler];
+
+  return handler?.(item as string);
 };
