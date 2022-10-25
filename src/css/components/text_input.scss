@@ -1,17 +1,21 @@
-.TextInputLabel {
-	padding : 0 !important;
+@import "../mixins";
+
+.text-input-label {
+	padding: 0 !important;
+	width: 0 !important;
 }
 
-.TextInputInput {
-	min-height  : 28px;
-	padding     : 8px 0 !important;
-	line-height : 150%;
-	font-family : Arial;
-	font-size   : 14px;
-	resize      : vertical;
-	overflow-y  : hidden;
+.text-input-label--top,
+.text-input-label--bottom {
+	@include muted-text;
 }
 
-.TextInputLabel {
-	width : 0 !important;
+.text-input-input {
+	min-height: 28px;
+	padding: 8px 0 !important;
+	line-height: 150%;
+	font-family: Arial;
+	font-size: 14px;
+	resize: vertical;
+	overflow-y: hidden;
 }
