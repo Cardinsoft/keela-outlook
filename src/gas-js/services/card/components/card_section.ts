@@ -3,6 +3,7 @@ import {
   getUncollapsedHeight,
   toggleCollapsedState,
 } from "../../../../gas-js/utils/collapsibility";
+import { Toggler } from "../../../components/toggler";
 import { type Widget } from "./widget";
 
 /**
@@ -12,6 +13,7 @@ export class CardSection extends RenderableComponent {
   private collapsible: boolean = false;
   private header?: string;
   private numUncollapsibleWidgets: number = 0;
+  private toggler: Toggler = new Toggler();
   private widgets: Widget[] = [];
 
   /**
@@ -65,7 +67,8 @@ export class CardSection extends RenderableComponent {
   }
 
   create(): HTMLElement {
-    const { collapsible, header, numUncollapsibleWidgets, widgets } = this;
+    const { collapsible, header, numUncollapsibleWidgets, toggler, widgets } =
+      this;
 
     const wrapper = document.createElement("form");
     wrapper.classList.add("card-section");
@@ -80,16 +83,6 @@ export class CardSection extends RenderableComponent {
     if (collapsible && widgets.length > numUncollapsibleWidgets) {
       wrapper.classList.add("collapsible");
 
-      const toggler = document.createElement("div");
-      toggler.classList.add(
-        "toggler",
-        "centered",
-        "ms-Icon",
-        "ms-Icon--ChevronDown",
-        "pointer"
-      );
-      wrapper.append(toggler);
-
       const initialHeight = getUncollapsedHeight(
         wrapper,
         numUncollapsibleWidgets
@@ -97,10 +90,10 @@ export class CardSection extends RenderableComponent {
 
       wrapper.style.height = `${initialHeight}px`;
 
-      toggler.addEventListener("click", async () => {
-        toggler.classList.toggle("toggler-up");
+      toggler.setOnToggle(async (togglerElement) => {
+        togglerElement.classList.toggle("toggler-up");
         await toggleCollapsedState(
-          toggler,
+          togglerElement,
           wrapper,
           "height",
           1,
@@ -114,12 +107,16 @@ export class CardSection extends RenderableComponent {
   }
 
   async render(parent: HTMLElement): Promise<HTMLElement> {
-    const { widgets } = this;
+    const { collapsible, toggler, widgets } = this;
 
     const element = (this.element ||= this.create());
 
     for (const widget of widgets) {
       await widget.render(element);
+    }
+
+    if (collapsible) {
+      await toggler.render(element);
     }
 
     return super.render(parent);
