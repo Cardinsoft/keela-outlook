@@ -133,7 +133,7 @@ export class TextInput extends RenderableComponent {
     }
 
     const wrapper = document.createElement("div");
-    wrapper.classList.add("row", "TextInput");
+    wrapper.classList.add("text-input", "card-widget", "ms-Grid");
 
     const row = document.createElement("div");
     row.classList.add("column");
@@ -141,7 +141,7 @@ export class TextInput extends RenderableComponent {
 
     if (title) {
       const topLabel = document.createElement("label");
-      topLabel.classList.add("ms-fontSize-s", "TextInputTopLabel");
+      topLabel.classList.add("ms-fontSize-s", "text-input-label--top");
       topLabel.textContent = title;
       row.append(topLabel);
     }
@@ -151,11 +151,11 @@ export class TextInput extends RenderableComponent {
     row.append(inputWrapper);
 
     const label = document.createElement("label");
-    label.classList.add("ms-Label", "TextInputLabel");
+    label.classList.add("ms-Label", "text-input-label");
     inputWrapper.append(label);
 
     const input = document.createElement(multiline ? "textarea" : "input");
-    input.classList.add("ms-TextField-field", "TextInputInput");
+    input.classList.add("ms-TextField-field", "text-input-input");
     input.name = fieldName;
     input.value = value;
     inputWrapper.append(input);
@@ -178,15 +178,15 @@ export class TextInput extends RenderableComponent {
       });
     }
 
-    new fabric.TextField(inputWrapper);
-
     if (hint) {
       const bottomLabel = document.createElement("label");
-      bottomLabel.classList.add("ms-fontSize-s", "TextInputBottomLabel");
+      bottomLabel.classList.add("ms-fontSize-s", "text-input-label--bottom");
       bottomLabel.textContent = hint;
       row.append(bottomLabel);
     }
 
-    return inputWrapper;
+    new fabric.TextField(inputWrapper);
+
+    return wrapper;
   }
 }
