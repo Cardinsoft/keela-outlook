@@ -1,6 +1,9 @@
 import { handleEvent } from "../../../../gas-js/handlers/event";
 import { ActionStore } from "../../../../gas-js/stores/actions";
-import { parseHTMLWidgetContent } from "../../../../gas-js/utils/html";
+import {
+  parseHTMLWidgetContent,
+  stripHTMLMarkup,
+} from "../../../../gas-js/utils/html";
 import { TextButtonStyle } from "../enums";
 import { Button } from "./button";
 
@@ -90,13 +93,13 @@ export class TextButton extends Button {
 
     const button = document.createElement("div");
     button.classList.add("TextButton");
-    button.classList.toggle("btn-disabled", disabled);
-    button.ariaLabel = altText || text;
+    button.classList.toggle("btn--disabled", disabled);
+    button.ariaLabel = altText || stripHTMLMarkup(text);
 
     const filled = textButtonStyle === TextButtonStyle.FILLED;
 
     button.style[filled ? "backgroundColor" : "color"] = backgroundColor;
-    button.classList.add(filled ? "btn-filled" : "btn-text");
+    button.classList.add(`text-btn--${filled ? "filled" : "text"}`);
 
     parseHTMLWidgetContent(button, text);
 
