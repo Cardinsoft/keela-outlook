@@ -144,6 +144,16 @@ export const parseHTMLWidgetContent = (
 };
 
 /**
+ * @summary strips all HTML markup from content
+ * @param content HTML string
+ */
+export const stripHTMLMarkup = (content: string) => {
+  const temp = document.createElement("div");
+  temp.innerHTML = content;
+  return temp.textContent!;
+};
+
+/**
  *
  * @param target element to bind the listener to
  * @param type event type
