@@ -2,6 +2,7 @@ import { RenderableComponent } from "../../../../gas-js/components";
 import { handleEvent } from "../../../../gas-js/handlers/event";
 import { ActionStore } from "../../../../gas-js/stores/actions";
 import { safeToString } from "../../../../gas-js/utils/strings";
+import { log } from "../../../utils/log";
 import { type Action } from "../actions/action";
 import { SelectionInputType } from "../enums";
 
@@ -304,8 +305,17 @@ export class SelectionInput extends RenderableComponent {
       },
     };
 
-    const content = await handlers[type](fieldName, this);
-    widget.append(content);
+    try {
+      const content = await handlers[type](fieldName, this);
+      widget.append(content);
+    } catch (error) {
+      log(
+        "error",
+        "failed to create SelectionInput content",
+        safeToString(error)
+      );
+    }
+
     return widget;
   }
 }
