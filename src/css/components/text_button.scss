@@ -1,10 +1,30 @@
+$btn-filled-br: 2px;
+
 .TextButton {
-    display        : block;
-	text-transform : uppercase;
-    font-weight    : bold;
-    border         : none;
+    border: none;
+    display: block;
+
+    font: {
+        weight: bold;
+    }
+
+    text-transform: uppercase;
+
+    &:focus {
+        outline: none;
+    }
 }
 
-.TextButton:focus {
-	outline : none;
+.text-btn--filled {
+    border: {
+        radius: $btn-filled-br;
+    }
+
+    color: white;
+    padding: 8px;
+}
+
+.text-btn--text {
+    text-align: center;
+    background: none;
 }
