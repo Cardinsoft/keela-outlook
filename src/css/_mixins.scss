@@ -1,3 +1,7 @@
 @mixin disabled {
     pointer-events: none;
 }
+
+@mixin muted-text {
+    color: #a6a6a6;
+}
