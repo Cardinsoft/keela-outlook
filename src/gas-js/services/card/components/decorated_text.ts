@@ -145,19 +145,26 @@ export class DecoratedText extends Button {
       });
     }
 
+    const contentColSize =
+      actionableWidgets.some(Boolean) || startIcon ? 9 : 12;
+    const decorationColSize = 12 - contentColSize;
+
     if (startIcon) {
       const icon = await startIcon.render(row);
-      icon.classList.add("ms-Grid-col", "ms-sm2", "ms-md2", "ms-lg2");
+      icon.classList.add(
+        "ms-Grid-col",
+        `ms-sm${decorationColSize}`,
+        `ms-md${decorationColSize}`,
+        `ms-lg${decorationColSize}`
+      );
     }
-
-    const clsSuff = actionableWidgets.some(Boolean) || startIcon ? 10 : 12;
 
     const contentWrapper = document.createElement("div");
     contentWrapper.classList.add(
       "ms-Grid-col",
-      `ms-sm${clsSuff}`,
-      `ms-md${clsSuff}`,
-      `ms-lg${clsSuff}`
+      `ms-sm${contentColSize}`,
+      `ms-md${contentColSize}`,
+      `ms-lg${contentColSize}`
     );
     row.append(contentWrapper);
 
@@ -184,19 +191,17 @@ export class DecoratedText extends Button {
       contentWrapper.append(bottomLabelElement);
     }
 
-    if (endIcon) {
-      const icon = await endIcon.render(row);
-      icon.classList.add("ms-Grid-col", "ms-sm2", "ms-md2", "ms-lg2");
-    }
-
-    if (button) {
-      const control = await button.render(row);
-      control.classList.add("ms-Grid-col", "ms-sm2", "ms-md2", "ms-lg2");
-    }
-
-    if (switchControl) {
-      const control = await switchControl.render(row);
-      control.classList.add("ms-Grid-col", "ms-sm2", "ms-md2", "ms-lg2");
+    const endDecoration = endIcon || button || switchControl;
+    if (endDecoration) {
+      const rendered = await endDecoration.render(row);
+      rendered.classList.remove("row");
+      rendered.classList.add(
+        "decorated-text-decoration",
+        "ms-Grid-col",
+        `ms-sm${decorationColSize}`,
+        `ms-md${decorationColSize}`,
+        `ms-lg${decorationColSize}`
+      );
     }
 
     return wrapper;
