@@ -14,7 +14,7 @@ export const openURL = (
   type: OpenType,
   onClose?: (...args: any[]) => void
 ) => {
-  const url = new URL(`${location.origin}/redirect`);
+  const url = new URL(`${location.origin}/dist/redirect.html`);
   url.searchParams.append("endpoint", forceHttps(href));
 
   const handlers: Record<OpenType, (url: URL) => void> = {
