@@ -55,16 +55,25 @@ export class Card extends RenderableComponent {
       await header.render(element);
     }
 
+    const renderedSections: HTMLElement[] = [];
+
     const shouldSeparate = sections.length > 1;
     for (const section of sections) {
       const sectionElement = await section.render(element);
       sectionElement.classList.toggle("separated", shouldSeparate);
+      renderedSections.push(sectionElement);
     }
 
     if (footer) {
       await footer.render(element);
     }
 
-    return super.render(parent);
+    await super.render(parent);
+
+    renderedSections.forEach((element) => {
+      element.dispatchEvent(new CustomEvent("collapse"));
+    });
+
+    return element;
   }
 }

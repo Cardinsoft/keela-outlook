@@ -4,9 +4,14 @@ $section-padding-v: 12px;
 
 .card-section {
     padding: $section-padding-v $section-padding-h;
+
+    &.collapsible {
+        overflow: hidden;
+        transition: height 0.15s linear;
+    }
 }
 
 .card-section-header {
-    margin: 0 0 $section-header-mb 0;
     color: #848484;
+    margin: 0 0 $section-header-mb 0;
 }

@@ -1,8 +1,5 @@
 import { RenderableComponent } from "../../../../gas-js/components";
-import {
-  getUncollapsedHeight,
-  toggleCollapsedState,
-} from "../../../../gas-js/utils/collapsibility";
+import { getUncollapsedHeight } from "../../../../gas-js/utils/collapsibility";
 import { Toggler } from "../../../components/toggler";
 import { type Widget } from "./widget";
 
@@ -13,7 +10,7 @@ export class CardSection extends RenderableComponent {
   private collapsible: boolean = false;
   private header?: string;
   private numUncollapsibleWidgets: number = 0;
-  private toggler: Toggler = new Toggler();
+  private toggler: Toggler = new Toggler(true);
   private widgets: Widget[] = [];
 
   /**
@@ -83,23 +80,18 @@ export class CardSection extends RenderableComponent {
     if (collapsible && widgets.length > numUncollapsibleWidgets) {
       wrapper.classList.add("collapsible");
 
-      const initialHeight = getUncollapsedHeight(
-        wrapper,
-        numUncollapsibleWidgets
-      );
-
-      wrapper.style.height = `${initialHeight}px`;
-
-      toggler.setOnToggle(async (togglerElement) => {
-        togglerElement.classList.toggle("toggler-up");
-        await toggleCollapsedState(
-          togglerElement,
+      toggler.setOnToggle(async (_togglerElement, { collapsed }) => {
+        const height = getUncollapsedHeight(
           wrapper,
-          "height",
-          1,
-          4,
-          initialHeight
+          collapsed ? numUncollapsibleWidgets : widgets.length
         );
+
+        wrapper.style.height = `${height}px`;
+      });
+
+      wrapper.addEventListener("collapse", () => {
+        const height = getUncollapsedHeight(wrapper, numUncollapsibleWidgets);
+        wrapper.style.height = `${height}px`;
       });
     }
 
@@ -115,10 +107,12 @@ export class CardSection extends RenderableComponent {
       await widget.render(element);
     }
 
+    await super.render(parent);
+
     if (collapsible) {
-      await toggler.render(element);
+      await toggler.render(parent);
     }
 
-    return super.render(parent);
+    return element;
   }
 }
