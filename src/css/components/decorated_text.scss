@@ -1,3 +1,16 @@
+@import "../flex";
+@import "../mixins";
+
+.decorated-text-content {
+    display: flex;
+    @include flex--col;
+    @include flex--h-center;
+}
+
+.decorated-text-icon {
+    @include mw-36;
+}
+
 .decorated-text-decoration {
     @include flex-self--center;
 }
