@@ -1,3 +1,4 @@
+import { handleEvent } from "../handlers/event";
 import { type Action } from "../services/card/actions/action";
 import { type AuthorizationAction } from "../services/card/actions/authorization";
 import { type DisplayCardsAction } from "../services/card/actions/display_cards";
@@ -21,6 +22,29 @@ export class ActionStore {
    */
   private static get identifiers() {
     return Object.keys(this.actions);
+  }
+
+  /**
+   * @summary binds an event listener handling a given {@link action}
+   * @param event event type
+   * @param caller calling element
+   * @param action action to bind
+   * @param target element to bind to
+   */
+  static bind(
+    event: string,
+    caller: HTMLElement,
+    action: ActionType,
+    target?: HTMLHtmlElement
+  ) {
+    this.set(caller, action);
+    const eventTarget = target || caller;
+
+    eventTarget.addEventListener(event, () => {
+      handleEvent(eventTarget);
+    });
+
+    return this;
   }
 
   /**
