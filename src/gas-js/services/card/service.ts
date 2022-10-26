@@ -2,6 +2,7 @@ import { type AddInMenu } from "../../../gas-js/components/menu";
 import { Action } from "./actions/action";
 import { AuthorizationAction } from "./actions/authorization";
 import { CardAction } from "./actions/card";
+import { DisplayCardsAction } from "./actions/display_cards";
 import { OpenLink } from "./actions/open_link";
 import { ActionResponseBuilder } from "./builders/action_response";
 import { CardBuilder } from "./builders/card";
@@ -26,6 +27,9 @@ import { ImageCropStyle } from "./components/image_crop_style";
 import { KeyValue } from "./components/key_value";
 import { Navigation } from "./components/navigation";
 import { Notification } from "./components/notification";
+import { ActionResponse } from "./components/responses/action_response";
+import { SuggestionsResponse } from "./components/responses/suggestions_response";
+import { UniversalActionResponse } from "./components/responses/universal_action_response";
 import { SelectionInput } from "./components/selection_input";
 import { Suggestions } from "./components/suggestions";
 import { Switch } from "./components/switch";
@@ -58,7 +62,13 @@ export class CardServiceConfig {
   static menu: AddInMenu;
 
   private static classes = {
+    [Action.name]: Action,
     [Card.name]: Card,
+    [DisplayCardsAction.name]: DisplayCardsAction,
+    [ActionResponse.name]: ActionResponse,
+    [OpenLink.name]: OpenLink,
+    [SuggestionsResponse.name]: SuggestionsResponse,
+    [UniversalActionResponse.name]: UniversalActionResponse,
   };
 
   static get lastCard() {
