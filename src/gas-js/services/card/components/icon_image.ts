@@ -41,13 +41,21 @@ export class IconImage extends RenderableComponent {
       throw new Error("IconImage must have either icon or icon URL set");
     }
 
-    if (url) {
+    const isCardServiceIcon = icon in Icon;
+
+    if (url || isCardServiceIcon) {
       const image = document.createElement("img");
       image.alt = altText;
       image.height = 20;
-      image.src = imageSource;
+      image.src = isCardServiceIcon
+        ? `${location.pathname.replace(
+            /\/$/,
+            ""
+          )}/public/icons/${imageSource}.png`
+        : imageSource;
       image.width = 20;
       wrapper.append(image);
+      return wrapper;
     }
 
     const isFontAwesomeIcon = icon.startsWith("fa-");
