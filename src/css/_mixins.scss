@@ -2,6 +2,10 @@
     pointer-events: none;
 }
 
+@mixin centered-text {
+    text-align: center;
+}
+
 @mixin muted-text {
     color: #a6a6a6;
 }
