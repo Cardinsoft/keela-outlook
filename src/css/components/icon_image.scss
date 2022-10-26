@@ -1,5 +1,13 @@
+$icon-image-color: #848484;
+
 .card-iconimage {
     align-items: center;
     display: flex;
     justify-content: center;
+}
+
+.card-icon-image-icon {
+    color: $icon-image-color;
+    height: 20;
+    width: 20;
 }
