@@ -1,4 +1,3 @@
-import { handleEvent } from "../../../../gas-js/handlers/event";
 import { ActionStore } from "../../../../gas-js/stores/actions";
 import { parseHTMLWidgetContent } from "../../../../gas-js/utils/html";
 import { Button } from "./button";
@@ -139,10 +138,7 @@ export class DecoratedText extends Button {
     wrapper.append(row);
 
     if (action) {
-      wrapper.addEventListener("click", () => {
-        ActionStore.set(wrapper, action);
-        handleEvent(wrapper);
-      });
+      ActionStore.bind("click", wrapper, action);
     }
 
     const contentColSize =
@@ -152,6 +148,7 @@ export class DecoratedText extends Button {
     if (startIcon) {
       const icon = await startIcon.render(row);
       icon.classList.add(
+        "decorated-text-icon",
         "ms-Grid-col",
         `ms-sm${decorationColSize}`,
         `ms-md${decorationColSize}`,
@@ -161,6 +158,7 @@ export class DecoratedText extends Button {
 
     const contentWrapper = document.createElement("div");
     contentWrapper.classList.add(
+      "decorated-text-content",
       "ms-Grid-col",
       `ms-sm${contentColSize}`,
       `ms-md${contentColSize}`,
