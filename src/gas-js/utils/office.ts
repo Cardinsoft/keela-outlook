@@ -40,11 +40,34 @@ export const getSettings = () => {
 };
 
 /**
+ * @summary returns {@link Office.Mailbox} or shims it
+ */
+export const getMailbox = () => {
+  return (
+    Office.context.mailbox || {
+      getCallbackTokenAsync(
+        callback: (result: Office.AsyncResult<string>) => void,
+        asyncContext?: unknown
+      ) {
+        callback({
+          asyncContext,
+          diagnostics: {},
+          error: { code: 0, message: "", name: "" },
+          status: Office.AsyncResultStatus.Succeeded,
+          value: "",
+        });
+      },
+      userProfile: getProfile(),
+    }
+  );
+};
+
+/**
  * @summary returns {@link Office.context.userProfile} or shims it
  */
 export const getProfile = () => {
   return (
-    Office.context?.mailbox.userProfile || {
+    Office.context.mailbox?.userProfile || {
       accountType: "office365",
       displayName: "",
       emailAddress: "",
