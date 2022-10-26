@@ -1,11 +1,12 @@
 import luxon from "luxon";
+import { getMailbox, getProfile } from "./utils/office";
 
 class EventTimezone {
   /**
    * @summary The timezone identifier of the user's timezone
    */
   get id() {
-    return Office.context.mailbox.userProfile.timeZone;
+    return getProfile().timeZone;
   }
 
   /**
@@ -19,57 +20,111 @@ class EventTimezone {
   }
 }
 
+type FormInput = { value: string[] };
+
 class CommonEventObject {
   timeZone = new EventTimezone();
 
   parameters: Record<string, string> = {};
 
   /**
+   * @summary A map containing the current values of the widgets in the displayed card.
+   */
+  formInputs: Record<string, { stringInputs: FormInput }> = {};
+
+  /**
    * @summary Indicates where the event originates
    */
   get platform() {
-    return Office.context.platform;
+    return Office.context.platform || Office.PlatformType.OfficeOnline;
   }
 
   /**
    * @summary The user's language and country/region identifier
    */
   get userLocale() {
-    return Office.context.displayLanguage;
+    return Office.context.displayLanguage || "en-US";
   }
 }
 
-class MessageMetadata {
-  /**
-   * @param item Outlook message
-   */
-  constructor(private item: Exclude<Office.Mailbox["item"], undefined>) {}
+/**
+ * @see https://developers.google.com/apps-script/add-ons/concepts/event-objects#gmail_event_object
+ */
+class GmailEventObject {
+  constructor(private item?: Office.MessageRead) {}
 
   /**
-   * @summary An access token
+   * @summary The Gmail-specific access token.
    */
   get accessToken() {
     return new Promise<string>((res, rej) => {
-      Office.context.mailbox.getCallbackTokenAsync((result) => {
+      getMailbox().getCallbackTokenAsync((result) => {
         const { error, value } = result;
-        error ? rej(error) : res(value);
+        error?.code ? rej(error) : res(value);
       });
     });
   }
 
+  get bccRecipients() {
+    return [];
+  }
+
   /**
-   * @summary The message ID of the thread open in the UI
+   * @summary The list of "CC:" recipient email addresses currently included in a draft the add-on is composing.
+   */
+  get ccRecipients() {
+    return this.item?.cc.map(({ emailAddress }) => emailAddress) || [];
+  }
+
+  /**
+   * @summary The ID of the currently open Gmail message.
    */
   get messageId() {
-    return this.item.itemId;
+    return this.item?.itemId || "";
+  }
+
+  /**
+   * @summary The currently open Gmail thread ID.
+   */
+  get threadId() {
+    return this.item?.conversationId || "";
   }
 }
 
 export class EventObject {
   commonEventObject = new CommonEventObject();
 
-  formInput: Record<string, string> = {};
-  formInputs: Record<string, string[]> = {};
+  gmail = new GmailEventObject(Office.context.mailbox?.item);
+
+  /**
+   * @summary A map of the current values of all form widgets in the card, restricted to one value per widget.
+   * @deprecated
+   */
+  get formInput() {
+    const { formInputs } = this.commonEventObject;
+
+    const inputs: Record<string, string> = {};
+    Object.entries(formInputs).forEach(([key, { stringInputs }]) => {
+      inputs[key] = stringInputs.value[0];
+    });
+
+    return inputs;
+  }
+
+  /**
+   * @summary A map of current values of widgets in the card, presented as lists of strings.
+   * @deprecated
+   */
+  get formInputs() {
+    const { formInputs } = this.commonEventObject;
+
+    const inputs: Record<string, string[]> = {};
+    Object.entries(formInputs).forEach(([key, { stringInputs }]) => {
+      inputs[key] = stringInputs.value;
+    });
+
+    return inputs;
+  }
 
   /**
    * @summary Indicates where the event originates
@@ -81,10 +136,14 @@ export class EventObject {
 
   /**
    * @summary current message metadata available in message contexts
+   * @deprecated
    */
   get messageMetadata() {
-    const { item } = Office.context.mailbox;
-    return item && new MessageMetadata(item);
+    const { gmail } = this;
+    return {
+      accessToken: gmail.accessToken,
+      messageId: gmail.messageId,
+    };
   }
 
   /**
@@ -97,6 +156,16 @@ export class EventObject {
 
   set parameters(value) {
     this.commonEventObject.parameters = value;
+  }
+
+  /**
+   * @summary The two-letter code indicating the user's country or region.
+   * @deprecated
+   */
+  get userCountry() {
+    const { userLocale } = this.commonEventObject;
+    const [, countryCode] = userLocale.split("-");
+    return countryCode || "US";
   }
 
   /**
