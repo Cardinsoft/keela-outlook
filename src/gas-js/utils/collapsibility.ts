@@ -1,6 +1,18 @@
 import { parsePixelLength } from "./html";
 
 /**
+ * @summary gets computed value of a CSS style as a numeric value
+ * @param element element to get the value for
+ * @param property property to lookup
+ */
+export const getComputedNumericProperty = (
+  element: Element,
+  property: "height" | "width"
+) => {
+  return parsePixelLength(window.getComputedStyle(element)[property]);
+};
+
+/**
  * @summary computes element height given the number of elements to show
  * @param element element to compute the height for
  * @param numberOfUncollapsibleWidgets number of widgets to show
@@ -32,95 +44,4 @@ export const getUncollapsedHeight = (
   }
 
   return fullHeight;
-};
-
-/**
- * @summary gets computed value of a given element's children
- * @param property property to lookup
- * @param element element to get the value for
- */
-const getChildrenPropertyValue = (
-  property: "height" | "width",
-  element: HTMLElement
-) => {
-  const { children } = element;
-
-  let childrenPropertyValue = 0;
-  for (let i = 0; i < children.length; i++) {
-    const computed = window.getComputedStyle(children[i]);
-    childrenPropertyValue += parsePixelLength(computed[property]);
-
-    if (property === "height") {
-      const chMargin = parsePixelLength(
-        i > 0 ? computed.marginBottom : computed.marginTop
-      );
-
-      childrenPropertyValue += chMargin;
-    }
-  }
-
-  return childrenPropertyValue;
-};
-
-/**
- * @summary toggles a given element collapsed state
- * @param trigger trggering element;
- * @param element element to toggle
- * @param property property to animate (height or width)
- * @param interval delay between increments
- * @param increment animation speed
- * @param initial initial value
- */
-export const toggleCollapsedState = async (
-  trigger: HTMLElement,
-  element: HTMLElement,
-  property: "height" | "width",
-  interval: number,
-  increment: number,
-  initial: number
-) => {
-  let end = initial;
-  let change = increment;
-
-  const childrenPropertyValue = getChildrenPropertyValue(property, element);
-
-  //compute and set height to element
-  const computed = parsePixelLength(window.getComputedStyle(element)[property]);
-  element.style[property] = `${computed}px`;
-
-  //if element is collapsed -> inverse increment;
-  if (computed === initial) {
-    change = -increment;
-    end = childrenPropertyValue;
-  }
-
-  //set recursive timeout to change height;
-  let timeout: NodeJS.Timeout = setTimeout(function wait() {
-    trigger.classList.add("disabled");
-    let newProperyValue = parsePixelLength(element.style[property]) - change;
-
-    if (newProperyValue < initial) {
-      newProperyValue = initial;
-    }
-
-    if (newProperyValue > childrenPropertyValue) {
-      newProperyValue = childrenPropertyValue;
-    }
-
-    element.style[property] = `${newProperyValue}px`;
-
-    const currentPropertyValue = parsePixelLength(element.style[property]);
-
-    const shouldStop = [
-      computed > initial && currentPropertyValue <= end,
-      computed === initial && currentPropertyValue >= end,
-    ].some(Boolean);
-
-    if (shouldStop) {
-      trigger.classList.remove("disabled");
-      return clearTimeout(timeout);
-    }
-
-    timeout = setTimeout(wait, interval);
-  }, interval);
 };
