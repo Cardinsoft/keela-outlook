@@ -5,6 +5,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { getOctokit } from "../shared/auth.js";
 import { getAllContent } from "./content.js";
+import { downgradeToES5 } from "./transpiler.js";
 
 const { parsed = {} } = dotenv.config({
   path: `${dirname(fileURLToPath(import.meta.url))}/.env`,
@@ -35,4 +36,4 @@ const contents = [...configs, ...src].flat().join("\n\n");
 
 const { OUTPUT_PATH } = parsed;
 
-await writeFile(OUTPUT_PATH, contents, { encoding: "utf-8" });
+await writeFile(OUTPUT_PATH, downgradeToES5(contents), { encoding: "utf-8" });
