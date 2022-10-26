@@ -231,7 +231,7 @@ export class SelectionInput extends RenderableComponent {
     }
 
     const widget = document.createElement("div");
-    widget.classList.add("row", "SelectionInput");
+    widget.classList.add("ms-Grid", "SelectionInput", "card-widget");
 
     const handlers: Record<
       SelectionInputType,
@@ -252,7 +252,7 @@ export class SelectionInput extends RenderableComponent {
 
         if (title) {
           const label = document.createElement("label");
-          label.classList.add("ms-Label SelectionInputTopLabel");
+          label.classList.add("ms-Label", "SelectionInputTopLabel");
           label.textContent = title;
           wrapper.append(label);
         }
@@ -270,6 +270,8 @@ export class SelectionInput extends RenderableComponent {
         input.name = name;
         wrapper.append(input);
 
+        await this.renderItems(name, input);
+
         if (action) {
           input.addEventListener("change", () => {
             ActionStore.set(widget, action);
@@ -284,7 +286,6 @@ export class SelectionInput extends RenderableComponent {
           .querySelector(".ms-Dropdown-truncator")
           ?.classList.add("hidden");
 
-        await this.renderItems(name, input);
         return wrapper;
       },
       [SelectionInputType.RADIO_BUTTON]: async (name) => {
