@@ -13,11 +13,15 @@ import { handleAction } from "./action";
  * @param value input value
  */
 const addToFormInputs = (event: EventObject, name: string, value: string) => {
-  const { formInput, formInputs } = event;
+  const {
+    commonEventObject: { formInputs },
+  } = event;
 
-  formInput[name] = value;
-  const inputs = (formInputs[name] ||= []);
-  inputs.push(value);
+  const { stringInputs } = (formInputs[name] ||= {
+    stringInputs: { value: [] },
+  });
+
+  stringInputs.value.push(value);
 };
 
 /**
@@ -31,11 +35,11 @@ const removeFromFormInputs = (
   name: string,
   value: string
 ) => {
-  const { formInput, formInputs } = event;
+  const {
+    commonEventObject: { formInputs },
+  } = event;
 
-  delete formInput[name];
-
-  const values = (formInputs[name] ||= []);
+  const values = (formInputs[name].stringInputs.value ||= []);
 
   const valueIndex = values.indexOf(value);
   if (valueIndex > -1) {
@@ -48,8 +52,6 @@ const removeFromFormInputs = (
  * @param event current event object
  */
 const fillFormInputs = (event: EventObject) => {
-  const { formInput, formInputs } = event;
-
   const forms = document.getElementsByTagName("form");
   for (const { elements } of forms) {
     for (const element of elements) {
@@ -61,10 +63,10 @@ const fillFormInputs = (event: EventObject) => {
         const selected = isSelectedStateFormElement(element);
         const handler = selected ? addToFormInputs : removeFromFormInputs;
         handler(event, name, value);
+        continue;
       }
 
-      formInput[name] = value;
-      formInputs[name] = [value];
+      addToFormInputs(event, name, value);
     }
   }
 };
