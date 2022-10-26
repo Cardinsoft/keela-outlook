@@ -23,12 +23,12 @@ $toggler-icon-size: 32px;
     transition: transform 0.2s linear;
     width: $toggler-icon-size;
 
+    &.card-section-toggler--up {
+        transform: rotate(180deg);
+    }
+
     &:hover {
         background-color: $toggler-icon-bg--hover;
         border-radius: 50%;
     }
-}
-
-.card-section-toggler--up .card-section-toggler-icon {
-    transform: rotate(180deg);
 }
