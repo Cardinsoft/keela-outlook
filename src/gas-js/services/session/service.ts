@@ -1,3 +1,4 @@
+import { getProfile } from "../../utils/office";
 import { User } from "./components/user";
 
 /**
@@ -10,7 +11,7 @@ export class Session {
    * @summary Gets information about the current user.
    */
   getActiveUser() {
-    return new User(Office.context.mailbox.userProfile);
+    return new User(getProfile());
   }
 
   /**
@@ -19,7 +20,7 @@ export class Session {
    * @summary Gets the language setting of the current user as a string—for example, en for English.
    */
   getActiveUserLocale() {
-    return Office.context.displayLanguage;
+    return Office.context.displayLanguage || "en";
   }
 
   /**
@@ -28,7 +29,7 @@ export class Session {
    * @summary Gets information about the user under whose authority the script is running.
    */
   getEffectiveUser() {
-    return new User(Office.context.mailbox.userProfile);
+    return new User(getProfile());
   }
 
   /**
@@ -37,7 +38,7 @@ export class Session {
    * @summary Gets the time zone of the script.
    */
   getScriptTimeZone() {
-    return Office.context.mailbox.userProfile.timeZone;
+    return getProfile().timeZone;
   }
 
   /**
@@ -46,8 +47,7 @@ export class Session {
    * @summary Gets a temporary key that is unique to the active user but does not reveal the user identity.
    */
   getTemporaryActiveUserKey() {
-    const { displayName, emailAddress, accountType } =
-      Office.context.mailbox.userProfile;
+    const { displayName, emailAddress, accountType } = getProfile();
     return btoa(`${displayName}-${emailAddress}-${accountType}`);
   }
 }
