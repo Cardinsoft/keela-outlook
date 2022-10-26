@@ -1,5 +1,4 @@
 import { RenderableComponent } from "../../../../gas-js/components";
-import { handleEvent } from "../../../../gas-js/handlers/event";
 import { ActionStore } from "../../../../gas-js/stores/actions";
 import { isHTMLTextAreaElement } from "../../../../gas-js/utils/guards";
 import { safeToString } from "../../../../gas-js/utils/strings";
@@ -172,10 +171,7 @@ export class TextInput extends RenderableComponent {
     });
 
     if (action) {
-      wrapper.addEventListener("focusout", () => {
-        ActionStore.set(wrapper, action);
-        handleEvent(wrapper);
-      });
+      ActionStore.bind("focusout", wrapper, action);
     }
 
     if (hint) {
