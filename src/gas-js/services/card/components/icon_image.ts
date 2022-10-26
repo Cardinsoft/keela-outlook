@@ -41,12 +41,29 @@ export class IconImage extends RenderableComponent {
       throw new Error("IconImage must have either icon or icon URL set");
     }
 
-    const image = document.createElement("img");
-    image.alt = altText;
-    image.height = 20;
-    image.src = imageSource;
-    image.width = 20;
-    wrapper.append(image);
+    if (url) {
+      const image = document.createElement("img");
+      image.alt = altText;
+      image.height = 20;
+      image.src = imageSource;
+      image.width = 20;
+      wrapper.append(image);
+    }
+
+    const isFontAwesomeIcon = icon.startsWith("fa-");
+
+    if (icon && isFontAwesomeIcon) {
+      const image = document.createElement("i");
+      image.classList.add("card-icon-image-icon", ...icon.split(" "));
+      wrapper.append(image);
+    }
+
+    if (icon && !isFontAwesomeIcon) {
+      const image = document.createElement("span");
+      image.classList.add("card-icon-image-icon", "material-icons");
+      image.textContent = icon;
+      wrapper.append(image);
+    }
 
     return wrapper;
   }
