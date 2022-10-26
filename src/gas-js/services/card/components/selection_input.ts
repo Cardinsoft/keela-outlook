@@ -231,7 +231,7 @@ export class SelectionInput extends RenderableComponent {
     }
 
     const widget = document.createElement("div");
-    widget.classList.add("ms-Grid", "SelectionInput", "card-widget");
+    widget.classList.add("ms-Grid", "selection-input", "card-widget");
 
     const handlers: Record<
       SelectionInputType,
