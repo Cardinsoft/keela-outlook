@@ -15,8 +15,8 @@
     <Description DefaultValue="Keela automatically matches an email address to records in Keela to see if the contact is already in their CRM."/>
 
     <!--Icons (lowres and highres)-->
-    <IconUrl DefaultValue="https://cardinsoft.github.io/outlook/dist/assets/icon-80.png" />
-    <HighResolutionIconUrl DefaultValue="https://cardinsoft.github.io/outlook/dist/assets/icon-128.png"/>
+    <IconUrl DefaultValue="https://cardinsoft.github.io/outlook/assets/icon-80.png" />
+    <HighResolutionIconUrl DefaultValue="https://cardinsoft.github.io/outlook/assets/icon-128.png"/>
 
     <!-- Support Url - required for App Source -->
     <SupportUrl DefaultValue="https://support.keela.co/hc/en-us/requests/new" />
@@ -40,7 +40,7 @@
     <FormSettings>
         <Form xsi:type="ItemRead">
             <DesktopSettings>
-                <SourceLocation DefaultValue="https://cardinsoft.github.io/keela-outlook/dist/index.html"/>
+                <SourceLocation DefaultValue="https://cardinsoft.github.io/keela-outlook/index.html"/>
                 <RequestedHeight>450</RequestedHeight>
             </DesktopSettings>
         </Form>
@@ -102,12 +102,12 @@
         <!-- v 1.0 resources -->
         <Resources>
             <bt:Images>
-                <bt:Image id="keela-icon-16" DefaultValue="https://cardinsoft.github.io/keela-outlook/dist/assets/icon-16.png"/>
-                <bt:Image id="keela-icon-32" DefaultValue="https://cardinsoft.github.io/keela-outlook/dist/assets/icon-32.png"/>
-                <bt:Image id="keela-icon-80" DefaultValue="https://cardinsoft.github.io/keela-outlook/dist/assets/icon-80.png"/>
+                <bt:Image id="keela-icon-16" DefaultValue="https://cardinsoft.github.io/keela-outlook/assets/icon-16.png"/>
+                <bt:Image id="keela-icon-32" DefaultValue="https://cardinsoft.github.io/keela-outlook/assets/icon-32.png"/>
+                <bt:Image id="keela-icon-80" DefaultValue="https://cardinsoft.github.io/keela-outlook/assets/icon-80.png"/>
             </bt:Images>
             <bt:Urls>
-                <bt:Url id="paneReadUrl" DefaultValue="https://cardinsoft.github.io/keela-outlook/dist/index.html"/>
+                <bt:Url id="paneReadUrl" DefaultValue="https://cardinsoft.github.io/keela-outlook/index.html"/>
             </bt:Urls>
             <bt:ShortStrings>
                 <bt:String id="groupLabel" DefaultValue="Keela"/>
@@ -167,12 +167,12 @@
             <!-- v 1.1 resources -->
             <Resources>
                 <bt:Images>
-                    <bt:Image id="keela-icon-16" DefaultValue="https://cardinsoft.github.io/keela-outlook/dist/assets/icon-16.png"/>
-                    <bt:Image id="keela-icon-32" DefaultValue="https://cardinsoft.github.io/keela-outlook/dist/assets/icon-32.png"/>
-                    <bt:Image id="keela-icon-80" DefaultValue="https://cardinsoft.github.io/keela-outlook/dist/assets/icon-80.png"/>
+                    <bt:Image id="keela-icon-16" DefaultValue="https://cardinsoft.github.io/keela-outlook/assets/icon-16.png"/>
+                    <bt:Image id="keela-icon-32" DefaultValue="https://cardinsoft.github.io/keela-outlook/assets/icon-32.png"/>
+                    <bt:Image id="keela-icon-80" DefaultValue="https://cardinsoft.github.io/keela-outlook/assets/icon-80.png"/>
                 </bt:Images>
                 <bt:Urls>
-                    <bt:Url id="paneReadUrl" DefaultValue="https://cardinsoft.github.io/keela-outlook/dist/index.html"/>
+                    <bt:Url id="paneReadUrl" DefaultValue="https://cardinsoft.github.io/keela-outlook/index.html"/>
                 </bt:Urls>
                 <bt:ShortStrings>
                     <bt:String id="groupLabel" DefaultValue="Keela"/>
