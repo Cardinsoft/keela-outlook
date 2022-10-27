@@ -24,6 +24,10 @@
                 "entry":"dist/index.js"
             }
         },
+        "manifests": {
+            "gas": "appsscript.json",
+            "outlook": "manifest.xml"
+        },
         "src":{
             "assets": "src/assets/*",
             "icons": "src/icons/*",

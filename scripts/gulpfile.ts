@@ -104,9 +104,19 @@ export const bundle = () => {
 };
 
 export const cleanDist = () => {
-  return del(["dist/*", "!dist/*.html", "!dist/assets", "!dist/public"], {
-    force: true,
-  });
+  return del(
+    [
+      "dist/*",
+      "!dist/*.html",
+      "!dist/assets",
+      "!dist/public",
+      "!dist/*.xml",
+      "!dist/*.json",
+    ],
+    {
+      force: true,
+    }
+  );
 };
 
 export const copyAssets = () => {
@@ -117,13 +127,20 @@ export const copyIcons = () => {
   return gulp.src(config.paths.src.icons).pipe(gulp.dest("dist/public/icons"));
 };
 
+export const copyManifests = () => {
+  return gulp
+    .src([config.paths.manifests.gas, config.paths.manifests.outlook])
+    .pipe(gulp.dest("dist"));
+};
+
 export default gulp.series(
   gulp.parallel(
     buildCSS,
     buildJS(config.paths.src.ts.gas, basename(config.paths.dist.js.gas)),
     buildJS(config.paths.src.ts.entry, basename(config.paths.dist.js.entry)),
     copyAssets,
-    copyIcons
+    copyIcons,
+    copyManifests
   ),
   bundle,
   cleanDist
