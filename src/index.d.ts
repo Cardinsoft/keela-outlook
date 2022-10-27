@@ -7,6 +7,7 @@ type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
 interface Window {
   // required to access action callback functions
   [x: string]: unknown;
+  CardService: import("./gas-js/services/card/service").CardService;
   CardServiceConfig: typeof import("./gas-js/services/card/service").CardServiceConfig;
 }
 
