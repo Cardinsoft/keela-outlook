@@ -58,7 +58,7 @@ export class ServicesStore {
 
   /**
    * @summary gets a service by name
-   * @param name action guid to lookup
+   * @param name service guid to lookup
    */
   static get(name: string) {
     return this.items[name];
