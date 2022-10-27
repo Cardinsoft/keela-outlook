@@ -530,15 +530,15 @@ var configValidator = function (config, cf) {
     var valid = configTypeValidator(config);
     var action = valid.action, color = valid.color, colour = valid.colour, content = valid.content, text = valid.text, title = valid.title, type = valid.type;
     if (!type && !content) {
-        valid.state = Cardin.State.HIDDEN;
+        valid.state = Cardin.WidgetState.HIDDEN;
     }
     if (type === WidgetTypes.BUTTON) {
-        valid.type = Cardin.Type.TEXT_BUTTON;
+        valid.type = Cardin.WidgetType.TEXT_BUTTON;
         valid.text = text || title || content;
         valid.color = color || colour || cf.Colors.Primary;
     }
     if (type === WidgetTypes.IMAGE) {
-        valid.type = Cardin.Type.IMAGE;
+        valid.type = Cardin.WidgetType.IMAGE;
     }
     if (action === "link") {
         valid.link = { url: content, tab: true };
@@ -665,7 +665,7 @@ var Keela = /** @class */ (function (_super) {
                         {
                             content: cf.Strings.Settings.Token.Prompt,
                             buttonConfig: {
-                                type: Cardin.Type.TEXT_BUTTON,
+                                type: Cardin.WidgetType.TEXT_BUTTON,
                                 icon: Cardin.Icon.TAB,
                                 text: Cardin.Formatter.colorize(cf.Colors.Primary, cf.Strings.Settings.Token.Action),
                                 link: {
@@ -717,7 +717,7 @@ var Keela = /** @class */ (function (_super) {
                         },
                         {
                             colour: cf.Colors.Primary,
-                            type: Cardin.Type.TEXT_BUTTON,
+                            type: Cardin.WidgetType.TEXT_BUTTON,
                             text: cf.Strings.Cards.Missing.Action,
                             link: {
                                 url: "".concat(this.getKeelaURI(cf), "/contacts"),
@@ -1653,7 +1653,7 @@ function settingsCard(settings) {
                 widgets: [{
                         content: cf.Strings.Settings.Token.Prompt,
                         buttonConfig: {
-                            type: Cardin.Type.TEXT_BUTTON,
+                            type: Cardin.WidgetType.TEXT_BUTTON,
                             icon: Cardin.Icon.TAB,
                             text: Cardin.Formatter.colorize(cf.Colors.Primary, cf.Strings.Settings.Token.Action),
                             link: {
@@ -1734,7 +1734,7 @@ var makeRegionSection = function (cf, _a) {
         widgets: [{
                 content: cf.Strings.Cards.Region.Prompt
             }, {
-                type: Cardin.Type.DROPDOWN,
+                type: Cardin.WidgetType.DROPDOWN,
                 name: "region",
                 content: options,
                 change: action,
@@ -1844,7 +1844,7 @@ var getSupportWidgetConfg = function (_a) {
     var config = {
         content: text,
         buttonConfig: {
-            type: Cardin.Type.TEXT_BUTTON,
+            type: Cardin.WidgetType.TEXT_BUTTON,
             icon: Cardin.Icon.TAB,
             text: Cardin.Formatter.colorize(cf.Colors.Primary, buttonText)
         }

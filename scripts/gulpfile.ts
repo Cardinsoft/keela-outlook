@@ -57,8 +57,8 @@ export const injectLocalJS = () => {
   return inject(
     gulp.src([
       config.paths.dist.js.gas,
-      config.paths.external.cardin,
-      config.paths.external.keela,
+      // config.paths.external.cardin,
+      // config.paths.external.keela,
       config.paths.dist.js.entry,
     ]),
     {

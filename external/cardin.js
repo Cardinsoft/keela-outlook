@@ -320,10 +320,10 @@ const buttonDecorator = (widget, options) => {
     if (!("setButton" in widget) || !options) {
         return widget;
     }
-    const { type = Type.TEXT_BUTTON } = options;
+    const { type = WidgetType.TEXT_BUTTON } = options;
     const buttonTemplates = {
-        [Type.IMAGE_BUTTON]: imageButtonWidget,
-        [Type.TEXT_BUTTON]: textButtonWidget,
+        [WidgetType.IMAGE_BUTTON]: imageButtonWidget,
+        [WidgetType.TEXT_BUTTON]: textButtonWidget,
     };
     const handler = buttonTemplates[type];
     if (typeof handler === "function") {
@@ -441,39 +441,42 @@ var Show = Object.freeze({
     UPDATED: "updated",
     RESET: "reset",
 });
-var State = ((e) => {
-    e[(e.EDITABLE = "editable")] = 0;
-    e[(e.HIDDEN = "hidden")] = 1;
-    return e;
-})({});
-var Type = ((e) => {
-    const { SelectionInputType: { CHECK_BOX, DROPDOWN, RADIO_BUTTON }, } = CardService;
-    e[(e.BUTTON_SET = "ButtonSet")] = 0;
-    e[(e.CHECK_BOX = "CHECK_BOX")] = CHECK_BOX;
-    e[(e.DROPDOWN = "DROPDOWN")] = DROPDOWN;
-    e[(e.IMAGE = "Image")] = 3;
-    e[(e.KEY_VALUE = "KeyValue")] = 4;
-    e[(e.IMAGE_BUTTON = "ImageButton")] = 5;
-    e[(e.RADIO = "RADIO_BUTTON")] = RADIO_BUTTON;
-    e[(e.TEXT_BUTTON = "TextButton")] = 7;
-    e[(e.TEXT_INPUT = "TextInput")] = 8;
-    e[(e.TEXT_PAR = "TextParagraph")] = 9;
-    e[(e.GRID = "Grid")] = 10;
-    return e;
-})({});
+var WidgetState = Object.freeze({
+    EDITABLE: "EDITABLE",
+    HIDDEN: "HIDDEN",
+});
+var WidgetType = Object.freeze({
+    BUTTON_SET: "BUTTON_SET",
+    get CHECK_BOX() {
+        return CardService.SelectionInputType.CHECK_BOX;
+    },
+    get DROPDOWN() {
+        return CardService.SelectionInputType.DROPDOWN;
+    },
+    IMAGE: "IMAGE",
+    KEY_VALUE: "KEY_VALUE",
+    IMAGE_BUTTON: "IMAGE_BUTTON",
+    get RADIO() {
+        return CardService.SelectionInputType.RADIO_BUTTON;
+    },
+    TEXT_BUTTON: "TEXT_BUTTON",
+    TEXT_INPUT: "TEXT_INPUT",
+    TEXT_PAR: "TEXT_PAR",
+    GRID: "GRID",
+});
 var section = errorDecorator((err) => console.warn(`section is misconfigured: ${err}`), (config, sectionIndex = 0) => {
     const section = CardService.newCardSection();
     const { sections = [] } = config;
     var sectionConfig = sections[sectionIndex];
     let { isCollapsible, numUncollapsible = 0 } = sectionConfig;
-    const { fetch, header, max, start = 0, widgets = [], more } = sectionConfig;
+    const { fetch, header, max, start = 0, widgets = [], more, } = sectionConfig;
     let numSeparators = 0;
     let current = 0;
     const parsedWidgets = [];
     for (let index = start; index < widgets.length; index++) {
         var widget = validateConfig(widgets[index] || {}, sectionIndex, index);
         const { content, state, type } = widget;
-        if (state === State.HIDDEN) {
+        if (state === WidgetState.HIDDEN) {
             continue;
         }
         if (!type) {
@@ -484,38 +487,38 @@ var section = errorDecorator((err) => console.warn(`section is misconfigured: ${
         }
         current++;
         switch (type) {
-            case Type.TEXT_PAR:
+            case WidgetType.TEXT_PAR:
                 parsedWidgets.push(textWidget(widget));
                 break;
-            case Type.IMAGE:
+            case WidgetType.IMAGE:
                 parsedWidgets.push(imageWidget(widget));
                 break;
-            case Type.BUTTON_SET:
+            case WidgetType.BUTTON_SET:
                 parsedWidgets.push(getButtonSetWidget(widget));
                 break;
-            case Type.IMAGE_BUTTON:
+            case WidgetType.IMAGE_BUTTON:
                 parsedWidgets.push(imageButtonWidget(widget));
                 break;
-            case Type.GRID:
+            case WidgetType.GRID:
                 parsedWidgets.push(getGridWidget(widget));
                 break;
-            case Type.TEXT_BUTTON:
+            case WidgetType.TEXT_BUTTON:
                 parsedWidgets.push(textButtonWidget(widget));
                 break;
-            case Type.KEY_VALUE:
+            case WidgetType.KEY_VALUE:
                 parsedWidgets.push(keyValueWidget(widget));
                 break;
-            case Type.TEXT_INPUT:
+            case WidgetType.TEXT_INPUT:
                 parsedWidgets.push(textInputWidget(widget));
                 break;
-            case Type.RADIO:
-            case Type.CHECK_BOX:
-            case Type.DROPDOWN:
+            case WidgetType.RADIO:
+            case WidgetType.CHECK_BOX:
+            case WidgetType.DROPDOWN:
                 parsedWidgets.push(selectionInputWidget(widget));
                 break;
         }
         pushIf(parsedWidgets, makeFetchMoreWidget(widget, sectionIndex, index));
-        if (widget.spaceAfter && (index + numSeparators + 2 < start + max) && index < widgets.length - 1) {
+        if (widget.spaceAfter && index + numSeparators + 2 < start + max && index < widgets.length - 1) {
             parsedWidgets.push(textWidget({ content: "\r" }));
             numSeparators++;
             if (isCollapsible && numUncollapsible) {
@@ -527,19 +530,19 @@ var section = errorDecorator((err) => console.warn(`section is misconfigured: ${
     if (!parsedWidgets.length) {
         return;
     }
-    parsedWidgets.forEach(w => section.addWidget(w));
+    parsedWidgets.forEach((w) => section.addWidget(w));
     var fetcher = getByProperty(sectionConfig.widgets, "id", "fetcher");
     if (more && !fetcher) {
         var fetchParams = copyObject(more, {
             card: copyObject(config, {}),
-            section: sectionIndex
+            section: sectionIndex,
         });
         fetcher = {
             icon: Icon.DOWNLOAD,
-            state: State.HIDDEN,
+            state: WidgetState.HIDDEN,
             title: "Load more " + more.entity,
             id: "fetcher",
-            click: { callback: "fetch", params: fetchParams }
+            click: { callback: "fetch", params: fetchParams },
         };
         fetchParams.card.sections[sectionIndex].widgets.push(copyObject(fetcher, {}));
         section.addWidget(keyValueWidget({ content: "\r" }));
@@ -555,7 +558,7 @@ var section = errorDecorator((err) => console.warn(`section is misconfigured: ${
         isCollapsible = false;
         backAndNext.push(getBackButtonConfig(config, sectionConfig, sectionIndex, start, max));
     }
-    if ((start + max - numSeparators < widgets.length)) {
+    if (start + max - numSeparators < widgets.length) {
         backAndNext.push(getNextButtonConfig(config, sectionIndex, start, max, numSeparators));
     }
     if (backAndNext.length > 0) {
@@ -569,7 +572,7 @@ var section = errorDecorator((err) => console.warn(`section is misconfigured: ${
 });
 var card = errorDecorator((err) => timestamp(`card is misconfigured`, err, "warning"), (config) => {
     const builder = CardService.newCardBuilder();
-    const { actions = [], build = true, header, name, sections = [] } = config;
+    const { actions = [], build = true, header, name, sections = [], } = config;
     header && builder.setHeader(cardHeader(header));
     name && builder.setName(name);
     const MAX_WIDGETS = +getGlobal_("MAX_WIDGETS", "12");
@@ -582,7 +585,7 @@ var card = errorDecorator((err) => timestamp(`card is misconfigured`, err, "warn
         return section(config, i);
     });
     parsedSections.filter(Boolean).forEach((s) => builder.addSection(s));
-    actions.forEach(action => builder.addCardAction(cardAction(action)));
+    actions.forEach((action) => builder.addCardAction(cardAction(action)));
     return build ? builder.build() : builder;
 });
 var deck = (config) => ensureArray(config).map(card);
@@ -1342,7 +1345,7 @@ const openLinkStrategy = (widget, { ...config }) => {
 function initialize_() {
     var sp = PropertiesService.getScriptProperties();
     sp.setProperties({
-        MAX_WIDGETS: "12"
+        MAX_WIDGETS: "12",
     });
 }
 function cardConfirm(params, build) {
@@ -1352,27 +1355,40 @@ function cardConfirm(params, build) {
     var confirmer = {
         build,
         header: {
-            title: "Confirm action"
+            title: "Confirm action",
         },
-        sections: [{
-                widgets: [{
+        sections: [
+            {
+                widgets: [
+                    {
                         icon: Icon.WARNING,
-                        content: prompt || "You are about to perform a sensitive action. Please, confirm"
-                    }, {
-                        type: Type.BUTTON_SET,
+                        content: prompt || "You are about to perform a sensitive action. Please, confirm",
+                    },
+                    {
+                        type: WidgetType.BUTTON_SET,
                         content: [
-                            { type: Type.TEXT_BUTTON, text: "Confirm", click: confirmParams },
-                            { type: Type.TEXT_BUTTON, text: "Cancel", click: cancelParams }
-                        ]
-                    }]
-            }]
+                            {
+                                type: WidgetType.TEXT_BUTTON,
+                                text: "Confirm",
+                                click: confirmParams,
+                            },
+                            {
+                                type: WidgetType.TEXT_BUTTON,
+                                text: "Cancel",
+                                click: cancelParams,
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
     };
     return card(confirmer);
 }
 function paginate() { }
 const validateKeyValueConfig = (widgetConfig, validType) => {
     const { name, state, type } = widgetConfig;
-    if (type || name || state === State.EDITABLE) {
+    if (type || name || state === WidgetState.EDITABLE) {
         return widgetConfig;
     }
     widgetConfig.type = validType;
@@ -1388,7 +1404,7 @@ const validateTextInputConfig = (widgetConfig, validType) => {
 };
 const validateEditableConfig = (config, sectionIdx = 0, widgetIdx = 0) => {
     const { state } = config;
-    if (state !== State.EDITABLE) {
+    if (state !== WidgetState.EDITABLE) {
         return config;
     }
     return {
@@ -1398,14 +1414,14 @@ const validateEditableConfig = (config, sectionIdx = 0, widgetIdx = 0) => {
             params: propertiesToString({
                 card: config,
                 section: sectionIdx,
-                index: widgetIdx
-            })
-        }
+                index: widgetIdx,
+            }),
+        },
     };
 };
 const validateConfig = (widgetConfig, sectionIndex, widgetIndex) => {
-    const kvValid = validateKeyValueConfig(widgetConfig, Type.KEY_VALUE);
-    const tiValid = validateTextInputConfig(kvValid, Type.TEXT_INPUT);
+    const kvValid = validateKeyValueConfig(widgetConfig, WidgetType.KEY_VALUE);
+    const tiValid = validateTextInputConfig(kvValid, WidgetType.TEXT_INPUT);
     return validateEditableConfig(tiValid, sectionIndex, widgetIndex);
 };
 const makeFetchMoreWidget = (config, sectionIndex = 0, widgetIndex = 0) => {
@@ -1416,15 +1432,15 @@ const makeFetchMoreWidget = (config, sectionIndex = 0, widgetIndex = 0) => {
     const moreParams = copyObject(more, {
         card: copyObject(config, {}),
         section: sectionIndex,
-        widget: widgetIndex
+        widget: widgetIndex,
     });
     const { entity } = more;
     return keyValueWidget({
         title: `Load more ${entity || "info"}`,
         click: {
             callback: "fetch",
-            params: moreParams
-        }
+            params: moreParams,
+        },
     });
 };
 const makeMultiplyWidget = (cardConfig, widgetConfig, sectionIdx = 0, widgetIdx = 0) => {
@@ -1439,9 +1455,9 @@ const makeMultiplyWidget = (cardConfig, widgetConfig, sectionIdx = 0, widgetIdx 
             params: {
                 card: copyObject(cardConfig, {}),
                 section: sectionIdx,
-                widget: widgetIdx
-            }
-        }
+                widget: widgetIdx,
+            },
+        },
     });
 };
 const defineIfNot = (obj, prop, value) => {
@@ -1456,7 +1472,7 @@ const getBackButtonConfig = (cardConfig, sectionConfig, index, start, max) => {
     const decrement = start - max + prevSeparators;
     const backCopy = copyObject(cardConfig, {});
     const section = backCopy.sections[index];
-    section.start = (decrement > 0 ? decrement : 0);
+    section.start = decrement > 0 ? decrement : 0;
     defineIfNot(section, "separators", []);
     section.separators.pop();
     return {
@@ -1464,9 +1480,9 @@ const getBackButtonConfig = (cardConfig, sectionConfig, index, start, max) => {
         click: {
             callback: "paginate",
             params: {
-                card: JSON.stringify(backCopy)
-            }
-        }
+                card: JSON.stringify(backCopy),
+            },
+        },
     };
 };
 const getNextButtonConfig = (cardConfig, index, start, max, numSeparators) => {
@@ -1480,8 +1496,8 @@ const getNextButtonConfig = (cardConfig, index, start, max, numSeparators) => {
         text: "next",
         click: {
             callback: "paginate",
-            params: { card: JSON.stringify(nextCopy) }
-        }
+            params: { card: JSON.stringify(nextCopy) },
+        },
     };
 };
 function cardHeader(config) {
@@ -1506,7 +1522,7 @@ function navigation(sequence = []) {
         pop: () => navigation.popCard(),
         push: (card) => navigation.pushCard(card),
         root: () => navigation.popToRoot(),
-        update: (card) => navigation.updateCard(card)
+        update: (card) => navigation.updateCard(card),
     };
     sequence.forEach((action) => {
         switch (action) {
@@ -1568,7 +1584,7 @@ var Responder = (() => {
             const builder = CardService.newActionResponseBuilder();
             builder.setNotification(notification(text));
             return builder.build();
-        }
+        },
     };
 })();
 const reloadStrategy = (builder, reload, event) => {
@@ -1634,7 +1650,7 @@ function openLink(config) {
     if (!url) {
         throw new Error("Open link should have a Url set");
     }
-    const { OpenAs: { FULL_SIZE, OVERLAY }, OnClose: { RELOAD_ADD_ON, NOTHING } } = CardService;
+    const { OpenAs: { FULL_SIZE, OVERLAY }, OnClose: { RELOAD_ADD_ON, NOTHING }, } = CardService;
     open.setUrl(url);
     open.setOpenAs(tab ? OVERLAY : FULL_SIZE);
     open.setOnClose(reload ? RELOAD_ADD_ON : NOTHING);
@@ -1646,7 +1662,7 @@ const textWidget = (config) => {
     return widget;
 };
 function selectionInputWidget(config = {}) {
-    const { content = [], name, select, title, type = Type.CHECK_BOX } = config;
+    const { content = [], name, select, title, type = WidgetType.CHECK_BOX, } = config;
     const widget = CardService.newSelectionInput();
     widget.setFieldName(name);
     widget.setType(CardService.SelectionInputType[type]);
@@ -1654,9 +1670,12 @@ function selectionInputWidget(config = {}) {
     actionDecorator(widget, config);
     const selected = content.map((o) => {
         const { value } = o;
-        return { ...o, selected: select !== void 0 ? select === value : o.selected };
+        return {
+            ...o,
+            selected: select !== void 0 ? select === value : o.selected,
+        };
     });
-    if (!selected.some((o) => o.selected) && type !== Type.CHECK_BOX) {
+    if (!selected.some((o) => o.selected) && type !== WidgetType.CHECK_BOX) {
         selected[0].selected = true;
     }
     selected.forEach(({ selected = false, text, value }) => widget.addItem(text, value, selected));
@@ -1678,7 +1697,7 @@ const getButtonSetWidget = (config) => {
     const { content } = config;
     const buttons = content.map((btn) => {
         const { type } = btn;
-        return type === Type.IMAGE_BUTTON ? imageButtonWidget(btn) : textButtonWidget(btn);
+        return type === WidgetType.IMAGE_BUTTON ? imageButtonWidget(btn) : textButtonWidget(btn);
     });
     const widget = CardService.newButtonSet();
     for (const button of buttons) {
@@ -1687,9 +1706,9 @@ const getButtonSetWidget = (config) => {
     return widget;
 };
 const textButtonWidget = errorDecorator((err) => console.warn(`failed to create TextButton: ${err}`), (config) => {
-    const { background, color, colour, disabled = false, filled = false, text } = config;
+    const { background, color, colour, disabled = false, filled = false, text, } = config;
     const widget = CardService.newTextButton();
-    const locColor = (colour || color);
+    const locColor = colour || color;
     const validatedText = text || validateContent_(config);
     widget.setText(locColor ? Formatter.colorize(locColor, validatedText) : validatedText);
     widget.setDisabled(disabled);
@@ -1765,7 +1784,7 @@ const getDecoratedTextWidget = (config) => {
             text: label,
             disabled: true,
             click: {
-                callback: label
+                callback: label,
             },
         });
     }
@@ -1778,7 +1797,7 @@ const getDecoratedTextWidget = (config) => {
 };
 const keyValueWidget = errorDecorator((err) => console.warn(`failed to create KeyValue: ${err}`), (config) => getDecoratedTextWidget(config));
 const hasAction = ({ suggest, click, change, auth, link }) => ({
-    action: !!(suggest || click || change || auth || link)
+    action: !!(suggest || click || change || auth || link),
 });
 function passesTests() {
     var suite = new TestSuite_("Library");
@@ -1844,7 +1863,7 @@ function serviceAccount(auth) {
         timestamp("error during service account", {
             error: serviceError,
             name: auth.name || "name not provided",
-            type: "fetch"
+            type: "fetch",
         }, "error");
     }
 }
@@ -1862,7 +1881,7 @@ function compare() {
             if (typeof arg !== typeof previous && !(arg instanceof RegExp) && !(previous instanceof RegExp))
                 return false;
             switch (typeof arg) {
-                case "function": return Function.prototype.toString.call(arg) === Function.prototype.toString.call(previous);
+                case "function": return (Function.prototype.toString.call(arg) === Function.prototype.toString.call(previous));
                 case "object":
                     if (arg === null || previous === null)
                         return arg === previous;
@@ -1925,7 +1944,7 @@ function copyObject(source, target, override) {
     }
     var transport = {};
     if (source.constructor) {
-        transport = new source.constructor;
+        transport = new source.constructor();
     }
     for (var key in source) {
         transport[key] = source[key];
@@ -1949,7 +1968,7 @@ function endsOnOne(input) {
         }
     }
     else if (isStr) {
-        return input.lastIndexOf("1") === (input.length - 1);
+        return input.lastIndexOf("1") === input.length - 1;
     }
     return result;
 }
@@ -1957,10 +1976,10 @@ function flatten(input, depth) {
     depth = depth || 1;
     var f = [];
     input.forEach(function (el) {
-        if ((el instanceof Array) && depth > 1) {
+        if (el instanceof Array && depth > 1) {
             f = f.concat(flatten(el, depth - 1));
         }
-        else if ((el instanceof Array)) {
+        else if (el instanceof Array) {
             f = f.concat(el);
         }
         else {
@@ -1971,7 +1990,7 @@ function flatten(input, depth) {
 }
 function generateCard(addHeader, numSections, numWidgets) {
     var card = {
-        sections: []
+        sections: [],
     };
     if (addHeader)
         card.header = { title: "" };
@@ -1988,7 +2007,7 @@ function generateCard(addHeader, numSections, numWidgets) {
 }
 function generateSection(addHeader, numWidgets) {
     var section = {
-        widgets: []
+        widgets: [],
     };
     if (addHeader)
         section.header = "";
@@ -2039,7 +2058,7 @@ function indexByProperty(input, name, value) {
 function JSONtoQuery(json, options) {
     if (!options) {
         options = {
-            indexed: true
+            indexed: true,
         };
     }
     function deep(obj, seq) {
@@ -2078,15 +2097,15 @@ function nest(obj, subs, depth) {
 }
 function traverseNested(obj, props, value) {
     var depth = 0;
-    return function t(o, p, d, v) {
+    return (function t(o, p, d, v) {
         while (d < p.length) {
-            if (v !== undefined & d === p.length - 1) {
+            if ((v !== undefined) & (d === p.length - 1)) {
                 o[p[d]] = v;
             }
             return t(o[p[d]], p, ++d, v);
         }
         return o;
-    }(obj, props, depth++, value);
+    })(obj, props, depth++, value);
 }
 function queryToJSON(query) {
     var parameters = {};
@@ -2113,31 +2132,29 @@ function handleError(error, cardConfig) {
     var defCard = {
         header: {
             title: "Issue with the Add-on",
-            image: Icon.WARNING
+            image: Icon.WARNING,
         },
         sections: [
             {
-                widgets: [
-                    { content: error.message }
-                ]
-            }
-        ]
+                widgets: [{ content: error.message }],
+            },
+        ],
     };
     if (!cardConfig) {
-        return (card(defCard));
+        return card(defCard);
     }
     try {
-        return (card(cardConfig));
+        return card(cardConfig);
     }
     catch (err) {
-        return (card(defCard));
+        return card(defCard);
     }
 }
 function order_(A, B, reverse) {
     toBoolean(reverse);
-    var areStrings = (typeof A === "string") && (typeof B === "string");
-    var areDates = (A instanceof Date) && (B instanceof Date);
-    var areNumbers = (typeof A === "number") && (typeof B === "number");
+    var areStrings = typeof A === "string" && typeof B === "string";
+    var areDates = A instanceof Date && B instanceof Date;
+    var areNumbers = typeof A === "number" && typeof B === "number";
     switch (true) {
         case areStrings:
             A = A.toLowerCase();
@@ -2191,10 +2208,10 @@ function preserve_(form, widgets, remove) {
                 if (remove) {
                     if (!form.hasOwnProperty(name)) {
                         switch (type) {
-                            case Type.KEY_VALUE:
+                            case WidgetType.KEY_VALUE:
                                 sw.selected = false;
                                 break;
-                            case Type.CHECK_BOX: content.forEach(function (option) {
+                            case WidgetType.CHECK_BOX: content.forEach(function (option) {
                                 option.selected = false;
                             });
                         }
@@ -2204,12 +2221,12 @@ function preserve_(form, widgets, remove) {
                     var field = form[key];
                     if (key === name) {
                         switch (type) {
-                            case Type.KEY_VALUE:
+                            case WidgetType.KEY_VALUE:
                                 if (field[0]) {
                                     sw.selected = true;
                                 }
                                 break;
-                            case Type.TEXT_INPUT:
+                            case WidgetType.TEXT_INPUT:
                                 widget.content = field[0];
                                 break;
                             default: content.forEach(function (option) {
@@ -2275,7 +2292,7 @@ const is = (() => {
         },
         undef(maybeDef) {
             return maybeDef === void 0;
-        }
+        },
     };
 })();
 function propertiesToString(object) {
@@ -2304,7 +2321,7 @@ function timestamp(label, content, type) {
         message: label,
         on: date,
         at: time,
-        happened: content
+        happened: content,
     };
     switch (type) {
         case "log":
@@ -2352,7 +2369,7 @@ function trimMessage(message) {
         cc,
         body,
         date,
-        subject
+        subject,
     };
     var domains = toTrim.match(/\w+(?=\..+(?=$))/g) || [];
     trimmed.domain = toSentenceCase(domains[domains.length - 1]);
@@ -2371,7 +2388,7 @@ function trimMessage(message) {
     if (split.length > 1) {
         split.forEach((part, idx) => {
             var spacer = "";
-            if (idx !== (start + 1)) {
+            if (idx !== start + 1) {
                 spacer = " ";
             }
             if (idx > start) {
@@ -2385,21 +2402,21 @@ function trimMessage(message) {
     trimmed.entities = extractEntities_(trimmed);
     return trimmed;
 }
-const emailRegex = /([-+\w.]+@[-+\w.]+\w+(?:\.\w+)+)/ig;
+const emailRegex = /([-+\w.]+@[-+\w.]+\w+(?:\.\w+)+)/gi;
 function extractEntities_(message) {
     const { cc, domain, email, name, to } = message;
     var entities = {
         names: [name],
         emails: [email],
-        domains: [domain]
+        domains: [domain],
     };
     if (!message) {
         return entities;
     }
     var emails = to.concat(cc);
     emails = emails.concat(message.body.match(/\w+?@\w+\.\w+?\b/g) || []);
-    var rNames = emails.map(r => trimSender(r)).filter(r => r !== "");
-    var rEmails = emails.map((c) => trimFrom(c).toLowerCase()).filter(c => c !== "");
+    var rNames = emails.map((r) => trimSender(r)).filter((r) => r !== "");
+    var rEmails = emails.map((c) => trimFrom(c).toLowerCase()).filter((c) => c !== "");
     entities.names = entities.names.concat(rNames).filter((name, n, nms) => {
         return nms.lastIndexOf(name) === n;
     }).sort((a, b) => order_(a, b));
@@ -2466,7 +2483,11 @@ const processImageURI = ({ uri, width = -1, height = -1 }) => {
     const base64 = Utilities.base64Encode(res.getContent());
     const cacheName = "resized_image";
     const selfURI = `${ScriptApp.getService().getUrl()}?resize:width=${width}&height=${height}&cache=${cacheName}`;
-    const resizedRes = UrlFetchApp.fetch(selfURI, { ...commonParams, method: "post", payload: base64 });
+    const resizedRes = UrlFetchApp.fetch(selfURI, {
+        ...commonParams,
+        method: "post",
+        payload: base64,
+    });
     if (!isSuccess({ res: resizedRes })) {
         return "";
     }
@@ -2496,8 +2517,8 @@ var Cardin = {
     Reload,
     Response,
     Show,
-    State,
-    Type,
+    WidgetState,
+    WidgetType,
     section,
     card,
     deck,
