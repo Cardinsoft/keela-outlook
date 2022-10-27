@@ -1,5 +1,5 @@
 {
     "extends": "../tsconfig.json",
     "include": ["."],
-    "exclude": ["pull_cardin"]
+    "exclude": ["pull_cardin", "pull_keela", "shared"]
 }
