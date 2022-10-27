@@ -2,7 +2,6 @@ import { Overlay } from "./gas-js/components/overlay";
 import { Spinner } from "./gas-js/components/spinner";
 import { EventObject } from "./gas-js/events";
 import { type Card } from "./gas-js/services/card/components/card";
-import { CardServiceConfig } from "./gas-js/services/card/service";
 
 /**
  * @summary initializes the Add-In
@@ -16,12 +15,12 @@ export const initialize = async (homepageTriggerName: string) => {
   const overlay = new Overlay("app-body");
   overlay.setColor("white");
   await overlay.render(overlayParent);
-  overlay.show();
+  await overlay.show();
 
   const spinner = new Spinner();
   spinner.setSize("large");
   await spinner.render(overlayParent);
-  spinner.show();
+  await spinner.show();
 
   const homepageTrigger = window[homepageTriggerName];
   if (typeof homepageTrigger !== "function") {
@@ -37,10 +36,12 @@ export const initialize = async (homepageTriggerName: string) => {
     throw new Error("Add-In must initialize with at least 1 card");
   }
 
-  await CardServiceConfig.resetCardStack(cards);
+  const { CardStore } = window.CardServiceConfig;
 
-  await lastCard.render(document.getElementById("app-body"));
+  await CardStore.teardown();
+  CardStore.reset(cards);
+  await CardStore.render(document.getElementById("app-body"));
 
-  spinner.hide();
-  overlay.hide();
+  await spinner.hide();
+  await overlay.hide();
 };
