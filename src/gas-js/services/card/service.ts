@@ -1,4 +1,5 @@
 import { type AddInMenu } from "../../../gas-js/components/menu";
+import { CardStore } from "../../stores/card";
 import { Action } from "./actions/action";
 import { AuthorizationAction } from "./actions/authorization";
 import { CardAction } from "./actions/card";
@@ -56,7 +57,7 @@ import {
  * @summary internal-use only configuration class
  */
 export class CardServiceConfig {
-  static cardStack: Card[] = [];
+  static CardStore: typeof CardStore = CardStore;
   static primaryColor: string;
   static secondaryColor: string;
   static menu: AddInMenu;
@@ -71,11 +72,6 @@ export class CardServiceConfig {
     [UniversalActionResponse.name]: UniversalActionResponse,
   };
 
-  static get lastCard() {
-    const { cardStack } = this;
-    return cardStack[cardStack.length - 1];
-  }
-
   /**
    * @summary runtime-safe instanceof guard
    * @param instance possible instance of a class
@@ -88,24 +84,13 @@ export class CardServiceConfig {
     return instance instanceof this.classes[className];
   }
 
-  static async resetCardStack(newCards: Card[]) {
-    const { cardStack } = this;
-
-    for (const card of cardStack) {
-      await card.teardown();
-    }
-
-    cardStack.length = 0;
-    cardStack.push(...newCards);
-  }
-
   /**
    * @summary sets a configuration option by name
    * @param name configuration option name
    * @param value configuration option value
    */
   static set<
-    T extends keyof Omit<typeof CardServiceConfig, "cardStack" | "prototype">
+    T extends keyof Omit<typeof CardServiceConfig, "cardStore" | "prototype">
   >(name: T, value: typeof CardServiceConfig[T]) {
     this[name] = value;
     return this;
