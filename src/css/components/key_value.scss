@@ -1,3 +1,5 @@
+@import "../mixins";
+
 .KeyValue p {
 	margin: 0.6em 0;
 }
@@ -17,11 +19,9 @@
 
 .KeyValueTopLabel,
 .KeyValueBottomLabel,
-.SelectionInputTopLabel,
-.TextInputTopLabel,
-.TextInputBottomLabel {
+.SelectionInputTopLabel {
 	display: block;
-	color: #a6a6a6;
+	@include muted-text;
 }
 
 .KeyValueTopLabel {
