@@ -5,6 +5,7 @@ import { getSettings, supportsSet } from "./gas-js/utils/office";
 import { safeToString } from "./gas-js/utils/strings";
 import { initialize } from "./initialize";
 import { GmailAddOnManifest } from "./manifest";
+import { getNormalizedBaseURL } from "./gas-js/utils/url";
 
 /**
  * @summary makes the Add-In root element visible
@@ -31,9 +32,7 @@ export const readyCallback = async (info: Pick<Office.Context, "host">) => {
     log("log", "initialized outside host application", safeToString(host));
   }
 
-  const res = await fetch(
-    `${location.href.replace(/\/$/, "")}/appsscript.json`
-  );
+  const res = await fetch(`${getNormalizedBaseURL()}/appsscript.json`);
   if (!res.ok) {
     log("error", "failed to get manifest", await res.text());
     return; // TODO: show error card

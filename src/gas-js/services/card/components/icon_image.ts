@@ -1,4 +1,5 @@
 import { RenderableComponent } from "../../../../gas-js/components";
+import { getNormalizedBaseURL } from "../../../utils/url";
 import { Icon, ImageCropType } from "../enums";
 
 /**
@@ -48,10 +49,7 @@ export class IconImage extends RenderableComponent {
       image.alt = altText;
       image.height = 20;
       image.src = isCardServiceIcon
-        ? `${location.pathname.replace(
-            /\/$/,
-            ""
-          )}/public/icons/${imageSource}.png`
+        ? `${getNormalizedBaseURL()}/public/icons/${imageSource}.png`
         : imageSource;
       image.width = 20;
       wrapper.append(image);
