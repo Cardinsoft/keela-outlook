@@ -15,8 +15,8 @@
     <Description DefaultValue="Keela automatically matches an email address to records in Keela to see if the contact is already in their CRM."/>
 
     <!--Icons (lowres and highres)-->
-    <IconUrl DefaultValue="https://cardinsoft.github.io/outlook/assets/icon-80.png" />
-    <HighResolutionIconUrl DefaultValue="https://cardinsoft.github.io/outlook/assets/icon-128.png"/>
+    <IconUrl DefaultValue="https://cardinsoft.github.io/keela-outlook/assets/icon-80.png" />
+    <HighResolutionIconUrl DefaultValue="https://cardinsoft.github.io/keela-outlook/assets/icon-128.png"/>
 
     <!-- Support Url - required for App Source -->
     <SupportUrl DefaultValue="https://support.keela.co/hc/en-us/requests/new" />
