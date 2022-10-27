@@ -74,7 +74,6 @@ export class UniversalAction extends RenderableComponent {
 
   create(): HTMLElement {
     const text = this.getText();
-    const action = this.run();
 
     const wrapper = document.createElement("div");
     wrapper.classList.add("menu-item");
@@ -86,7 +85,7 @@ export class UniversalAction extends RenderableComponent {
     // TODO: handle actions with icons
 
     wrapper.addEventListener("click", () => {
-      ActionStore.set(wrapper, action);
+      ActionStore.set(wrapper, this.run());
       handleEvent(wrapper);
     });
 
