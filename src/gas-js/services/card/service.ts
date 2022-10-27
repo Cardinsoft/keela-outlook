@@ -300,7 +300,7 @@ export class CardService {
    * @summary Creates a new {@link Navigation}.
    */
   newNavigation() {
-    return new Navigation(CardServiceConfig.cardStack);
+    return new Navigation();
   }
 
   newNotification() {

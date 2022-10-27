@@ -1,13 +1,28 @@
 import { InspectableComponent } from "../index";
 import { type Card } from "./card";
 
+export enum NavigationType {
+  NAMED = "NAMED",
+  POP = "POP",
+  PUSH = "PUSH",
+  ROOT = "ROOT",
+}
+
+export class NavigationAction {
+  constructor(public type: NavigationType, public name?: string) {}
+}
+
+export class PushNavigationAction extends NavigationAction {
+  constructor(public card: Card) {
+    super(NavigationType.PUSH);
+  }
+}
+
 /**
  * @see https://developers.google.com/apps-script/reference/card-service/navigation
  */
 export class Navigation extends InspectableComponent {
-  constructor(private stack: Card[] = []) {
-    super();
-  }
+  actions: Array<NavigationAction | PushNavigationAction> = [];
 
   /**
    * @see https://developers.google.com/apps-script/reference/card-service/navigation#popcard
@@ -15,7 +30,7 @@ export class Navigation extends InspectableComponent {
    * @summary Pops a card from the navigation stack.
    */
   popCard() {
-    this.stack.pop();
+    this.actions.push(new NavigationAction(NavigationType.POP));
     return this;
   }
 
@@ -26,16 +41,7 @@ export class Navigation extends InspectableComponent {
    * @param cardName The name of the card to navigate to.
    */
   popToNamedCard(cardName: string) {
-    const { stack } = this;
-
-    for (let i = stack.length - 1; i >= 0; i--) {
-      const card = stack[i];
-
-      if (card.name === cardName) break;
-
-      this.popCard();
-    }
-
+    this.actions.push(new NavigationAction(NavigationType.NAMED, cardName));
     return this;
   }
 
@@ -45,13 +51,7 @@ export class Navigation extends InspectableComponent {
    * @summary Pops the card stack to the root card.
    */
   popToRoot() {
-    const { stack } = this;
-
-    const { length } = stack;
-    for (let i = 1; i < length; i++) {
-      this.popCard();
-    }
-
+    this.actions.push(new NavigationAction(NavigationType.ROOT));
     return this;
   }
 
@@ -62,7 +62,7 @@ export class Navigation extends InspectableComponent {
    * @param card A card to add to the stack.
    */
   pushCard(card: Card) {
-    this.stack.push(card);
+    this.actions.push(new PushNavigationAction(card));
     return this;
   }
 
@@ -71,8 +71,10 @@ export class Navigation extends InspectableComponent {
    * @param card A card to replace the current card with.
    */
   updateCard(card: Card) {
-    this.popCard();
-    this.pushCard(card);
+    this.actions.push(
+      new NavigationAction(NavigationType.POP),
+      new PushNavigationAction(card)
+    );
     return this;
   }
 }
