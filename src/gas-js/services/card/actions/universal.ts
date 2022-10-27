@@ -36,14 +36,22 @@ export class UniversalAction extends RenderableComponent {
 
     // TODO: allow background actions (return type: undefined)
 
-    const maybeAction = callFunctionFromGlobalScope<OpenLink | Card>(
+    const handlerResult = callFunctionFromGlobalScope<OpenLink | Card | Card[]>(
       functionName,
       new EventObject()
     );
 
-    return window.CardServiceConfig.isInstance<typeof Card>(maybeAction, "Card")
-      ? new DisplayCardsAction().setCards([maybeAction])
-      : maybeAction;
+    if (handlerResult instanceof Array) {
+      return new DisplayCardsAction().setCards(handlerResult);
+    }
+
+    if (
+      window.CardServiceConfig.isInstance<typeof Card>(handlerResult, "Card")
+    ) {
+      return new DisplayCardsAction().setCards([handlerResult]);
+    }
+
+    return handlerResult;
   }
 
   /**
