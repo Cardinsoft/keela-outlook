@@ -31,7 +31,9 @@ export const readyCallback = async (info: Pick<Office.Context, "host">) => {
     log("log", "initialized outside host application", safeToString(host));
   }
 
-  const res = await fetch(`${location.origin}/appsscript.json`);
+  const res = await fetch(
+    `${location.href.replace(/\/$/, "")}/appsscript.json`
+  );
   if (!res.ok) {
     log("error", "failed to get manifest", await res.text());
     return; // TODO: show error card
